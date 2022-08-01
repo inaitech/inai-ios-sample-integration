@@ -137,7 +137,7 @@ extension PaymentFieldsViewController: UITableViewDataSource, UITableViewDelegat
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let formField = self.selectedPaymentOption.formFields[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "TextInputTableViewCell", for: indexPath) as! PaymentFieldTableViewCell
-        cell.updateUI(formField: formField, viewController: self)
+        cell.updateUI(formField: formField, viewController: self, orderId: self.orderId)
         return cell
         
     }

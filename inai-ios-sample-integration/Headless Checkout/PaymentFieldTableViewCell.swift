@@ -10,10 +10,15 @@ import UIKit
 import inai_ios_sdk
 
 class PaymentFieldTableViewCell: UITableViewCell,
-                                 UITextFieldDelegate {
+                                 UITextFieldDelegate,
+                                 InaiCardInfoDelegate {
     
     var formField: FormField!
     var viewController: UIViewController!
+    var orderId: String!
+    
+    private var gettingCardInfo = false
+    private var pendingCardNumber:String? = nil
     
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var textField: UITextField!
@@ -60,11 +65,81 @@ class PaymentFieldTableViewCell: UITableViewCell,
         return validated
     }
     
+    private func setCreditCardImage(_ brand: String) {
+        let cardImage = UIImage(named: brand.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)) ?? UIImage(named: "unknown_card")
+        let iconContainer = UIView(frame: CGRect(x: 0, y: 0, width: 60, height: 30))
+        let cardView = UIImageView(frame: iconContainer.frame)
+        cardView.image = cardImage
+        cardView.contentMode = .scaleAspectFit
+        iconContainer.addSubview(cardView)
+        self.textField.leftViewMode = .always
+        self.textField.leftView = iconContainer
+    }
+    
+    func cardInfoFetched(with result: Inai_CardInfoResult) {
+        self.gettingCardInfo = false
+        
+        switch result.status {
+        case Inai_CardInfoStatus.success:
+            if let card = result.data["card"] as? [String: Any], let brand = card["brand"] as? String {
+                self.setCreditCardImage(brand)
+            }
+            break
+            
+        case Inai_CardInfoStatus.failed :
+            //  Do nothing..
+            break
+        @unknown default:
+            break
+        }
+        
+        //  Do we have a pending request?
+        if let pendingCardNumber = pendingCardNumber {
+            self.getCardInfo(pendingCardNumber)
+        }
+    }
+    
+    private func getCardInfo(_ cardNumber: String) {
+        
+        pendingCardNumber = nil
+        
+        if (gettingCardInfo) {
+            //  We're already in the middle of a fetch call
+            //  Lets queue this request
+            pendingCardNumber = cardNumber
+            return
+        }
+
+        //  TODO: update order id
+        let config = InaiConfig(token: PlistConstants.shared.token,
+                                orderId : self.orderId,
+                                countryCode: PlistConstants.shared.country
+        )
+        
+        if let inaiCheckout = InaiCheckout(config: config) {
+            self.gettingCardInfo = true
+            inaiCheckout.getCardInfo(cardNumber: cardNumber,
+                                     viewController: self.viewController, delegate: self)
+        }
+    }
+    
     func updateTextFieldUI(textfield: UITextField) {
         if formField.validated {
             textfield.layer.borderColor = greenColor.cgColor
         } else {
             textfield.layer.borderColor = redColor.cgColor
+        }
+        
+        if (formField.name == "number") {
+            if (self.textField.text?.count ?? 0 > 5) {
+                //  This is a card number field, lets fetch card info and set the card image if we have it
+                //  Min len of 6 required for getCardInfo
+                let cardNumber = self.textField.text!
+                self.getCardInfo(cardNumber)
+            } else {
+                //  Add hodler view to Maintain padding
+                self.textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 30))
+            }
         }
     }
     
@@ -83,9 +158,10 @@ class PaymentFieldTableViewCell: UITableViewCell,
         formField.value = swtch.isOn ? "true" : "false"
     }
     
-    func updateUI(formField: FormField, viewController: UIViewController) {
+    func updateUI(formField: FormField, viewController: UIViewController, orderId: String) {
         self.formField = formField
         self.viewController = viewController
+        self.orderId = orderId
         
         label.text = formField.label
         textField.placeholder = formField.placeHolder
