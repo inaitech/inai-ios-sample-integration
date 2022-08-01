@@ -46,6 +46,7 @@
 		28C217BF289496B9005312F8 /* Models.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		28C217C1289496E7005312F8 /* CommonMethods.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonMethods.swift; sourceTree = "<group>"; };
 		28ED2A772897F78700BB4782 /* config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = config.plist; sourceTree = "<group>"; };
+		28ED2A79289894D000BB4782 /* inai-ios-sample-integration.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "inai-ios-sample-integration.entitlements"; sourceTree = "<group>"; };
 		28F2D49A289301DB007EF5B3 /* inai-ios-sample-integration.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "inai-ios-sample-integration.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		28F2D49D289301DB007EF5B3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		28F2D49F289301DB007EF5B3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -131,6 +132,7 @@
 		28F2D49C289301DB007EF5B3 /* inai-ios-sample-integration */ = {
 			isa = PBXGroup;
 			children = (
+				28ED2A79289894D000BB4782 /* inai-ios-sample-integration.entitlements */,
 				28C217B228940302005312F8 /* Helpers */,
 				28C217AF2893D86C005312F8 /* Extensions */,
 				28C217AC2893D82B005312F8 /* Structures */,
@@ -442,6 +444,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "inai-ios-sample-integration/inai-ios-sample-integration.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -471,6 +474,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "inai-ios-sample-integration/inai-ios-sample-integration.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
