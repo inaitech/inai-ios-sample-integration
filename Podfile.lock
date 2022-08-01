@@ -1,0 +1,16 @@
+PODS:
+  - inai-pod (0.1.17)
+
+DEPENDENCIES:
+  - inai-pod
+
+SPEC REPOS:
+  trunk:
+    - inai-pod
+
+SPEC CHECKSUMS:
+  inai-pod: 75ed6b4671e8d8d07be11dba87ff8c281541c590
+
+PODFILE CHECKSUM: 9031063796644ebd3368800d3ce18b7caf8410f1
+
+COCOAPODS: 1.11.3

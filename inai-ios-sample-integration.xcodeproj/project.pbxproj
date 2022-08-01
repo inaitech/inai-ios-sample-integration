@@ -7,23 +7,55 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		285605022893CE260027E608 /* HeadlessCheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285605012893CE260027E608 /* HeadlessCheckoutViewController.swift */; };
+		285605042893CF190027E608 /* ProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285605032893CF190027E608 /* ProductViewController.swift */; };
+		28C217AB2893D7C2005312F8 /* PlistConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C217AA2893D7C2005312F8 /* PlistConstants.swift */; };
+		28C217AE2893D843005312F8 /* OrderResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C217AD2893D843005312F8 /* OrderResponse.swift */; };
+		28C217B12893D879005312F8 /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C217B02893D879005312F8 /* UIViewControllerExtensions.swift */; };
+		28C217B42894031B005312F8 /* APIMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C217B32894031B005312F8 /* APIMethods.swift */; };
+		28C217BA2894968A005312F8 /* PaymentFieldsTableFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C217B52894968A005312F8 /* PaymentFieldsTableFooterView.swift */; };
+		28C217BB2894968A005312F8 /* PaymentFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C217B62894968A005312F8 /* PaymentFieldTableViewCell.swift */; };
+		28C217BC2894968A005312F8 /* PaymentFieldsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C217B72894968A005312F8 /* PaymentFieldsViewController.swift */; };
+		28C217BD2894968A005312F8 /* PaymentOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C217B82894968A005312F8 /* PaymentOptionsViewController.swift */; };
+		28C217BE2894968A005312F8 /* PaymentFieldsTableFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28C217B92894968A005312F8 /* PaymentFieldsTableFooterView.xib */; };
+		28C217C0289496B9005312F8 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C217BF289496B9005312F8 /* Models.swift */; };
+		28C217C2289496E7005312F8 /* CommonMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C217C1289496E7005312F8 /* CommonMethods.swift */; };
+		28ED2A782897F78700BB4782 /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28ED2A772897F78700BB4782 /* config.plist */; };
 		28F2D49E289301DB007EF5B3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F2D49D289301DB007EF5B3 /* AppDelegate.swift */; };
 		28F2D4A0289301DB007EF5B3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F2D49F289301DB007EF5B3 /* SceneDelegate.swift */; };
-		28F2D4A2289301DB007EF5B3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F2D4A1289301DB007EF5B3 /* ViewController.swift */; };
+		28F2D4A2289301DB007EF5B3 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F2D4A1289301DB007EF5B3 /* HomeViewController.swift */; };
 		28F2D4A5289301DB007EF5B3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28F2D4A3289301DB007EF5B3 /* Main.storyboard */; };
 		28F2D4A7289301DD007EF5B3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28F2D4A6289301DD007EF5B3 /* Assets.xcassets */; };
 		28F2D4AA289301DD007EF5B3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28F2D4A8289301DD007EF5B3 /* LaunchScreen.storyboard */; };
+		45ACC28367AAF145DA7198A6 /* Pods_inai_ios_sample_integration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC009725747D5E7A3279F62 /* Pods_inai_ios_sample_integration.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		22A70DB9860AE122672AD604 /* Pods-inai-ios-sample-integration.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-inai-ios-sample-integration.debug.xcconfig"; path = "Target Support Files/Pods-inai-ios-sample-integration/Pods-inai-ios-sample-integration.debug.xcconfig"; sourceTree = "<group>"; };
+		285605012893CE260027E608 /* HeadlessCheckoutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeadlessCheckoutViewController.swift; sourceTree = "<group>"; };
+		285605032893CF190027E608 /* ProductViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductViewController.swift; sourceTree = "<group>"; };
+		28C217AA2893D7C2005312F8 /* PlistConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlistConstants.swift; sourceTree = "<group>"; };
+		28C217AD2893D843005312F8 /* OrderResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderResponse.swift; sourceTree = "<group>"; };
+		28C217B02893D879005312F8 /* UIViewControllerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtensions.swift; sourceTree = "<group>"; };
+		28C217B32894031B005312F8 /* APIMethods.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIMethods.swift; sourceTree = "<group>"; };
+		28C217B52894968A005312F8 /* PaymentFieldsTableFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentFieldsTableFooterView.swift; sourceTree = "<group>"; };
+		28C217B62894968A005312F8 /* PaymentFieldTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentFieldTableViewCell.swift; sourceTree = "<group>"; };
+		28C217B72894968A005312F8 /* PaymentFieldsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentFieldsViewController.swift; sourceTree = "<group>"; };
+		28C217B82894968A005312F8 /* PaymentOptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentOptionsViewController.swift; sourceTree = "<group>"; };
+		28C217B92894968A005312F8 /* PaymentFieldsTableFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PaymentFieldsTableFooterView.xib; sourceTree = "<group>"; };
+		28C217BF289496B9005312F8 /* Models.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		28C217C1289496E7005312F8 /* CommonMethods.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonMethods.swift; sourceTree = "<group>"; };
+		28ED2A772897F78700BB4782 /* config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = config.plist; sourceTree = "<group>"; };
 		28F2D49A289301DB007EF5B3 /* inai-ios-sample-integration.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "inai-ios-sample-integration.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		28F2D49D289301DB007EF5B3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		28F2D49F289301DB007EF5B3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		28F2D4A1289301DB007EF5B3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		28F2D4A1289301DB007EF5B3 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		28F2D4A4289301DB007EF5B3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		28F2D4A6289301DD007EF5B3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		28F2D4A9289301DD007EF5B3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		28F2D4AB289301DD007EF5B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7EC009725747D5E7A3279F62 /* Pods_inai_ios_sample_integration.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_inai_ios_sample_integration.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DDF31F41779EA2B625BAEA01 /* Pods-inai-ios-sample-integration.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-inai-ios-sample-integration.release.xcconfig"; path = "Target Support Files/Pods-inai-ios-sample-integration/Pods-inai-ios-sample-integration.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +63,60 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45ACC28367AAF145DA7198A6 /* Pods_inai_ios_sample_integration.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		285605002893CDC00027E608 /* Headless Checkout */ = {
+			isa = PBXGroup;
+			children = (
+				285605012893CE260027E608 /* HeadlessCheckoutViewController.swift */,
+				285605032893CF190027E608 /* ProductViewController.swift */,
+				28C217B82894968A005312F8 /* PaymentOptionsViewController.swift */,
+				28C217B72894968A005312F8 /* PaymentFieldsViewController.swift */,
+				28C217B62894968A005312F8 /* PaymentFieldTableViewCell.swift */,
+				28C217B52894968A005312F8 /* PaymentFieldsTableFooterView.swift */,
+				28C217B92894968A005312F8 /* PaymentFieldsTableFooterView.xib */,
+				28C217BF289496B9005312F8 /* Models.swift */,
+			);
+			path = "Headless Checkout";
+			sourceTree = "<group>";
+		};
+		28C217AC2893D82B005312F8 /* Structures */ = {
+			isa = PBXGroup;
+			children = (
+				28C217AD2893D843005312F8 /* OrderResponse.swift */,
+			);
+			path = Structures;
+			sourceTree = "<group>";
+		};
+		28C217AF2893D86C005312F8 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				28C217B02893D879005312F8 /* UIViewControllerExtensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		28C217B228940302005312F8 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				28C217C1289496E7005312F8 /* CommonMethods.swift */,
+				28C217B32894031B005312F8 /* APIMethods.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		28F2D491289301DB007EF5B3 = {
 			isa = PBXGroup;
 			children = (
 				28F2D49C289301DB007EF5B3 /* inai-ios-sample-integration */,
 				28F2D49B289301DB007EF5B3 /* Products */,
+				70F4C58FD706D89C25FDB530 /* Pods */,
+				7553D2D625537AD1211FDF20 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,15 +131,38 @@
 		28F2D49C289301DB007EF5B3 /* inai-ios-sample-integration */ = {
 			isa = PBXGroup;
 			children = (
+				28C217B228940302005312F8 /* Helpers */,
+				28C217AF2893D86C005312F8 /* Extensions */,
+				28C217AC2893D82B005312F8 /* Structures */,
+				285605002893CDC00027E608 /* Headless Checkout */,
 				28F2D49D289301DB007EF5B3 /* AppDelegate.swift */,
 				28F2D49F289301DB007EF5B3 /* SceneDelegate.swift */,
-				28F2D4A1289301DB007EF5B3 /* ViewController.swift */,
+				28F2D4A1289301DB007EF5B3 /* HomeViewController.swift */,
 				28F2D4A3289301DB007EF5B3 /* Main.storyboard */,
 				28F2D4A6289301DD007EF5B3 /* Assets.xcassets */,
 				28F2D4A8289301DD007EF5B3 /* LaunchScreen.storyboard */,
 				28F2D4AB289301DD007EF5B3 /* Info.plist */,
+				28ED2A772897F78700BB4782 /* config.plist */,
+				28C217AA2893D7C2005312F8 /* PlistConstants.swift */,
 			);
 			path = "inai-ios-sample-integration";
+			sourceTree = "<group>";
+		};
+		70F4C58FD706D89C25FDB530 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				22A70DB9860AE122672AD604 /* Pods-inai-ios-sample-integration.debug.xcconfig */,
+				DDF31F41779EA2B625BAEA01 /* Pods-inai-ios-sample-integration.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		7553D2D625537AD1211FDF20 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7EC009725747D5E7A3279F62 /* Pods_inai_ios_sample_integration.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,9 +172,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 28F2D4AE289301DD007EF5B3 /* Build configuration list for PBXNativeTarget "inai-ios-sample-integration" */;
 			buildPhases = (
+				8E96D769124FC76CB399E8CD /* [CP] Check Pods Manifest.lock */,
 				28F2D496289301DB007EF5B3 /* Sources */,
 				28F2D497289301DB007EF5B3 /* Frameworks */,
 				28F2D498289301DB007EF5B3 /* Resources */,
+				4BF0C78CF560146D6EFEBBCA /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -125,22 +225,78 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28C217BE2894968A005312F8 /* PaymentFieldsTableFooterView.xib in Resources */,
 				28F2D4AA289301DD007EF5B3 /* LaunchScreen.storyboard in Resources */,
 				28F2D4A7289301DD007EF5B3 /* Assets.xcassets in Resources */,
+				28ED2A782897F78700BB4782 /* config.plist in Resources */,
 				28F2D4A5289301DB007EF5B3 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		4BF0C78CF560146D6EFEBBCA /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-inai-ios-sample-integration/Pods-inai-ios-sample-integration-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-inai-ios-sample-integration/Pods-inai-ios-sample-integration-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-inai-ios-sample-integration/Pods-inai-ios-sample-integration-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8E96D769124FC76CB399E8CD /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-inai-ios-sample-integration-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		28F2D496289301DB007EF5B3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				28F2D4A2289301DB007EF5B3 /* ViewController.swift in Sources */,
+				28C217BC2894968A005312F8 /* PaymentFieldsViewController.swift in Sources */,
+				28C217B12893D879005312F8 /* UIViewControllerExtensions.swift in Sources */,
+				28F2D4A2289301DB007EF5B3 /* HomeViewController.swift in Sources */,
+				28C217B42894031B005312F8 /* APIMethods.swift in Sources */,
+				28C217BB2894968A005312F8 /* PaymentFieldTableViewCell.swift in Sources */,
+				285605022893CE260027E608 /* HeadlessCheckoutViewController.swift in Sources */,
+				28C217BD2894968A005312F8 /* PaymentOptionsViewController.swift in Sources */,
 				28F2D49E289301DB007EF5B3 /* AppDelegate.swift in Sources */,
+				285605042893CF190027E608 /* ProductViewController.swift in Sources */,
+				28C217C2289496E7005312F8 /* CommonMethods.swift in Sources */,
+				28C217AE2893D843005312F8 /* OrderResponse.swift in Sources */,
 				28F2D4A0289301DB007EF5B3 /* SceneDelegate.swift in Sources */,
+				28C217BA2894968A005312F8 /* PaymentFieldsTableFooterView.swift in Sources */,
+				28C217AB2893D7C2005312F8 /* PlistConstants.swift in Sources */,
+				28C217C0289496B9005312F8 /* Models.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,6 +438,7 @@
 		};
 		28F2D4AF289301DD007EF5B3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 22A70DB9860AE122672AD604 /* Pods-inai-ios-sample-integration.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -310,6 +467,7 @@
 		};
 		28F2D4B0289301DD007EF5B3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DDF31F41779EA2B625BAEA01 /* Pods-inai-ios-sample-integration.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
