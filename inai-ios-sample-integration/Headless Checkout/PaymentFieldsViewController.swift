@@ -39,7 +39,13 @@ class PaymentFieldsViewController: UIViewController {
     
     @objc func checkoutButtonTapped(_ btn: UIButton) {
         self.view.endEditing(true)
-        self.processCheckout()
+        let requiredFieldsFilled = checkAllFieldsValidated()
+        if (!requiredFieldsFilled) {
+            showAlert("Please fill all required fields with valid Input")
+            return
+        }
+        
+        self.validateFields()
     }
     
     private func pay(token: String, paymentDetails: [String: Any],
@@ -78,6 +84,24 @@ class PaymentFieldsViewController: UIViewController {
         return paymentDetails
     }
     
+    private func validateFields() {
+        let config = InaiConfig(token: PlistConstants.shared.token,
+                                orderId : self.orderId,
+                                countryCode: PlistConstants.shared.country
+        )
+                
+        let paymentDetails = generatePaymentDetails(selectedPaymentOption: selectedPaymentOption)
+        if let inaiCheckout = InaiCheckout(config: config) {
+            inaiCheckout.validateFields(
+                paymentMethodOption: selectedPaymentOption.railCode!,
+                paymentDetails: paymentDetails,
+                viewController: self,
+                delegate: self )
+        } else {
+            showResult("Invalid Config")
+        }
+    }
+    
     private func processCheckout() {
         let paymentDetails = generatePaymentDetails(selectedPaymentOption: selectedPaymentOption)
         self.pay(token: PlistConstants.shared.token,
@@ -86,6 +110,20 @@ class PaymentFieldsViewController: UIViewController {
                  countryCode: PlistConstants.shared.country,
                  paymentMethodOption: selectedPaymentOption.railCode!,
                  viewController: self)
+    }
+}
+
+
+extension PaymentFieldsViewController {
+    private func checkAllFieldsValidated() -> Bool {
+        var retVal: Bool = true
+        for fo in selectedPaymentOption.formFields {
+            if fo.validated == false {
+                retVal = false
+                break
+            }
+        }
+        return retVal
     }
 }
 
@@ -123,6 +161,22 @@ extension PaymentFieldsViewController: UITableViewDataSource, UITableViewDelegat
     }
 }
 
+extension PaymentFieldsViewController: InaiValidateFieldsDelegate {
+    func fieldsValidationFinished(with result: Inai_ValidateFieldsResult) {
+        switch result.status {
+        case Inai_ValidateFieldsStatus.success:
+            //  Fields validated proceed with payment..
+            self.processCheckout()
+            break
+            
+        case Inai_ValidateFieldsStatus.failed :
+            self.showResult("Fields Validation Failed!: \(convertDictToStr(result.data))")
+            break
+        @unknown default:
+            break
+        }
+    }
+}
 
 extension PaymentFieldsViewController: InaiCheckoutDelegate {
 

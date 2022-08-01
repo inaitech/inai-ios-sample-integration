@@ -15,6 +15,8 @@ class FormField {
     var name: String!
     var required: Bool
     var value: String = ""
+    var validations: Validation?
+    var validated: Bool = false
     
     init(_ json: [String: Any]) {
         self.fieldType = json["field_type"] as? String ?? ""
@@ -22,6 +24,9 @@ class FormField {
         self.placeHolder = json["placeholder"] as? String ?? ""
         self.name = json["name"] as? String ?? ""
         self.required = json["required"] as? Bool ?? false
+        if let validationsJSON = json["validations"] as? [String: Any] {
+            self.validations = Validation.validationFromJSON(validationsJSON)
+        }
     }
     
 }
