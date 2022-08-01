@@ -75,10 +75,10 @@
 			children = (
 				285605012893CE260027E608 /* HeadlessCheckoutViewController.swift */,
 				285605032893CF190027E608 /* ProductViewController.swift */,
-				28C217B82894968A005312F8 /* PaymentOptionsViewController.swift */,
+				28C217B52894968A005312F8 /* PaymentFieldsTableFooterView.swift */,
 				28C217B72894968A005312F8 /* PaymentFieldsViewController.swift */,
 				28C217B62894968A005312F8 /* PaymentFieldTableViewCell.swift */,
-				28C217B52894968A005312F8 /* PaymentFieldsTableFooterView.swift */,
+				28C217B82894968A005312F8 /* PaymentOptionsViewController.swift */,
 				28C217B92894968A005312F8 /* PaymentFieldsTableFooterView.xib */,
 				28C217BF289496B9005312F8 /* Models.swift */,
 			);

@@ -110,7 +110,6 @@ class PaymentFieldTableViewCell: UITableViewCell,
             return
         }
 
-        //  TODO: update order id
         let config = InaiConfig(token: PlistConstants.shared.token,
                                 orderId : self.orderId,
                                 countryCode: PlistConstants.shared.country
