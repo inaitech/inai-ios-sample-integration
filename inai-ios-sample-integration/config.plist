@@ -5,9 +5,9 @@
 	<key>amount</key>
 	<string>100</string>
 	<key>token</key>
-	<string>sbx_ci_7kCbmGnJBYmC4TwUz1FA3FsWPnRKQG3gzCX4R87VDTsS</string>
+	<string>&lt;Inai Username&gt;</string>
 	<key>password</key>
-	<string>sbx_cs_HGGbrw5QTX9Y4EaqCk8ssa3CoUk5cumU2w1omXHfBqmk</string>
+	<string>&lt;Inai Password&gt;</string>
 	<key>order_id</key>
 	<string>ord_2BxEFW43fDO7ZRBQVqBUAdjR1YZ</string>
 	<key>base_url</key>
