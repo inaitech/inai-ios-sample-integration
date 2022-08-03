@@ -26,22 +26,15 @@ class ValidateFieldsViewController: UIViewController, InaiValidateFieldsDelegate
               scrollView: self.tbl_inputs,
               view: self.view)
         tbl_inputs.separatorStyle = .none
-        
-        if (selectedPaymentOption.railCode == "card") {
-            //  Lets not render the save card field as it will always be passed
-            self.selectedPaymentOption.formFields = self.selectedPaymentOption.formFields
-                                                    .filter { $0.name != "save_card" }
-        }
         setupTableFooterView()
     }
     
     func setupTableFooterView() {
-        let isApplePay = selectedPaymentOption.railCode == "apple_pay"
         if let footerView = Bundle.main.loadNibNamed("PaymentFieldsTableFooterView",
                                                   owner: nil,
                                                      options: nil)?.first as? PaymentFieldsTableFooterView {
             tbl_footerView = footerView
-            tbl_footerView.updateUI(isApplePay: isApplePay)
+            tbl_footerView.updateUI(isApplePay: false)
             tbl_footerView.btn_checkout.addTarget(self, action: #selector(checkoutButtonTapped(_:)), for: .touchUpInside)
             tbl_footerView.btn_checkout.setTitle("Validate Fields", for: .normal)
         }

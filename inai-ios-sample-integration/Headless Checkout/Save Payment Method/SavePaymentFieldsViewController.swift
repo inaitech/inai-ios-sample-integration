@@ -36,12 +36,11 @@ class SavePaymentFieldsViewController: UIViewController {
     }
     
     func setupTableFooterView() {
-        let isApplePay = selectedPaymentOption.railCode == "apple_pay"
         if let footerView = Bundle.main.loadNibNamed("PaymentFieldsTableFooterView",
                                                   owner: nil,
                                                      options: nil)?.first as? PaymentFieldsTableFooterView {
             tbl_footerView = footerView
-            tbl_footerView.updateUI(isApplePay: isApplePay)
+            tbl_footerView.updateUI(isApplePay: false)
             tbl_footerView.btn_checkout.addTarget(self, action: #selector(checkoutButtonTapped(_:)), for: .touchUpInside)
             tbl_footerView.btn_checkout.setTitle("Save Payment Method", for: .normal)
         }
