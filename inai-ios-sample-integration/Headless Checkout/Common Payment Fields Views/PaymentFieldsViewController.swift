@@ -1,6 +1,6 @@
 //
 //  PaymentFieldsViewController.swift
-//  inai-checkout
+//  inai-ios-sample-integration
 //
 //  Created by Parag Dulam on 5/3/22.
 //
@@ -24,6 +24,7 @@ fileprivate struct ApplePayStringError: Error {
 
 class PaymentFieldsViewController: UIViewController {
     
+    var savePaymentMethod: Bool = false
     var selectedPaymentOption: PaymentMethodOption!
     var orderId: String!
     var paymentController: PKPaymentAuthorizationController!
@@ -78,7 +79,7 @@ class PaymentFieldsViewController: UIViewController {
             return
         }
         
-        self.validateFields()
+        self.processCheckout()
     }
     
     private func pay(token: String, paymentDetails: [String: Any],
@@ -115,24 +116,6 @@ class PaymentFieldsViewController: UIViewController {
             paymentDetails["paymentMethodId"] = paymentMethodId
         }
         return paymentDetails
-    }
-    
-    private func validateFields() {
-        let config = InaiConfig(token: PlistConstants.shared.token,
-                                orderId : self.orderId,
-                                countryCode: PlistConstants.shared.country
-        )
-                
-        let paymentDetails = generatePaymentDetails(selectedPaymentOption: selectedPaymentOption)
-        if let inaiCheckout = InaiCheckout(config: config) {
-            inaiCheckout.validateFields(
-                paymentMethodOption: selectedPaymentOption.railCode!,
-                paymentDetails: paymentDetails,
-                viewController: self,
-                delegate: self )
-        } else {
-            showResult("Invalid Config")
-        }
     }
     
     private func processCheckout() {
@@ -215,23 +198,6 @@ extension PaymentFieldsViewController: UITableViewDataSource, UITableViewDelegat
         let alert = UIAlertController(title: "Result", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
-    }
-}
-
-extension PaymentFieldsViewController: InaiValidateFieldsDelegate {
-    func fieldsValidationFinished(with result: Inai_ValidateFieldsResult) {
-        switch result.status {
-        case Inai_ValidateFieldsStatus.success:
-            //  Fields validated proceed with payment..
-            self.processCheckout()
-            break
-            
-        case Inai_ValidateFieldsStatus.failed :
-            self.showResult("Fields Validation Failed!: \(convertDictToStr(result.data))")
-            break
-        @unknown default:
-            break
-        }
     }
 }
 

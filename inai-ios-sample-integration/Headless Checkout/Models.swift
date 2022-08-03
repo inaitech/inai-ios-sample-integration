@@ -1,6 +1,6 @@
 //
 //  Models.swift
-//  inai-checkout
+//  inai-ios-sample-integration
 //
 //  Created by Parag Dulam on 5/3/22.
 //
@@ -77,7 +77,6 @@ struct PaymentMethodOption {
         }
         return retVal
     }
-    
 }
 
 

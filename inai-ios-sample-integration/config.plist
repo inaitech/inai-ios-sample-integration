@@ -2,10 +2,14 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>amount</key>
+	<string>100</string>
 	<key>token</key>
-	<string>&lt;Inai Username&gt;</string>
+	<string>sbx_ci_7kCbmGnJBYmC4TwUz1FA3FsWPnRKQG3gzCX4R87VDTsS</string>
 	<key>password</key>
-	<string>&lt;Inai Token&gt;</string>
+	<string>sbx_cs_HGGbrw5QTX9Y4EaqCk8ssa3CoUk5cumU2w1omXHfBqmk</string>
+	<key>order_id</key>
+	<string>ord_2BxEFW43fDO7ZRBQVqBUAdjR1YZ</string>
 	<key>base_url</key>
 	<string>https://api.inai.io/v1</string>
 	<key>country</key>
