@@ -42,7 +42,7 @@ class SavePaymentFieldsViewController: UIViewController {
             tbl_footerView = footerView
             tbl_footerView.updateUI(isApplePay: false)
             tbl_footerView.btn_checkout.addTarget(self, action: #selector(checkoutButtonTapped(_:)), for: .touchUpInside)
-            tbl_footerView.btn_checkout.setTitle("Save Payment Method", for: .normal)
+            tbl_footerView.btn_checkout.setTitle("Add Payment Method", for: .normal)
         }
     }
     
