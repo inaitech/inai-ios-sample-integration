@@ -60,6 +60,7 @@ class SavedPaymentOptionsViewController: UIViewController {
             if let vc = segue.destination as? PaymentFieldsViewController {
                 vc.orderId = self.orderId
                 vc.selectedPaymentOption = sender as? PaymentMethodOption
+                vc.ctaText = "Pay with Saved Payment Method"
             }
         }
     }

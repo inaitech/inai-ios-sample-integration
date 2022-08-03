@@ -30,6 +30,9 @@ class PaymentFieldsViewController: UIViewController {
     var paymentController: PKPaymentAuthorizationController!
     var keyboardHandler: KeyboardHandler!
     
+    //  Custom CTA Text for button
+    var ctaText: String? = nil
+    
     private var applePayCompletion: ((PKPaymentAuthorizationResult) -> Void)?
     
     @IBOutlet weak var tbl_inputs: UITableView!
@@ -54,6 +57,9 @@ class PaymentFieldsViewController: UIViewController {
             tbl_footerView.updateUI(isApplePay: isApplePay)
             tbl_footerView.btn_apple_pay.addTarget(self, action: #selector(applePay), for: .touchUpInside)
             tbl_footerView.btn_checkout.addTarget(self, action: #selector(checkoutButtonTapped(_:)), for: .touchUpInside)
+            if let ctaText = self.ctaText {
+                tbl_footerView.btn_checkout.setTitle(ctaText, for: .normal)
+            }
         }
     }
     
