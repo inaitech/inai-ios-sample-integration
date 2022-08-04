@@ -472,7 +472,7 @@ This product is made with Primegreen, a series of high-performance recycled mate
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CCh-CA-OcY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3845" y="875"/>
+            <point key="canvasLocation" x="3845" y="844"/>
         </scene>
         <!--Save Payment Options-->
         <scene sceneID="Q8k-V1-WaD">
@@ -832,18 +832,24 @@ This product is made with Primegreen, a series of high-performance recycled mate
                                     <outlet property="delegate" destination="cg7-EB-Li9" id="eAM-1b-YrC"/>
                                 </connections>
                             </tableView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="q3j-rM-gcu">
+                                <rect key="frame" x="188.5" y="456.5" width="37" height="37"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="7da-LD-BaZ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="7da-LD-BaZ" firstAttribute="bottom" secondItem="LQc-BY-h2N" secondAttribute="bottom" priority="250" id="6CU-lZ-hTM"/>
+                            <constraint firstItem="q3j-rM-gcu" firstAttribute="centerX" secondItem="LQc-BY-h2N" secondAttribute="centerX" id="DgR-j1-M9a"/>
                             <constraint firstItem="LQc-BY-h2N" firstAttribute="top" secondItem="7da-LD-BaZ" secondAttribute="top" id="Dkf-Ew-cQz"/>
                             <constraint firstItem="LQc-BY-h2N" firstAttribute="leading" secondItem="7da-LD-BaZ" secondAttribute="leading" id="HBH-6Q-dNo"/>
+                            <constraint firstItem="q3j-rM-gcu" firstAttribute="centerY" secondItem="LQc-BY-h2N" secondAttribute="centerY" id="Rkh-jX-8Q2"/>
                             <constraint firstItem="7da-LD-BaZ" firstAttribute="trailing" secondItem="LQc-BY-h2N" secondAttribute="trailing" id="b0l-UK-ERQ"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Payment Fields" id="MAl-gW-xHr"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="q3j-rM-gcu" id="T58-bQ-gun"/>
                         <outlet property="tbl_inputs" destination="LQc-BY-h2N" id="aPT-lt-mvR"/>
                     </connections>
                 </viewController>

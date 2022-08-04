@@ -11,12 +11,13 @@ import inai_ios_sdk
 
 class ValidateFieldsViewController: UIViewController, InaiValidateFieldsDelegate {
     
+    @IBOutlet weak var tbl_inputs: UITableView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
     var savePaymentMethod: Bool = false
     var selectedPaymentOption: PaymentMethodOption!
     var orderId: String!
     var keyboardHandler: KeyboardHandler!
-        
-    @IBOutlet weak var tbl_inputs: UITableView!
     var tbl_footerView: PaymentFieldsTableFooterView!
 
     override func viewDidLoad() {
@@ -51,7 +52,6 @@ class ValidateFieldsViewController: UIViewController, InaiValidateFieldsDelegate
         for f in selectedPaymentOption.formFields {
             fieldsArray.append(["name":f.name!, "value": f.value as Any])
         }
-        fieldsArray.append(["name":"save_card", "value": true])
         paymentDetails["fields"] = fieldsArray
         if let paymentMethodId = selectedPaymentOption.paymentMethodId {
             paymentDetails["paymentMethodId"] = paymentMethodId
@@ -67,6 +67,7 @@ class ValidateFieldsViewController: UIViewController, InaiValidateFieldsDelegate
                 
         let paymentDetails = generatePaymentDetails(selectedPaymentOption: selectedPaymentOption)
         if let inaiCheckout = InaiCheckout(config: config) {
+            self.activityIndicator.startAnimating()
             inaiCheckout.validateFields(
                 paymentMethodOption: selectedPaymentOption.railCode!,
                 paymentDetails: paymentDetails,
@@ -78,10 +79,11 @@ class ValidateFieldsViewController: UIViewController, InaiValidateFieldsDelegate
     }
     
     func fieldsValidationFinished(with result: Inai_ValidateFieldsResult) {
+        self.activityIndicator.stopAnimating()
         switch result.status {
         case Inai_ValidateFieldsStatus.success:
             //  Fields validated proceed with payment..
-            self.showResult("Fields Validation Success!: \(convertDictToStr(result.data))")
+            self.showResult("\(convertDictToStr(result.data))")
             break
             
         case Inai_ValidateFieldsStatus.failed :
@@ -99,8 +101,6 @@ class ValidateFieldsViewController: UIViewController, InaiValidateFieldsDelegate
         self.present(alert, animated: true, completion: nil)
     }
 }
-
-
 
 extension ValidateFieldsViewController: HandlesKeyboardEvent {}
 extension ValidateFieldsViewController: UITableViewDataSource, UITableViewDelegate {
