@@ -61,7 +61,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Mjg-ll-A7i">
-                                <rect key="frame" x="20" y="98" width="374" height="280"/>
+                                <rect key="frame" x="20" y="98" width="374" height="340"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U3c-qY-mdg">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="40"/>
@@ -108,8 +108,23 @@
                                             <action selector="showProductViewWithSavedPayment:" destination="o45-GN-P2H" eventType="touchUpInside" id="e48-sL-uTi"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a58-AQ-AaI">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vMN-cM-Zik">
                                         <rect key="frame" x="0.0" y="180" width="374" height="40"/>
+                                        <color key="backgroundColor" red="0.45886170859999997" green="0.45265638829999999" blue="0.83925354480000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="cve-mC-DyC"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Apple Pay">
+                                            <fontDescription key="titleFontDescription" type="system" pointSize="18"/>
+                                            <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="showProductView:" destination="o45-GN-P2H" eventType="touchUpInside" id="Vxx-az-dtW"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a58-AQ-AaI">
+                                        <rect key="frame" x="0.0" y="240" width="374" height="40"/>
                                         <color key="backgroundColor" red="0.45886170859999997" green="0.45265638829999999" blue="0.83925354480000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="L0K-Fd-W5u"/>
@@ -124,7 +139,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TCt-u4-OJQ">
-                                        <rect key="frame" x="0.0" y="240" width="374" height="40"/>
+                                        <rect key="frame" x="0.0" y="300" width="374" height="40"/>
                                         <color key="backgroundColor" red="0.45886170859999997" green="0.45265638829999999" blue="0.83925354480000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="IIt-FZ-Wgk"/>
@@ -228,7 +243,7 @@
             </objects>
             <point key="canvasLocation" x="3846" y="35"/>
         </scene>
-        <!--Payment Fields-->
+        <!--Payment-->
         <scene sceneID="jiD-GD-i13">
             <objects>
                 <viewController id="9m7-uw-LVY" customClass="PaymentFieldsViewController" customModule="inai_ios_sample_integration" customModuleProvider="target" sceneMemberID="viewController">
@@ -313,14 +328,14 @@
                             <constraint firstItem="Be9-Jb-DEP" firstAttribute="leading" secondItem="P9L-9Y-SBO" secondAttribute="leading" id="d2Z-92-3tN"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Payment Fields" id="ptz-DN-qTc"/>
+                    <navigationItem key="navigationItem" title="Payment" id="ptz-DN-qTc"/>
                     <connections>
                         <outlet property="tbl_inputs" destination="Be9-Jb-DEP" id="foY-b6-Lxn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eXp-Ok-D1a" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4696" y="17"/>
+            <point key="canvasLocation" x="4774" y="48"/>
         </scene>
         <!--Product-->
         <scene sceneID="qGP-OV-C6E">

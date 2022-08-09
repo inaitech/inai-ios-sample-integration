@@ -5,11 +5,9 @@
 	<key>amount</key>
 	<string>100</string>
 	<key>token</key>
-	<string>&lt;Inai Username&gt;</string>
+	<string>__Inai_Username__</string>
 	<key>password</key>
-	<string>&lt;Inai Password&gt;</string>
-	<key>order_id</key>
-	<string>ord_2BxEFW43fDO7ZRBQVqBUAdjR1YZ</string>
+	<string>__Inai_Password__</string>
 	<key>base_url</key>
 	<string>https://api.inai.io/v1</string>
 	<key>country</key>
