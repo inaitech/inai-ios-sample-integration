@@ -20,6 +20,12 @@
 		28C217BE2894968A005312F8 /* PaymentFieldsTableFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28C217B92894968A005312F8 /* PaymentFieldsTableFooterView.xib */; };
 		28C217C0289496B9005312F8 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C217BF289496B9005312F8 /* Models.swift */; };
 		28C217C2289496E7005312F8 /* CommonMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C217C1289496E7005312F8 /* CommonMethods.swift */; };
+		28C5F4092899C97C00F21C7E /* SavedPaymentOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C5F4082899C97C00F21C7E /* SavedPaymentOptionsViewController.swift */; };
+		28C5F4112899DE4400F21C7E /* SavePaymentFieldsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C5F4102899DE4400F21C7E /* SavePaymentFieldsViewController.swift */; };
+		28C5F4142899E0CC00F21C7E /* SavePaymentOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C5F4132899E0CC00F21C7E /* SavePaymentOptionsViewController.swift */; };
+		28C5F4182899E5D900F21C7E /* GetCardInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C5F4172899E5D900F21C7E /* GetCardInfoViewController.swift */; };
+		28C5F41C2899FB5C00F21C7E /* ValidateFieldsOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C5F41B2899FB5C00F21C7E /* ValidateFieldsOptionsViewController.swift */; };
+		28C5F41E2899FD3000F21C7E /* ValidateFieldsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C5F41D2899FD3000F21C7E /* ValidateFieldsViewController.swift */; };
 		28ED2A782897F78700BB4782 /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28ED2A772897F78700BB4782 /* config.plist */; };
 		28F2D49E289301DB007EF5B3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F2D49D289301DB007EF5B3 /* AppDelegate.swift */; };
 		28F2D4A0289301DB007EF5B3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F2D49F289301DB007EF5B3 /* SceneDelegate.swift */; };
@@ -45,6 +51,12 @@
 		28C217B92894968A005312F8 /* PaymentFieldsTableFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PaymentFieldsTableFooterView.xib; sourceTree = "<group>"; };
 		28C217BF289496B9005312F8 /* Models.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		28C217C1289496E7005312F8 /* CommonMethods.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonMethods.swift; sourceTree = "<group>"; };
+		28C5F4082899C97C00F21C7E /* SavedPaymentOptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedPaymentOptionsViewController.swift; sourceTree = "<group>"; };
+		28C5F4102899DE4400F21C7E /* SavePaymentFieldsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavePaymentFieldsViewController.swift; sourceTree = "<group>"; };
+		28C5F4132899E0CC00F21C7E /* SavePaymentOptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavePaymentOptionsViewController.swift; sourceTree = "<group>"; };
+		28C5F4172899E5D900F21C7E /* GetCardInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetCardInfoViewController.swift; sourceTree = "<group>"; };
+		28C5F41B2899FB5C00F21C7E /* ValidateFieldsOptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidateFieldsOptionsViewController.swift; sourceTree = "<group>"; };
+		28C5F41D2899FD3000F21C7E /* ValidateFieldsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidateFieldsViewController.swift; sourceTree = "<group>"; };
 		28ED2A772897F78700BB4782 /* config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = config.plist; sourceTree = "<group>"; };
 		28ED2A79289894D000BB4782 /* inai-ios-sample-integration.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "inai-ios-sample-integration.entitlements"; sourceTree = "<group>"; };
 		28F2D49A289301DB007EF5B3 /* inai-ios-sample-integration.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "inai-ios-sample-integration.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -76,11 +88,12 @@
 			children = (
 				285605012893CE260027E608 /* HeadlessCheckoutViewController.swift */,
 				285605032893CF190027E608 /* ProductViewController.swift */,
-				28C217B52894968A005312F8 /* PaymentFieldsTableFooterView.swift */,
-				28C217B72894968A005312F8 /* PaymentFieldsViewController.swift */,
-				28C217B62894968A005312F8 /* PaymentFieldTableViewCell.swift */,
-				28C217B82894968A005312F8 /* PaymentOptionsViewController.swift */,
-				28C217B92894968A005312F8 /* PaymentFieldsTableFooterView.xib */,
+				28C5F40A2899CCFE00F21C7E /* Payment Options */,
+				28C5F4122899E0B800F21C7E /* Save Payment Method */,
+				28C5F40B2899CD1700F21C7E /* Make Payment With Saved Method */,
+				28C5F4162899E51E00F21C7E /* Validate Fields */,
+				28C5F4152899E50000F21C7E /* Get Card Info */,
+				28C5F4072899BEF500F21C7E /* Common Payment Fields Views */,
 				28C217BF289496B9005312F8 /* Models.swift */,
 			);
 			path = "Headless Checkout";
@@ -109,6 +122,59 @@
 				28C217B32894031B005312F8 /* APIMethods.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		28C5F4072899BEF500F21C7E /* Common Payment Fields Views */ = {
+			isa = PBXGroup;
+			children = (
+				28C217B72894968A005312F8 /* PaymentFieldsViewController.swift */,
+				28C217B62894968A005312F8 /* PaymentFieldTableViewCell.swift */,
+				28C217B52894968A005312F8 /* PaymentFieldsTableFooterView.swift */,
+				28C217B92894968A005312F8 /* PaymentFieldsTableFooterView.xib */,
+			);
+			path = "Common Payment Fields Views";
+			sourceTree = "<group>";
+		};
+		28C5F40A2899CCFE00F21C7E /* Payment Options */ = {
+			isa = PBXGroup;
+			children = (
+				28C217B82894968A005312F8 /* PaymentOptionsViewController.swift */,
+			);
+			path = "Payment Options";
+			sourceTree = "<group>";
+		};
+		28C5F40B2899CD1700F21C7E /* Make Payment With Saved Method */ = {
+			isa = PBXGroup;
+			children = (
+				28C5F4082899C97C00F21C7E /* SavedPaymentOptionsViewController.swift */,
+			);
+			path = "Make Payment With Saved Method";
+			sourceTree = "<group>";
+		};
+		28C5F4122899E0B800F21C7E /* Save Payment Method */ = {
+			isa = PBXGroup;
+			children = (
+				28C5F4132899E0CC00F21C7E /* SavePaymentOptionsViewController.swift */,
+				28C5F4102899DE4400F21C7E /* SavePaymentFieldsViewController.swift */,
+			);
+			path = "Save Payment Method";
+			sourceTree = "<group>";
+		};
+		28C5F4152899E50000F21C7E /* Get Card Info */ = {
+			isa = PBXGroup;
+			children = (
+				28C5F4172899E5D900F21C7E /* GetCardInfoViewController.swift */,
+			);
+			path = "Get Card Info";
+			sourceTree = "<group>";
+		};
+		28C5F4162899E51E00F21C7E /* Validate Fields */ = {
+			isa = PBXGroup;
+			children = (
+				28C5F41B2899FB5C00F21C7E /* ValidateFieldsOptionsViewController.swift */,
+				28C5F41D2899FD3000F21C7E /* ValidateFieldsViewController.swift */,
+			);
+			path = "Validate Fields";
 			sourceTree = "<group>";
 		};
 		28F2D491289301DB007EF5B3 = {
@@ -178,7 +244,7 @@
 				28F2D496289301DB007EF5B3 /* Sources */,
 				28F2D497289301DB007EF5B3 /* Frameworks */,
 				28F2D498289301DB007EF5B3 /* Resources */,
-				4BF0C78CF560146D6EFEBBCA /* [CP] Embed Pods Frameworks */,
+				4662D3422D32E38C9271E222 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -238,7 +304,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		4BF0C78CF560146D6EFEBBCA /* [CP] Embed Pods Frameworks */ = {
+		4662D3422D32E38C9271E222 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -284,20 +350,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28C5F4182899E5D900F21C7E /* GetCardInfoViewController.swift in Sources */,
+				28C5F41C2899FB5C00F21C7E /* ValidateFieldsOptionsViewController.swift in Sources */,
 				28C217BC2894968A005312F8 /* PaymentFieldsViewController.swift in Sources */,
+				28C5F41E2899FD3000F21C7E /* ValidateFieldsViewController.swift in Sources */,
 				28C217B12893D879005312F8 /* UIViewControllerExtensions.swift in Sources */,
 				28F2D4A2289301DB007EF5B3 /* HomeViewController.swift in Sources */,
 				28C217B42894031B005312F8 /* APIMethods.swift in Sources */,
 				28C217BB2894968A005312F8 /* PaymentFieldTableViewCell.swift in Sources */,
+				28C5F4142899E0CC00F21C7E /* SavePaymentOptionsViewController.swift in Sources */,
 				285605022893CE260027E608 /* HeadlessCheckoutViewController.swift in Sources */,
 				28C217BD2894968A005312F8 /* PaymentOptionsViewController.swift in Sources */,
 				28F2D49E289301DB007EF5B3 /* AppDelegate.swift in Sources */,
 				285605042893CF190027E608 /* ProductViewController.swift in Sources */,
+				28C5F4112899DE4400F21C7E /* SavePaymentFieldsViewController.swift in Sources */,
 				28C217C2289496E7005312F8 /* CommonMethods.swift in Sources */,
 				28C217AE2893D843005312F8 /* OrderResponse.swift in Sources */,
 				28F2D4A0289301DB007EF5B3 /* SceneDelegate.swift in Sources */,
 				28C217BA2894968A005312F8 /* PaymentFieldsTableFooterView.swift in Sources */,
 				28C217AB2893D7C2005312F8 /* PlistConstants.swift in Sources */,
+				28C5F4092899C97C00F21C7E /* SavedPaymentOptionsViewController.swift in Sources */,
 				28C217C0289496B9005312F8 /* Models.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

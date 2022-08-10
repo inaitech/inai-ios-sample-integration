@@ -1,6 +1,6 @@
 //
 //  CommonMethods.swift
-//  inai-checkout
+//  inai-ios-sample-integration
 //
 //  Created by Parag Dulam on 5/13/22.
 //
@@ -26,8 +26,6 @@ extension HandlesKeyboardEvent {
         keyboardHandler.setupKeyboardEvents(scrollView: scrollView,
                                             view: view)
     }
-    
-    
 }
 
 
