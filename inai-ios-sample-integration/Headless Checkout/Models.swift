@@ -1,6 +1,6 @@
 //
 //  Models.swift
-//  inai-checkout
+//  inai-ios-sample-integration
 //
 //  Created by Parag Dulam on 5/3/22.
 //
@@ -15,6 +15,8 @@ class FormField {
     var name: String!
     var required: Bool
     var value: String = ""
+    var validations: Validation?
+    var validated: Bool = false
     
     init(_ json: [String: Any]) {
         self.fieldType = json["field_type"] as? String ?? ""
@@ -22,6 +24,9 @@ class FormField {
         self.placeHolder = json["placeholder"] as? String ?? ""
         self.name = json["name"] as? String ?? ""
         self.required = json["required"] as? Bool ?? false
+        if let validationsJSON = json["validations"] as? [String: Any] {
+            self.validations = Validation.validationFromJSON(validationsJSON)
+        }
     }
     
 }
@@ -67,6 +72,31 @@ struct PaymentMethodOption {
                                                             formFields: formFields,
                                                             dict: json)
                     retVal.append(paymentOption)
+                }
+            }
+        }
+        return retVal
+    }
+}
+
+
+struct SavedPaymentMethod {
+    
+    var type: String?
+    var id: String?
+    var customer_id: String?
+    var typeJSON: [String: Any]?
+    
+    static func paymentMethodsFromJSON(_ json: [String: Any]) -> [SavedPaymentMethod] {
+        var retVal: [SavedPaymentMethod] = []
+        if let methods = json["payment_methods"] as? [[String: Any]] {
+            for method in methods {
+                if let id = method["id"] as? String,
+                   let type = method["type"] as? String {
+                    let paymentMethod = SavedPaymentMethod(type: type, id: id,
+                                                           customer_id: method["customer_id"] as? String,
+                                                           typeJSON: method[type] as? [String : Any])
+                    retVal.append(paymentMethod)
                 }
             }
         }

@@ -1,6 +1,6 @@
 //
-//  HeadlessCheckoutViewController.swift
-//  inai-checkout
+//  PaymentOptionsViewController.swift
+//  inai-ios-sample-integration
 //
 //  Created by Parag Dulam on 4/29/22.
 //
@@ -13,33 +13,45 @@ class PaymentOptionsViewController: UIViewController {
     
     @IBOutlet weak var tbl_payment_options: UITableView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    
-    var selectedPaymentOption: PaymentMethodOption?
-    var paymentOptions: [PaymentMethodOption] = []
-    var orderId = ""
+        
+    private var selectedPaymentOption: PaymentMethodOption?
+    private var paymentOptions: [PaymentMethodOption] = []
+    private var orderId = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.processPaymentOptions()
+        self.prepareOrder()
+    }
+    
+    private func prepareOrder() {
+        //  Initiate a new order
+        self.activityIndicator.startAnimating()
+        APIMethods.shared.prepareOrder { orderId, customerId in
+            self.activityIndicator.stopAnimating()
+            if let orderId = orderId {
+                self.orderId = orderId
+                self.processPaymentOptions()
+            }
+        }
     }
     
     private func processPaymentOptions() {
-        
-        activityIndicator.startAnimating()
+        self.activityIndicator.startAnimating()
         var payOptions: [PaymentMethodOption] = []
         
         APIMethods.shared.getPaymentOptions(
-                          orderId: self.orderId) { response, error in
-            guard let respo = response else {
+            orderId: self.orderId,
+            saved_payment_method: false) { response, error in
                 self.activityIndicator.stopAnimating()
-                self.showAlert(error?.localizedDescription ?? "")
-                return
+                guard let respo = response else {
+                    self.showAlert(error?.localizedDescription ?? "")
+                    return
+                }
+                let paymentOptions = PaymentMethodOption.paymentOptionsFromJSON(respo)
+                payOptions.append(contentsOf: paymentOptions)
+                self.paymentOptions = payOptions
+                self.tbl_payment_options.reloadData()
             }
-            let paymentOptions = PaymentMethodOption.paymentOptionsFromJSON(respo)
-            payOptions.append(contentsOf: paymentOptions)
-            self.paymentOptions = payOptions
-            self.tbl_payment_options.reloadData()
-        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -54,14 +66,6 @@ class PaymentOptionsViewController: UIViewController {
 
 extension PaymentOptionsViewController: UITableViewDataSource, UITableViewDelegate {
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Payment Options"
-    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.paymentOptions.count
     }
@@ -71,6 +75,20 @@ extension PaymentOptionsViewController: UITableViewDataSource, UITableViewDelega
         let po = self.paymentOptions[indexPath.row]
         cell.textLabel?.text = sanitizeRailCode(po.railCode)
         return cell
+    }
+    
+    private func sanitizePaymentMethod(_ paymentMethod: SavedPaymentMethod) -> String? {
+        var retVal: String? = nil
+        if paymentMethod.type == "card" {
+            if let cardDetails = paymentMethod.typeJSON,
+               let cardName = cardDetails["brand"] as? String,
+               let last4 = cardDetails["last_4"] as? String {
+                retVal = "\(cardName) - \(last4)"
+            }
+        } else {
+            retVal = sanitizeRailCode(paymentMethod.type)
+        }
+        return retVal
     }
     
     private func sanitizeRailCode(_ railCode: String?) -> String? {

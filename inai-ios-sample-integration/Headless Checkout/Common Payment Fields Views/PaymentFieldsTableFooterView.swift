@@ -1,6 +1,6 @@
 //
 //  PaymentFieldsTableFooterView.swift
-//  inai-checkout
+//  inai-ios-sample-integration
 //
 //  Created by Parag Dulam on 5/14/22.
 //
@@ -10,7 +10,16 @@ import UIKit
 
 class PaymentFieldsTableFooterView: UIView {
     @IBOutlet weak var btn_checkout: UIButton!
-    override func awakeFromNib() { }
+    @IBOutlet weak var btn_apple_pay: UIButton!
+    
+    override func awakeFromNib() {
+        btn_apple_pay.setTitle(nil, for: .normal)
+    }
+    
+    func updateUI(isApplePay: Bool) {
+        btn_apple_pay.isHidden = !isApplePay
+        btn_checkout.isHidden = isApplePay
+    }
     
     func updateCheckoutButtonUI(enable: Bool) {
         btn_checkout.isEnabled = enable

@@ -4,5 +4,5 @@ target 'inai-ios-sample-integration' do
   use_frameworks!
 
   # Pods for inai-ios-sample-integration
-  pod 'inai-pod'
+  pod 'inai-pod', '0.1.17'
 end
