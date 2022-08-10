@@ -1,6 +1,6 @@
 //
 //  Models.swift
-//  inai-checkout
+//  inai-ios-sample-integration
 //
 //  Created by Parag Dulam on 5/3/22.
 //
@@ -72,6 +72,31 @@ struct PaymentMethodOption {
                                                             formFields: formFields,
                                                             dict: json)
                     retVal.append(paymentOption)
+                }
+            }
+        }
+        return retVal
+    }
+}
+
+
+struct SavedPaymentMethod {
+    
+    var type: String?
+    var id: String?
+    var customer_id: String?
+    var typeJSON: [String: Any]?
+    
+    static func paymentMethodsFromJSON(_ json: [String: Any]) -> [SavedPaymentMethod] {
+        var retVal: [SavedPaymentMethod] = []
+        if let methods = json["payment_methods"] as? [[String: Any]] {
+            for method in methods {
+                if let id = method["id"] as? String,
+                   let type = method["type"] as? String {
+                    let paymentMethod = SavedPaymentMethod(type: type, id: id,
+                                                           customer_id: method["customer_id"] as? String,
+                                                           typeJSON: method[type] as? [String : Any])
+                    retVal.append(paymentMethod)
                 }
             }
         }

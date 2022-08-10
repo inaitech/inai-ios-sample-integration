@@ -1,6 +1,6 @@
 //
 //  APIMethods.swift
-//  inai-checkout
+//  inai-ios-sample-integration
 //
 //  Created by Parag Dulam on 5/3/22.
 //  Refactored by Amit Yadav in 29/07/2022
@@ -14,6 +14,7 @@ class APIMethods {
     
     private let HTTP_GET = "GET"
     private let HTTP_POST = "POST"
+    private let Customer_ID_Key = "customerId"
     
     // static property to create singleton
     static let shared = APIMethods()
@@ -49,18 +50,31 @@ class APIMethods {
         return urlVars.isEmpty ? "" : "?" + urlVars.joined(separator: "&")
     }
     
-    func prepareOrder(completion: @escaping (String?) -> Void) {
+    func prepareOrder(savePaymentMethod : Bool = false, completion: @escaping (String?, String?) -> Void) {
         //  Prep postdata
-        let body: [String: AnyHashable] = [
-            "amount": "110",
+        var savedCustomerId: String? = UserDefaults.standard.string(forKey: self.Customer_ID_Key) ?? nil
+
+        var body: [String: AnyHashable] = [
+            "amount": PlistConstants.shared.amount,
             "currency": PlistConstants.shared.currency,
             "description": "Acme Shirt",
-            "customer": ["email": "testdev@test.com",
-                         "first_name": "Dev",
-                         "last_name": "Smith",
-                         "contact_number": "01010101010"],
             "metadata": ["test_order_id": "5735"]
         ]
+        
+        if let savedCustomerId = savedCustomerId {
+            //  Lets reuse the existing customer
+            body["customer"] =  [ "id": savedCustomerId]
+        } else {
+            //  Create a new customer
+            body["customer"] = ["email": "testdev@test.com",
+                                 "first_name": "Dev",
+                                 "last_name": "Smith",
+                                 "contact_number": "01010101010"]
+        }
+        
+        if (savePaymentMethod) {
+            body["capture_method"] = "MANUAL"
+        }
         
         self.request(url: URL(string: self.inai_prepare_order_url)!,
                      method: HTTP_POST,
@@ -76,22 +90,40 @@ class APIMethods {
                     if let responseOrderId = data["id"] as? String {
                         orderId = responseOrderId
                     }
+                    
+                    if savedCustomerId == nil {
+                        if let customerId = data["customer_id"] as? String {
+                            //  Save customer id to defaults so we can reuse it
+                            savedCustomerId = customerId
+                            UserDefaults.standard.set(customerId, forKey: self.Customer_ID_Key)
+                        }
+                    }
                 }
             }
             
-            completion(orderId)
+            completion(orderId, savedCustomerId)
         }
     }
     
     func getPaymentOptions(orderId: String,
+                           saved_payment_method: Bool = false,
                            completion: @escaping ([String: Any]?, Error?) -> Void) {
         var params: [String: String] = [:]
         params["order_id"] = orderId
         params["country"] = PlistConstants.shared.country
+        if saved_payment_method {
+            params["saved_payment_method"] = "true"
+        }
      
         self.request(url: URL(string: inai_get_payment_options_url + buildQueryString(fromDictionary: params))!,
                      method: HTTP_GET,
                      postData: nil,
+                     completion: completion)
+    }
+    
+    func getOrderDetails(orderId: String, completion: @escaping ([String: Any]?, Error?) -> Void) {
+        self.request(url: URL(string: inai_get_order_details_url + "/\(orderId)")!,
+                     method: HTTP_GET, postData: nil,
                      completion: completion)
     }
     
@@ -139,3 +171,4 @@ class APIMethods {
         task.resume()
     }
 }
+
