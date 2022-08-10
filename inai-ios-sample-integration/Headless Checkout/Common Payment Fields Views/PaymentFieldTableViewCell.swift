@@ -1,6 +1,6 @@
 //
 //  TextInputTableViewCell.swift
-//  inai-checkout
+//  inai-ios-sample-integration
 //
 //  Created by Parag Dulam on 5/1/22.
 //
@@ -14,6 +14,7 @@ class PaymentFieldTableViewCell: UITableViewCell,
     
     var formField: FormField!
     var viewController: UIViewController!
+    var orderId: String!
     
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var textField: UITextField!
@@ -28,8 +29,6 @@ class PaymentFieldTableViewCell: UITableViewCell,
         textField.clipsToBounds = true
         textField.layer.cornerRadius = 5.0
         textField.layer.borderWidth = 1.0
-        textField.leftViewMode = .always
-        textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 30))
         textField.layer.borderColor = UIColor(red: 240.0/255.0,
                                               green: 240.0/255.0,
                                               blue: 240.0/255.0,
@@ -83,9 +82,10 @@ class PaymentFieldTableViewCell: UITableViewCell,
         formField.value = swtch.isOn ? "true" : "false"
     }
     
-    func updateUI(formField: FormField, viewController: UIViewController) {
+    func updateUI(formField: FormField, viewController: UIViewController, orderId: String) {
         self.formField = formField
         self.viewController = viewController
+        self.orderId = orderId
         
         label.text = formField.label
         textField.placeholder = formField.placeHolder
