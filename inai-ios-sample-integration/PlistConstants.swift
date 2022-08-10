@@ -15,6 +15,7 @@ class PlistConstants {
     var baseURL: String = ""
     var country: String = ""
     var currency: String = ""
+    var amount: String = ""
     
     // static property to create singleton
     static let shared = PlistConstants()
@@ -26,7 +27,8 @@ class PlistConstants {
             self.password = variables["password"] as? String ?? ""
             self.baseURL = variables["base_url"] as? String ?? ""
             self.country = variables["country"] as? String ?? ""
-            self.currency = variables["currency"] as? String ?? "''"
+            self.currency = variables["currency"] as? String ?? ""
+            self.amount = variables["amount"] as? String ?? ""
         }
     }
     
