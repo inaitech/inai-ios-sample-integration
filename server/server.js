@@ -51,7 +51,8 @@ app.post('/v1/order', async (req, res) => {
 // get payment method options
 app.get('/v1/payment-method-options', async (req, res) => {
     try{
-        const { country, saved_payment_method, order_id } = req.query;
+        const { country, saved_payment_method = false, order_id } = req.query;
+
         const query = `?country=${country}&saved_payment_method=${saved_payment_method}&order_id=${order_id}`;
         payment_method_options_url += query;
     
