@@ -21,7 +21,6 @@ require('dotenv').config();
 app.use(cors());
 app.use(express.json());
 
-// CRUD operations
 // create an order
 app.post('/v1/order', async (req, res) => {
     try{
