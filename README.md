@@ -6,15 +6,18 @@ This repository demonstrates how to integrate Inai’s iOS Framework into your p
 ## Features
 ### Headless Checkout
 - Make a payment with variety of payment methods
-    - File : Headless Checkout/Payment Options/PaymentOptionsViewController.swift
+    - File : [PaymentOptionsViewController.swift](https://github.com/inaitech/inai-ios-sample-integration/blob/e4c946d4dd694559d99ec3ffc269969918983b18/inai-ios-sample-integration/Headless%20Checkout/Payment%20Options/PaymentOptionsViewController.swift)
 - Save a payment method
-    - File : Headless Checkout/Save Payment Method/SavePaymentOptionsViewController.swift
-- Save a payment method as you pay
-    - File : Headless Checkout/Make Payment With Saved Method/SavedPaymentOptionsViewController.swift
-- Pay with a saved payment method
-    - File : Headless Checkout/Validate Fields/ValidateFieldsOptionsViewController.swift
+    - File : [SavePaymentOptionsViewController.swift](https://github.com/inaitech/inai-ios-sample-integration/blob/e4c946d4dd694559d99ec3ffc269969918983b18/inai-ios-sample-integration/Headless%20Checkout/Save%20Payment%20Method/SavePaymentOptionsViewController.swift)
+- Pay with Saved Payment Method
+    - File : [SavedPaymentOptionsViewController.swift](https://github.com/inaitech/inai-ios-sample-integration/blob/e4c946d4dd694559d99ec3ffc269969918983b18/inai-ios-sample-integration/Headless%20Checkout/Make%20Payment%20With%20Saved%20Method/SavedPaymentOptionsViewController.swift)
 - Pay with Apple Pay (iOS) - [Setup Instructions](https://docs.inai.io/docs/apple-pay-with-inai-headless-checkout-ios)
-- File : Headless Checkout/Apple Pay/ApplePayViewController.swift
+    - File : [ApplePayViewController.swift]()
+- Validate Fields
+    - File : [ValidateFieldsOptionsViewController.swift](https://github.com/inaitech/inai-ios-sample-integration/blob/e4c946d4dd694559d99ec3ffc269969918983b18/inai-ios-sample-integration/Headless%20Checkout/Validate%20Fields/ValidateFieldsViewController.swift)
+- Get Card Info
+    - File : [GetCardInfoViewController.swift](https://github.com/inaitech/inai-ios-sample-integration/blob/main/inai-ios-sample-integration/Headless%20Checkout/Get%20Card%20Info/GetCardInfoViewController.swift)
+
 
 ## Prerequisites
 - To begin, you will require the client username and client password values. Instructions to get this can be found [here](https://docs.inai.io/docs/getting-started)

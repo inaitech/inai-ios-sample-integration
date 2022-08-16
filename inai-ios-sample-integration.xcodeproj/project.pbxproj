@@ -7,24 +7,33 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2849DE5428AA91C600569AFB /* ValidateFields_PaymentFieldsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2849DE5228AA91C600569AFB /* ValidateFields_PaymentFieldsTableViewCell.swift */; };
+		2849DE5528AA91C600569AFB /* ValidateFields_PaymentFieldsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2849DE5328AA91C600569AFB /* ValidateFields_PaymentFieldsViewController.swift */; };
+		2849DE5F28AA961200569AFB /* SavePayment_FieldsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2849DE5E28AA961200569AFB /* SavePayment_FieldsTableViewCell.swift */; };
+		2849DE6628AAEBA300569AFB /* MakePaymentWithSavedMethod_PaymentFieldsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2849DE6328AAEBA300569AFB /* MakePaymentWithSavedMethod_PaymentFieldsViewController.swift */; };
+		2849DE6728AAEBA300569AFB /* MakePaymentWithSavedMethod_Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2849DE6428AAEBA300569AFB /* MakePaymentWithSavedMethod_Models.swift */; };
+		2849DE6828AAEBA300569AFB /* MakePaymentWithSavedMethod_PaymentFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2849DE6528AAEBA300569AFB /* MakePaymentWithSavedMethod_PaymentFieldTableViewCell.swift */; };
+		2849DE6A28AAEE6F00569AFB /* SavePayment_Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2849DE6928AAEE6F00569AFB /* SavePayment_Models.swift */; };
+		2849DE6C28AAEEB700569AFB /* ValidateFields_Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2849DE6B28AAEEB700569AFB /* ValidateFields_Models.swift */; };
+		2849DE7228AB200300569AFB /* ApplePayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2849DE6F28AB200300569AFB /* ApplePayViewController.swift */; };
+		2849DE7328AB200300569AFB /* ApplePay_Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2849DE7028AB200300569AFB /* ApplePay_Models.swift */; };
+		2849DE7428AB200300569AFB /* ApplePay.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2849DE7128AB200300569AFB /* ApplePay.storyboard */; };
+		284C164F28A5097400214A05 /* MakePayment.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 284C164E28A5097400214A05 /* MakePayment.storyboard */; };
 		285605022893CE260027E608 /* HeadlessCheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285605012893CE260027E608 /* HeadlessCheckoutViewController.swift */; };
 		285605042893CF190027E608 /* ProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285605032893CF190027E608 /* ProductViewController.swift */; };
+		28B33ABF28A53C2700AB6D25 /* MakePayment_PaymentFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B33ABB28A53C2700AB6D25 /* MakePayment_PaymentFieldTableViewCell.swift */; };
+		28B33AC128A53C2700AB6D25 /* MakePayment_PaymentFieldsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B33ABD28A53C2700AB6D25 /* MakePayment_PaymentFieldsViewController.swift */; };
+		28B42ED928A7BC7A00DB80F7 /* SavePaymentMethod.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28B42ED828A7BC7A00DB80F7 /* SavePaymentMethod.storyboard */; };
+		28B42EDB28A7BD8B00DB80F7 /* GetCardInfo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28B42EDA28A7BD8B00DB80F7 /* GetCardInfo.storyboard */; };
+		28B42EDD28A7BDD800DB80F7 /* ValidateFields.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28B42EDC28A7BDD800DB80F7 /* ValidateFields.storyboard */; };
+		28B42EDF28A7BE4200DB80F7 /* MakePaymentWithSavedMethod.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28B42EDE28A7BE4200DB80F7 /* MakePaymentWithSavedMethod.storyboard */; };
+		28B929EA28A591E1005FA064 /* MakePayment_Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B929E928A591E1005FA064 /* MakePayment_Models.swift */; };
 		28C217AB2893D7C2005312F8 /* PlistConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C217AA2893D7C2005312F8 /* PlistConstants.swift */; };
-		28C217AE2893D843005312F8 /* OrderResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C217AD2893D843005312F8 /* OrderResponse.swift */; };
-		28C217B12893D879005312F8 /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C217B02893D879005312F8 /* UIViewControllerExtensions.swift */; };
-		28C217B42894031B005312F8 /* APIMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C217B32894031B005312F8 /* APIMethods.swift */; };
-		28C217BA2894968A005312F8 /* PaymentFieldsTableFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C217B52894968A005312F8 /* PaymentFieldsTableFooterView.swift */; };
-		28C217BB2894968A005312F8 /* PaymentFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C217B62894968A005312F8 /* PaymentFieldTableViewCell.swift */; };
-		28C217BC2894968A005312F8 /* PaymentFieldsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C217B72894968A005312F8 /* PaymentFieldsViewController.swift */; };
-		28C217BD2894968A005312F8 /* PaymentOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C217B82894968A005312F8 /* PaymentOptionsViewController.swift */; };
-		28C217BE2894968A005312F8 /* PaymentFieldsTableFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28C217B92894968A005312F8 /* PaymentFieldsTableFooterView.xib */; };
-		28C217C0289496B9005312F8 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C217BF289496B9005312F8 /* Models.swift */; };
-		28C217C2289496E7005312F8 /* CommonMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C217C1289496E7005312F8 /* CommonMethods.swift */; };
-		28C5F4092899C97C00F21C7E /* SavedPaymentOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C5F4082899C97C00F21C7E /* SavedPaymentOptionsViewController.swift */; };
-		28C5F4112899DE4400F21C7E /* SavePaymentFieldsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C5F4102899DE4400F21C7E /* SavePaymentFieldsViewController.swift */; };
+		28C217BD2894968A005312F8 /* MakePaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C217B82894968A005312F8 /* MakePaymentViewController.swift */; };
+		28C5F4092899C97C00F21C7E /* MakePaymentWithSavedMethodOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C5F4082899C97C00F21C7E /* MakePaymentWithSavedMethodOptionsViewController.swift */; };
+		28C5F4112899DE4400F21C7E /* SavePayment_FieldsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C5F4102899DE4400F21C7E /* SavePayment_FieldsViewController.swift */; };
 		28C5F4142899E0CC00F21C7E /* SavePaymentOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C5F4132899E0CC00F21C7E /* SavePaymentOptionsViewController.swift */; };
 		28C5F4182899E5D900F21C7E /* GetCardInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C5F4172899E5D900F21C7E /* GetCardInfoViewController.swift */; };
-		28C5F41C2899FB5C00F21C7E /* ValidateFieldsOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C5F41B2899FB5C00F21C7E /* ValidateFieldsOptionsViewController.swift */; };
 		28C5F41E2899FD3000F21C7E /* ValidateFieldsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C5F41D2899FD3000F21C7E /* ValidateFieldsViewController.swift */; };
 		28ED2A782897F78700BB4782 /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28ED2A772897F78700BB4782 /* config.plist */; };
 		28F2D49E289301DB007EF5B3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F2D49D289301DB007EF5B3 /* AppDelegate.swift */; };
@@ -38,24 +47,33 @@
 
 /* Begin PBXFileReference section */
 		22A70DB9860AE122672AD604 /* Pods-inai-ios-sample-integration.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-inai-ios-sample-integration.debug.xcconfig"; path = "Target Support Files/Pods-inai-ios-sample-integration/Pods-inai-ios-sample-integration.debug.xcconfig"; sourceTree = "<group>"; };
+		2849DE5228AA91C600569AFB /* ValidateFields_PaymentFieldsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidateFields_PaymentFieldsTableViewCell.swift; sourceTree = "<group>"; };
+		2849DE5328AA91C600569AFB /* ValidateFields_PaymentFieldsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidateFields_PaymentFieldsViewController.swift; sourceTree = "<group>"; };
+		2849DE5E28AA961200569AFB /* SavePayment_FieldsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavePayment_FieldsTableViewCell.swift; sourceTree = "<group>"; };
+		2849DE6328AAEBA300569AFB /* MakePaymentWithSavedMethod_PaymentFieldsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MakePaymentWithSavedMethod_PaymentFieldsViewController.swift; sourceTree = "<group>"; };
+		2849DE6428AAEBA300569AFB /* MakePaymentWithSavedMethod_Models.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MakePaymentWithSavedMethod_Models.swift; sourceTree = "<group>"; };
+		2849DE6528AAEBA300569AFB /* MakePaymentWithSavedMethod_PaymentFieldTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MakePaymentWithSavedMethod_PaymentFieldTableViewCell.swift; sourceTree = "<group>"; };
+		2849DE6928AAEE6F00569AFB /* SavePayment_Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavePayment_Models.swift; sourceTree = "<group>"; };
+		2849DE6B28AAEEB700569AFB /* ValidateFields_Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateFields_Models.swift; sourceTree = "<group>"; };
+		2849DE6F28AB200300569AFB /* ApplePayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplePayViewController.swift; sourceTree = "<group>"; };
+		2849DE7028AB200300569AFB /* ApplePay_Models.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplePay_Models.swift; sourceTree = "<group>"; };
+		2849DE7128AB200300569AFB /* ApplePay.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ApplePay.storyboard; sourceTree = "<group>"; };
+		284C164E28A5097400214A05 /* MakePayment.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MakePayment.storyboard; sourceTree = "<group>"; };
 		285605012893CE260027E608 /* HeadlessCheckoutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeadlessCheckoutViewController.swift; sourceTree = "<group>"; };
 		285605032893CF190027E608 /* ProductViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductViewController.swift; sourceTree = "<group>"; };
+		28B33ABB28A53C2700AB6D25 /* MakePayment_PaymentFieldTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MakePayment_PaymentFieldTableViewCell.swift; sourceTree = "<group>"; };
+		28B33ABD28A53C2700AB6D25 /* MakePayment_PaymentFieldsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MakePayment_PaymentFieldsViewController.swift; sourceTree = "<group>"; };
+		28B42ED828A7BC7A00DB80F7 /* SavePaymentMethod.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SavePaymentMethod.storyboard; sourceTree = "<group>"; };
+		28B42EDA28A7BD8B00DB80F7 /* GetCardInfo.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = GetCardInfo.storyboard; sourceTree = "<group>"; };
+		28B42EDC28A7BDD800DB80F7 /* ValidateFields.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ValidateFields.storyboard; sourceTree = "<group>"; };
+		28B42EDE28A7BE4200DB80F7 /* MakePaymentWithSavedMethod.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MakePaymentWithSavedMethod.storyboard; sourceTree = "<group>"; };
+		28B929E928A591E1005FA064 /* MakePayment_Models.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MakePayment_Models.swift; sourceTree = "<group>"; };
 		28C217AA2893D7C2005312F8 /* PlistConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlistConstants.swift; sourceTree = "<group>"; };
-		28C217AD2893D843005312F8 /* OrderResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderResponse.swift; sourceTree = "<group>"; };
-		28C217B02893D879005312F8 /* UIViewControllerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtensions.swift; sourceTree = "<group>"; };
-		28C217B32894031B005312F8 /* APIMethods.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIMethods.swift; sourceTree = "<group>"; };
-		28C217B52894968A005312F8 /* PaymentFieldsTableFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentFieldsTableFooterView.swift; sourceTree = "<group>"; };
-		28C217B62894968A005312F8 /* PaymentFieldTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentFieldTableViewCell.swift; sourceTree = "<group>"; };
-		28C217B72894968A005312F8 /* PaymentFieldsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentFieldsViewController.swift; sourceTree = "<group>"; };
-		28C217B82894968A005312F8 /* PaymentOptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentOptionsViewController.swift; sourceTree = "<group>"; };
-		28C217B92894968A005312F8 /* PaymentFieldsTableFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PaymentFieldsTableFooterView.xib; sourceTree = "<group>"; };
-		28C217BF289496B9005312F8 /* Models.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
-		28C217C1289496E7005312F8 /* CommonMethods.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonMethods.swift; sourceTree = "<group>"; };
-		28C5F4082899C97C00F21C7E /* SavedPaymentOptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedPaymentOptionsViewController.swift; sourceTree = "<group>"; };
-		28C5F4102899DE4400F21C7E /* SavePaymentFieldsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavePaymentFieldsViewController.swift; sourceTree = "<group>"; };
+		28C217B82894968A005312F8 /* MakePaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MakePaymentViewController.swift; sourceTree = "<group>"; };
+		28C5F4082899C97C00F21C7E /* MakePaymentWithSavedMethodOptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MakePaymentWithSavedMethodOptionsViewController.swift; sourceTree = "<group>"; };
+		28C5F4102899DE4400F21C7E /* SavePayment_FieldsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavePayment_FieldsViewController.swift; sourceTree = "<group>"; };
 		28C5F4132899E0CC00F21C7E /* SavePaymentOptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavePaymentOptionsViewController.swift; sourceTree = "<group>"; };
 		28C5F4172899E5D900F21C7E /* GetCardInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetCardInfoViewController.swift; sourceTree = "<group>"; };
-		28C5F41B2899FB5C00F21C7E /* ValidateFieldsOptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidateFieldsOptionsViewController.swift; sourceTree = "<group>"; };
 		28C5F41D2899FD3000F21C7E /* ValidateFieldsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidateFieldsViewController.swift; sourceTree = "<group>"; };
 		28ED2A772897F78700BB4782 /* config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = config.plist; sourceTree = "<group>"; };
 		28ED2A79289894D000BB4782 /* inai-ios-sample-integration.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "inai-ios-sample-integration.entitlements"; sourceTree = "<group>"; };
@@ -83,70 +101,85 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2849DE4D28AA90B000569AFB /* Payment Field Views */ = {
+			isa = PBXGroup;
+			children = (
+				2849DE5328AA91C600569AFB /* ValidateFields_PaymentFieldsViewController.swift */,
+				2849DE5228AA91C600569AFB /* ValidateFields_PaymentFieldsTableViewCell.swift */,
+			);
+			path = "Payment Field Views";
+			sourceTree = "<group>";
+		};
+		2849DE6228AAEB6600569AFB /* Payment Fields Views */ = {
+			isa = PBXGroup;
+			children = (
+				2849DE6328AAEBA300569AFB /* MakePaymentWithSavedMethod_PaymentFieldsViewController.swift */,
+				2849DE6528AAEBA300569AFB /* MakePaymentWithSavedMethod_PaymentFieldTableViewCell.swift */,
+			);
+			path = "Payment Fields Views";
+			sourceTree = "<group>";
+		};
+		2849DE6D28AAF2F400569AFB /* Payment Fields Views */ = {
+			isa = PBXGroup;
+			children = (
+				28C5F4102899DE4400F21C7E /* SavePayment_FieldsViewController.swift */,
+				2849DE5E28AA961200569AFB /* SavePayment_FieldsTableViewCell.swift */,
+			);
+			path = "Payment Fields Views";
+			sourceTree = "<group>";
+		};
+		2849DE6E28AB1F9E00569AFB /* Apple Pay */ = {
+			isa = PBXGroup;
+			children = (
+				2849DE6F28AB200300569AFB /* ApplePayViewController.swift */,
+				2849DE7028AB200300569AFB /* ApplePay_Models.swift */,
+				2849DE7128AB200300569AFB /* ApplePay.storyboard */,
+			);
+			path = "Apple Pay";
+			sourceTree = "<group>";
+		};
 		285605002893CDC00027E608 /* Headless Checkout */ = {
 			isa = PBXGroup;
 			children = (
 				285605012893CE260027E608 /* HeadlessCheckoutViewController.swift */,
 				285605032893CF190027E608 /* ProductViewController.swift */,
-				28C5F40A2899CCFE00F21C7E /* Payment Options */,
+				28C5F40A2899CCFE00F21C7E /* Make Payment */,
 				28C5F4122899E0B800F21C7E /* Save Payment Method */,
 				28C5F40B2899CD1700F21C7E /* Make Payment With Saved Method */,
+				2849DE6E28AB1F9E00569AFB /* Apple Pay */,
 				28C5F4162899E51E00F21C7E /* Validate Fields */,
 				28C5F4152899E50000F21C7E /* Get Card Info */,
-				28C5F4072899BEF500F21C7E /* Common Payment Fields Views */,
-				28C217BF289496B9005312F8 /* Models.swift */,
 			);
 			path = "Headless Checkout";
 			sourceTree = "<group>";
 		};
-		28C217AC2893D82B005312F8 /* Structures */ = {
+		28B33AB928A53C1E00AB6D25 /* Payment Fields Views */ = {
 			isa = PBXGroup;
 			children = (
-				28C217AD2893D843005312F8 /* OrderResponse.swift */,
+				28B33ABD28A53C2700AB6D25 /* MakePayment_PaymentFieldsViewController.swift */,
+				28B33ABB28A53C2700AB6D25 /* MakePayment_PaymentFieldTableViewCell.swift */,
 			);
-			path = Structures;
+			path = "Payment Fields Views";
 			sourceTree = "<group>";
 		};
-		28C217AF2893D86C005312F8 /* Extensions */ = {
+		28C5F40A2899CCFE00F21C7E /* Make Payment */ = {
 			isa = PBXGroup;
 			children = (
-				28C217B02893D879005312F8 /* UIViewControllerExtensions.swift */,
+				28C217B82894968A005312F8 /* MakePaymentViewController.swift */,
+				284C164E28A5097400214A05 /* MakePayment.storyboard */,
+				28B929E928A591E1005FA064 /* MakePayment_Models.swift */,
+				28B33AB928A53C1E00AB6D25 /* Payment Fields Views */,
 			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
-		28C217B228940302005312F8 /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-				28C217C1289496E7005312F8 /* CommonMethods.swift */,
-				28C217B32894031B005312F8 /* APIMethods.swift */,
-			);
-			path = Helpers;
-			sourceTree = "<group>";
-		};
-		28C5F4072899BEF500F21C7E /* Common Payment Fields Views */ = {
-			isa = PBXGroup;
-			children = (
-				28C217B72894968A005312F8 /* PaymentFieldsViewController.swift */,
-				28C217B62894968A005312F8 /* PaymentFieldTableViewCell.swift */,
-				28C217B52894968A005312F8 /* PaymentFieldsTableFooterView.swift */,
-				28C217B92894968A005312F8 /* PaymentFieldsTableFooterView.xib */,
-			);
-			path = "Common Payment Fields Views";
-			sourceTree = "<group>";
-		};
-		28C5F40A2899CCFE00F21C7E /* Payment Options */ = {
-			isa = PBXGroup;
-			children = (
-				28C217B82894968A005312F8 /* PaymentOptionsViewController.swift */,
-			);
-			path = "Payment Options";
+			path = "Make Payment";
 			sourceTree = "<group>";
 		};
 		28C5F40B2899CD1700F21C7E /* Make Payment With Saved Method */ = {
 			isa = PBXGroup;
 			children = (
-				28C5F4082899C97C00F21C7E /* SavedPaymentOptionsViewController.swift */,
+				28C5F4082899C97C00F21C7E /* MakePaymentWithSavedMethodOptionsViewController.swift */,
+				28B42EDE28A7BE4200DB80F7 /* MakePaymentWithSavedMethod.storyboard */,
+				2849DE6428AAEBA300569AFB /* MakePaymentWithSavedMethod_Models.swift */,
+				2849DE6228AAEB6600569AFB /* Payment Fields Views */,
 			);
 			path = "Make Payment With Saved Method";
 			sourceTree = "<group>";
@@ -155,7 +188,9 @@
 			isa = PBXGroup;
 			children = (
 				28C5F4132899E0CC00F21C7E /* SavePaymentOptionsViewController.swift */,
-				28C5F4102899DE4400F21C7E /* SavePaymentFieldsViewController.swift */,
+				28B42ED828A7BC7A00DB80F7 /* SavePaymentMethod.storyboard */,
+				2849DE6928AAEE6F00569AFB /* SavePayment_Models.swift */,
+				2849DE6D28AAF2F400569AFB /* Payment Fields Views */,
 			);
 			path = "Save Payment Method";
 			sourceTree = "<group>";
@@ -164,6 +199,7 @@
 			isa = PBXGroup;
 			children = (
 				28C5F4172899E5D900F21C7E /* GetCardInfoViewController.swift */,
+				28B42EDA28A7BD8B00DB80F7 /* GetCardInfo.storyboard */,
 			);
 			path = "Get Card Info";
 			sourceTree = "<group>";
@@ -171,8 +207,10 @@
 		28C5F4162899E51E00F21C7E /* Validate Fields */ = {
 			isa = PBXGroup;
 			children = (
-				28C5F41B2899FB5C00F21C7E /* ValidateFieldsOptionsViewController.swift */,
 				28C5F41D2899FD3000F21C7E /* ValidateFieldsViewController.swift */,
+				28B42EDC28A7BDD800DB80F7 /* ValidateFields.storyboard */,
+				2849DE6B28AAEEB700569AFB /* ValidateFields_Models.swift */,
+				2849DE4D28AA90B000569AFB /* Payment Field Views */,
 			);
 			path = "Validate Fields";
 			sourceTree = "<group>";
@@ -199,9 +237,6 @@
 			isa = PBXGroup;
 			children = (
 				28ED2A79289894D000BB4782 /* inai-ios-sample-integration.entitlements */,
-				28C217B228940302005312F8 /* Helpers */,
-				28C217AF2893D86C005312F8 /* Extensions */,
-				28C217AC2893D82B005312F8 /* Structures */,
 				285605002893CDC00027E608 /* Headless Checkout */,
 				28F2D49D289301DB007EF5B3 /* AppDelegate.swift */,
 				28F2D49F289301DB007EF5B3 /* SceneDelegate.swift */,
@@ -293,9 +328,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				28C217BE2894968A005312F8 /* PaymentFieldsTableFooterView.xib in Resources */,
 				28F2D4AA289301DD007EF5B3 /* LaunchScreen.storyboard in Resources */,
 				28F2D4A7289301DD007EF5B3 /* Assets.xcassets in Resources */,
+				28B42EDD28A7BDD800DB80F7 /* ValidateFields.storyboard in Resources */,
+				28B42EDB28A7BD8B00DB80F7 /* GetCardInfo.storyboard in Resources */,
+				28B42ED928A7BC7A00DB80F7 /* SavePaymentMethod.storyboard in Resources */,
+				28B42EDF28A7BE4200DB80F7 /* MakePaymentWithSavedMethod.storyboard in Resources */,
+				284C164F28A5097400214A05 /* MakePayment.storyboard in Resources */,
+				2849DE7428AB200300569AFB /* ApplePay.storyboard in Resources */,
 				28ED2A782897F78700BB4782 /* config.plist in Resources */,
 				28F2D4A5289301DB007EF5B3 /* Main.storyboard in Resources */,
 			);
@@ -351,26 +391,30 @@
 			buildActionMask = 2147483647;
 			files = (
 				28C5F4182899E5D900F21C7E /* GetCardInfoViewController.swift in Sources */,
-				28C5F41C2899FB5C00F21C7E /* ValidateFieldsOptionsViewController.swift in Sources */,
-				28C217BC2894968A005312F8 /* PaymentFieldsViewController.swift in Sources */,
+				28B929EA28A591E1005FA064 /* MakePayment_Models.swift in Sources */,
+				2849DE6C28AAEEB700569AFB /* ValidateFields_Models.swift in Sources */,
 				28C5F41E2899FD3000F21C7E /* ValidateFieldsViewController.swift in Sources */,
-				28C217B12893D879005312F8 /* UIViewControllerExtensions.swift in Sources */,
 				28F2D4A2289301DB007EF5B3 /* HomeViewController.swift in Sources */,
-				28C217B42894031B005312F8 /* APIMethods.swift in Sources */,
-				28C217BB2894968A005312F8 /* PaymentFieldTableViewCell.swift in Sources */,
+				2849DE7228AB200300569AFB /* ApplePayViewController.swift in Sources */,
+				2849DE5528AA91C600569AFB /* ValidateFields_PaymentFieldsViewController.swift in Sources */,
+				28B33ABF28A53C2700AB6D25 /* MakePayment_PaymentFieldTableViewCell.swift in Sources */,
 				28C5F4142899E0CC00F21C7E /* SavePaymentOptionsViewController.swift in Sources */,
 				285605022893CE260027E608 /* HeadlessCheckoutViewController.swift in Sources */,
-				28C217BD2894968A005312F8 /* PaymentOptionsViewController.swift in Sources */,
+				28C217BD2894968A005312F8 /* MakePaymentViewController.swift in Sources */,
 				28F2D49E289301DB007EF5B3 /* AppDelegate.swift in Sources */,
 				285605042893CF190027E608 /* ProductViewController.swift in Sources */,
-				28C5F4112899DE4400F21C7E /* SavePaymentFieldsViewController.swift in Sources */,
-				28C217C2289496E7005312F8 /* CommonMethods.swift in Sources */,
-				28C217AE2893D843005312F8 /* OrderResponse.swift in Sources */,
+				28C5F4112899DE4400F21C7E /* SavePayment_FieldsViewController.swift in Sources */,
+				2849DE7328AB200300569AFB /* ApplePay_Models.swift in Sources */,
+				28B33AC128A53C2700AB6D25 /* MakePayment_PaymentFieldsViewController.swift in Sources */,
 				28F2D4A0289301DB007EF5B3 /* SceneDelegate.swift in Sources */,
-				28C217BA2894968A005312F8 /* PaymentFieldsTableFooterView.swift in Sources */,
+				2849DE6628AAEBA300569AFB /* MakePaymentWithSavedMethod_PaymentFieldsViewController.swift in Sources */,
+				2849DE5428AA91C600569AFB /* ValidateFields_PaymentFieldsTableViewCell.swift in Sources */,
+				2849DE5F28AA961200569AFB /* SavePayment_FieldsTableViewCell.swift in Sources */,
+				2849DE6728AAEBA300569AFB /* MakePaymentWithSavedMethod_Models.swift in Sources */,
+				2849DE6A28AAEE6F00569AFB /* SavePayment_Models.swift in Sources */,
 				28C217AB2893D7C2005312F8 /* PlistConstants.swift in Sources */,
-				28C5F4092899C97C00F21C7E /* SavedPaymentOptionsViewController.swift in Sources */,
-				28C217C0289496B9005312F8 /* Models.swift in Sources */,
+				28C5F4092899C97C00F21C7E /* MakePaymentWithSavedMethodOptionsViewController.swift in Sources */,
+				2849DE6828AAEBA300569AFB /* MakePaymentWithSavedMethod_PaymentFieldTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -519,6 +563,7 @@
 				CODE_SIGN_ENTITLEMENTS = "inai-ios-sample-integration/inai-ios-sample-integration.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 73UU5N4925;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "inai-ios-sample-integration/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -532,7 +577,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "io.inai.inai-ios-sample-integration";
+				PRODUCT_BUNDLE_IDENTIFIER = "io.inai.inai-ios-sample-integration-ay";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -549,6 +594,7 @@
 				CODE_SIGN_ENTITLEMENTS = "inai-ios-sample-integration/inai-ios-sample-integration.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 73UU5N4925;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "inai-ios-sample-integration/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -562,7 +608,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "io.inai.inai-ios-sample-integration";
+				PRODUCT_BUNDLE_IDENTIFIER = "io.inai.inai-ios-sample-integration-ay";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

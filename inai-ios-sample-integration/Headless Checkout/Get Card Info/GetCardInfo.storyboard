@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="FP6-8E-lwD">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Get Card Info-->
+        <scene sceneID="S75-pK-9qZ">
+            <objects>
+                <viewController id="FP6-8E-lwD" userLabel="Get Card Info" customClass="GetCardInfoViewController" customModule="inai_ios_sample_integration" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="BNu-Kh-fIJ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f6a-Po-bNc">
+                                <rect key="frame" x="20" y="44" width="374" height="818"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="onj-E9-wzS">
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="108.5"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="FsP-Bm-CW2">
+                                                <rect key="frame" x="0.0" y="0.0" width="374" height="64.5"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Card Number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZBd-7U-OQG">
+                                                        <rect key="frame" x="0.0" y="0.0" width="374" height="20.5"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="J5B-Oq-WYq">
+                                                        <rect key="frame" x="0.0" y="30.5" width="374" height="34"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                        <connections>
+                                                            <action selector="textFieldDidChange:" destination="FP6-8E-lwD" eventType="editingChanged" id="UKY-QU-Mb0"/>
+                                                        </connections>
+                                                    </textField>
+                                                </subviews>
+                                            </stackView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IDB-nB-FCO">
+                                                <rect key="frame" x="0.0" y="74.5" width="374" height="34"/>
+                                                <color key="backgroundColor" red="0.45886170859999997" green="0.45265638829999999" blue="0.83925354480000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="AddCardAndPay"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" title="Get Card Info"/>
+                                                <connections>
+                                                    <action selector="clickedGetCardInfo:" destination="FP6-8E-lwD" eventType="touchUpInside" id="l7D-tL-HdO"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="onj-E9-wzS" firstAttribute="trailing" secondItem="hka-Cr-che" secondAttribute="trailing" id="H11-D7-74k"/>
+                                    <constraint firstItem="onj-E9-wzS" firstAttribute="width" secondItem="RB3-w5-hY8" secondAttribute="width" id="Qav-N0-0FG"/>
+                                    <constraint firstItem="onj-E9-wzS" firstAttribute="top" secondItem="hka-Cr-che" secondAttribute="top" id="YFK-SW-cL1"/>
+                                    <constraint firstItem="onj-E9-wzS" firstAttribute="bottom" secondItem="hka-Cr-che" secondAttribute="bottom" priority="250" constant="-20" id="Z2K-Ey-Q74"/>
+                                    <constraint firstItem="onj-E9-wzS" firstAttribute="leading" secondItem="hka-Cr-che" secondAttribute="leading" id="ZeY-0S-uZu"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="hka-Cr-che"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="RB3-w5-hY8"/>
+                            </scrollView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="xWt-cQ-R8k">
+                                <rect key="frame" x="188.5" y="434.5" width="37" height="37"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="FtI-I9-uAe"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="f6a-Po-bNc" firstAttribute="bottom" secondItem="FtI-I9-uAe" secondAttribute="bottom" priority="250" id="2qA-si-rOM"/>
+                            <constraint firstItem="xWt-cQ-R8k" firstAttribute="centerX" secondItem="FtI-I9-uAe" secondAttribute="centerX" id="5Sp-JE-mVm"/>
+                            <constraint firstItem="FtI-I9-uAe" firstAttribute="trailing" secondItem="f6a-Po-bNc" secondAttribute="trailing" constant="20" id="Ejw-tZ-Dfv"/>
+                            <constraint firstItem="xWt-cQ-R8k" firstAttribute="centerY" secondItem="FtI-I9-uAe" secondAttribute="centerY" id="Ijr-iX-wKj"/>
+                            <constraint firstItem="f6a-Po-bNc" firstAttribute="leading" secondItem="FtI-I9-uAe" secondAttribute="leading" constant="20" id="c7p-BP-AIV"/>
+                            <constraint firstItem="FtI-I9-uAe" firstAttribute="top" secondItem="f6a-Po-bNc" secondAttribute="top" id="vRC-vb-siH"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Get Card Info" id="Cp9-nT-0wE"/>
+                    <connections>
+                        <outlet property="activityIndicator" destination="xWt-cQ-R8k" id="pa1-h3-IrD"/>
+                        <outlet property="btn_get_card_info" destination="IDB-nB-FCO" id="g9X-dn-RNO"/>
+                        <outlet property="scrollView" destination="f6a-Po-bNc" id="eK3-lq-LyZ"/>
+                        <outlet property="txt_card_number" destination="J5B-Oq-WYq" id="WSw-vo-Nz3"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="29G-8x-Dhb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1857" y="-719"/>
+        </scene>
+    </scenes>
+</document>
