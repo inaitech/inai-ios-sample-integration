@@ -12,7 +12,7 @@ This repository demonstrates how to integrate Inai’s iOS Framework into your p
 - Pay with Saved Payment Method
     - File : [SavedPaymentOptionsViewController.swift](https://github.com/inaitech/inai-ios-sample-integration/blob/e4c946d4dd694559d99ec3ffc269969918983b18/inai-ios-sample-integration/Headless%20Checkout/Make%20Payment%20With%20Saved%20Method/SavedPaymentOptionsViewController.swift)
 - Pay with Apple Pay (iOS) - [Setup Instructions](https://docs.inai.io/docs/apple-pay-with-inai-headless-checkout-ios)
-    - File : [ApplePayViewController.swift]()
+    - File : [ApplePayViewController.swift](https://github.com/inaitech/inai-ios-sample-integration/blob/ae5b96f9ff4832a14e98f2d2b61864328e5a599b/inai-ios-sample-integration/Headless%20Checkout/Apple%20Pay/ApplePayViewController.swift)
 - Validate Fields
     - File : [ValidateFieldsOptionsViewController.swift](https://github.com/inaitech/inai-ios-sample-integration/blob/e4c946d4dd694559d99ec3ffc269969918983b18/inai-ios-sample-integration/Headless%20Checkout/Validate%20Fields/ValidateFieldsViewController.swift)
 - Get Card Info
