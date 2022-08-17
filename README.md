@@ -30,7 +30,16 @@ This repository demonstrates how to integrate Inai’s iOS Framework into your p
 iOS 9, Swift 5.x
 
 ## Setup
-To setup the inai sample app for <platform>, follow the steps below,
+
+To start the backend NodeJS server:
+1. Navigate to the ./server folder at the root level.
+2. Run command `npm install` to install the dependency packages.
+3. Add a new .env file the follwing variables:
+    1. client_username
+    2. client_password
+4. Run command `npm start` to start the nodejs backend server
+
+To setup the inai sample app for IOS, follow the steps below:
 1. `git clone https://github.com/inaitech/inai-ios-sample-integration`
 2. Navigate to  ./config.plist fileupdate the following values :
    - Client Username
@@ -38,9 +47,10 @@ To setup the inai sample app for <platform>, follow the steps below,
    - Country
    - Amount      // for order creation
    - Currency    // for order creation
+   - Base URL    // backend api server url eg: http://localhost:5009
 3. Run command `pod install` at the root level of the project to install the CocoaPods dependencies.
 4. Open the workspace file `inai-ios-sample-integration.xcworkspace`, build and run the project.
-
+ 
 ## FAQs
 <TBA>
 

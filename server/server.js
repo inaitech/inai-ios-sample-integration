@@ -2,8 +2,9 @@ const express = require('express');
 const fetch = require('node-fetch');
 
 // urls
-const create_order_url = 'https://api.inai.io/v1/orders';
-let payment_method_options_url = 'https://api.inai.io/v1/payment-method-options';
+const baseUrl = "https://api.inai.io/v1";
+const create_order_url = `${baseUrl}/orders`;
+const payment_method_options_url = `${baseUrl}/payment-method-options`;
 
 // express app
 const app = express();
@@ -22,10 +23,10 @@ app.use(cors());
 app.use(express.json());
 
 // create an order
-app.post('/v1/order', async (req, res) => {
+app.post('/v1/orders', async (req, res) => {
+  console.log("Preparing Order");
     try{
         const token = Buffer.from(`${process.env.client_username}:${process.env.client_password}`).toString('base64');
-        req.body = {...req.body, amount: process.env.amount, currency: process.env.currency};
         const options = {
             method: 'POST',
             headers: {
@@ -44,8 +45,9 @@ app.post('/v1/order', async (req, res) => {
           res.status(response.status).json(response_data);
     }catch(error){
         res.status(400).json(error);
+        console.error(error);
     }
-})
+});
 
 // get payment method options
 app.get('/v1/payment-method-options', async (req, res) => {
@@ -67,14 +69,47 @@ app.get('/v1/payment-method-options', async (req, res) => {
         const response = await fetch(payment_method_options_url, options);
         const response_data = await response.json();
         if (response_data.message || response.status !== 200) {
+          console.log(response_data);
           return res.status(400).json(response_data);
         }
         res.status(response.status).json(response_data);
       } catch (error) {
         res.status(400).json(error);
-        // throw error;
+        console.error(error);
       }
-})
+});
+
+// get Customer Payment methods
+app.get('/v1/customers/:customerId/payment-methods', async (req, res) => {
+  try{
+      console.log("Get Customer payment-methods");
+      const customerId =  req.params.customerId;
+      const customerUrl = `${baseUrl}/customers/${customerId}/payment-methods`;
+      console.log(customerUrl);
+
+      const token = Buffer.from(`${process.env.client_username}:${process.env.client_password}`).toString('base64');
+      const options = {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+          Authorization: `Basic ${token}`,
+        }
+      };
+  
+      const response = await fetch(customerUrl, options);
+      const response_data = await response.json();
+
+      console.log(response_data);
+
+      if (response_data.message || response.status !== 200) {
+        return res.status(400).json(response_data);
+      }
+      res.status(response.status).json(response_data);
+    } catch (error) {
+      res.status(400).json(error);
+      console.error(error);
+    }
+});
 
 // listening to port
 app.listen(port, () => console.log('listening to port', port));

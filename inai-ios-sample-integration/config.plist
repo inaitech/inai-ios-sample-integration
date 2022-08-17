@@ -5,11 +5,11 @@
 	<key>amount</key>
 	<string>100</string>
 	<key>token</key>
-	<string>__Inai_Username__</string>
+	<string>__INAI_USERNAME__</string>
 	<key>password</key>
-	<string>__Inai_Password__</string>
+	<string>__INAI_PASSWORD__</string>
 	<key>base_url</key>
-	<string>https://api.inai.io/v1</string>
+	<string>__BACKEND_URL__</string>
 	<key>country</key>
 	<string>USA</string>
 	<key>currency</key>
