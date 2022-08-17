@@ -17,8 +17,8 @@ class HeadlessCheckoutViewController: UIViewController {
         if segue.identifier == "ShowProductView" {
             if let vc = segue.destination as? ProductController {
                 if let sender = sender as? [String: Any] {
-                    if (sender["saved_payment_method"] as? Bool ?? false) {
-                        vc.payWithSavedMethods = true
+                    if let payment_method = sender["payment_method"] as? String {
+                        vc.payment_method = payment_method
                     }
                 }
             }
@@ -28,11 +28,15 @@ class HeadlessCheckoutViewController: UIViewController {
     // MARK: - IBActions
     // MARK: -
     @IBAction func showProductView(_ sender: Any) {
-        performSegue(withIdentifier: "ShowProductView", sender: nil)
+        performSegue(withIdentifier: "ShowProductView", sender: ["payment_method": "normal"])
     }
     
     @IBAction func showProductViewWithSavedPayment(_ sender: Any) {
-        performSegue(withIdentifier: "ShowProductView", sender: ["saved_payment_method": true])
+        performSegue(withIdentifier: "ShowProductView", sender: ["payment_method": "saved"])
+    }
+    
+    @IBAction func showProductViewWithApplePay(_ sender: Any) {
+        performSegue(withIdentifier: "ShowProductView", sender: ["payment_method": "apple_pay"])
     }
 }
 

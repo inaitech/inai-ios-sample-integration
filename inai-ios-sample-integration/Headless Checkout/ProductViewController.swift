@@ -10,7 +10,7 @@ import inai_ios_sdk
 
 class ProductController: UIViewController {
 
-    var payWithSavedMethods: Bool = false
+    var payment_method: String = "normal"
     
     // MARK: - IBOutlets
     // MARK: -
@@ -25,8 +25,10 @@ class ProductController: UIViewController {
     // MARK: - IBActions
     // MARK: -
     @IBAction func clickedBuyNow(_ sender: Any) {
-        if (payWithSavedMethods) {
+        if (payment_method == "saved") {
             performSegue(withIdentifier: "ShowSavedPaymentOptionsView", sender: self)
+        } else if (payment_method == "apple_pay") {
+            performSegue(withIdentifier: "ShowApplePayView", sender: self)
         } else {
             performSegue(withIdentifier: "ShowPaymentOptionsView", sender: self)
         }

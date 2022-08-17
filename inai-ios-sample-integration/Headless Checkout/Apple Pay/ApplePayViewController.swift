@@ -1,5 +1,5 @@
 //
-//  SavePaymentOptionsViewController.swift
+//  ApplePayViewController.swift
 //  inai-ios-sample-integration
 //
 //  Created by Parag Dulam on 4/29/22.
@@ -8,15 +8,32 @@
 import Foundation
 import UIKit
 import inai_ios_sdk
+import PassKit
 
-class SavePaymentOptionsViewController: UIViewController {
+fileprivate struct ApplePayStringError: Error {
+    let message: String
     
-    @IBOutlet weak var tbl_payment_options: UITableView!
+    init(_ message: String) {
+        self.message = message
+    }
+    
+    public var localizedDescription: String {
+        return message
+    }
+}
+
+class ApplePayViewController: UIViewController {
+    
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-        
-    private var selectedPaymentOption: SavePayment_PaymentMethodOption?
-    private var paymentOptions: [SavePayment_PaymentMethodOption] = []
+    @IBOutlet weak var button_container: UIStackView!
+    
+    var selectedPaymentOption: ApplePay_PaymentMethodOption!
+
     private var orderId = ""
+    
+    private var paymentController: PKPaymentAuthorizationController!
+    private var applePayCompletion: ((PKPaymentAuthorizationResult) -> Void)?
+    private var applePayRequestData: InaiApplePayRequestData?
     
     var base_url: String! {
         return PlistConstants.shared.baseURL
@@ -34,7 +51,7 @@ class SavePaymentOptionsViewController: UIViewController {
         super.viewDidLoad()
         self.prepareOrder()
     }
-    
+
     private func prepareOrder() {
         //  Initiate a new order
         self.activityIndicator.startAnimating()
@@ -60,8 +77,6 @@ class SavePaymentOptionsViewController: UIViewController {
                                  "last_name": "Smith",
                                  "contact_number": "01010101010"]
         }
-
-        body["capture_method"] = "MANUAL"
 
         self.request(url: URL(string: self.inai_prepare_order_url)!,
                      method: "POST",
@@ -135,28 +150,90 @@ class SavePaymentOptionsViewController: UIViewController {
         self.activityIndicator.startAnimating()
         
         self.getPaymentOptions(
-            orderId: self.orderId) { response, error in
+            orderId: self.orderId,
+            saved_payment_method: false) { response, error in
                 self.activityIndicator.stopAnimating()
                 guard let respo = response else {
                     self.showAlert(error?.localizedDescription ?? "")
                     return
                 }
                 
-                //  Lets render all options to save except Apply Pay
-                let paymentOptions = SavePayment_PaymentMethodOption.paymentOptionsFromJSON(respo)
-                                    .filter { self.sanitizeRailCode($0.railCode) != "Apple Pay" }
+                let payOptions = ApplePay_PaymentMethodOption.paymentOptionsFromJSON(respo)
+                    .filter { self.sanitizeRailCode($0.railCode) == "Apple Pay" }
                 
-                self.paymentOptions = paymentOptions
-                self.tbl_payment_options.reloadData()
+                if (payOptions.count == 0 ) {
+                    //  Apple Pay not available
+                    self.showAlert("Apple Pay not available for this account", title: "Error", completion: self.goToHomeScreen)
+                    return
+                }
+                
+                self.selectedPaymentOption = payOptions[0]
+                self.initApplePayUI()
             }
     }
     
+    private func sanitizeRailCode(_ railCode: String?) -> String? {
+        let sanitizedString = railCode?.replacingOccurrences(of: "_", with: " ")
+        return sanitizedString?.capitalized
+    }
+    
+    private func initApplePayUI() {
+        //  Get Apple Pay Order Information from the Inai SDK
+        if let applePaymentRequestData = InaiCheckout.getApplePayRequestData(paymentMethodOptionsData: self.selectedPaymentOption.dict) {
+            self.setupApplePayButton(applePaymentRequestData)
+            
+        } else {
+            // Invalid Apple Pay Request Data
+            self.showAlert("Invalid Apple Pay Request Data", title: "Error", completion: self.goToHomeScreen)
+        }
+    }
+    
+    func setupApplePayButton (_ applePayRequestData: InaiApplePayRequestData) {
+        self.applePayRequestData = applePayRequestData
+        var button: UIButton?
+        if applePayRequestData.canMakePayments {
+            button = PKPaymentButton(paymentButtonType: .buy, paymentButtonStyle: .black)
+            button?.addTarget(self, action: #selector(self.payPressed), for: .touchUpInside)
+        } else if applePayRequestData.canSetupCards {
+            button = PKPaymentButton(paymentButtonType: .setUp, paymentButtonStyle: .black)
+            button?.addTarget(self, action: #selector(self.setupPressed), for: .touchUpInside)
+        }
+        
+        if let applePayButton = button {
+            applePayButton.translatesAutoresizingMaskIntoConstraints = false
+            button_container.addSubview(applePayButton)
+        }
+    }
+
+    @objc func setupPressed(sender: AnyObject) {
+        let passLibrary = PKPassLibrary()
+        passLibrary.openPaymentSetup()
+    }
+    
+    @objc func payPressed(sender: Any) {
+        let request = InaiCheckout.getApplePaymentRequest(paymentRequestData: self.applePayRequestData!)
+        paymentController = PKPaymentAuthorizationController(paymentRequest: request)
+        paymentController?.delegate = self
+        paymentController?.present(completion: { (presented: Bool) in
+            if presented {
+                debugPrint("Presented payment controller")
+            } else {
+                debugPrint("Failed to present payment controller")
+            }
+        })
+    }
+    
+    private func goToHomeScreen(action: UIAlertAction) -> Void {
+        self.navigationController?.popToRootViewController(animated: true)
+    }
+     
     func getPaymentOptions(orderId: String,
+                           saved_payment_method: Bool = false,
                            completion: @escaping ([String: Any]?, Error?) -> Void) {
         var params: [String: String] = [:]
         params["order_id"] = orderId
         params["country"] = PlistConstants.shared.country
-        
+       
         self.request(url: URL(string: inai_get_payment_options_url + buildQueryString(fromDictionary: params))!,
                      method: "GET",
                      postData: nil,
@@ -174,36 +251,61 @@ class SavePaymentOptionsViewController: UIViewController {
         return urlVars.isEmpty ? "" : "?" + urlVars.joined(separator: "&")
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "ShowSavePaymentFieldsView" {
-            if let vc = segue.destination as? SavePayment_PaymentFieldsViewController {
-                vc.orderId = self.orderId
-                vc.selectedPaymentOption = sender as? SavePayment_PaymentMethodOption
-            }
+}
+
+extension ApplePayViewController: PKPaymentAuthorizationControllerDelegate {
+    
+    func paymentAuthorizationController(_ controller: PKPaymentAuthorizationController,
+                                        didAuthorizePayment payment: PKPayment,
+                                        handler completion: @escaping (PKPaymentAuthorizationResult) -> Void) {
+        let config = InaiConfig(token: PlistConstants.shared.token,
+                                orderId : self.orderId,
+                                countryCode: PlistConstants.shared.country)
+        
+        if let inaiCheckout = InaiCheckout(config: config) {
+            
+            let paymentDetails = InaiCheckout.convertPaymentTokenToDict(payment: payment)
+            self.applePayCompletion = completion
+            
+            inaiCheckout.makePayment( paymentMethodOption: "apple_pay",
+                                      paymentDetails: paymentDetails,
+                                      viewController: self,
+                                      delegate: self)
         }
+    }
+  
+    func paymentAuthorizationControllerDidFinish(_ controller: PKPaymentAuthorizationController) {
+        controller.dismiss {}
     }
 }
 
-extension SavePaymentOptionsViewController: UITableViewDataSource, UITableViewDelegate {
+
+extension ApplePayViewController: InaiCheckoutDelegate {
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.paymentOptions.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCell", for: indexPath)
-        let po = self.paymentOptions[indexPath.row]
-        cell.textLabel?.text = sanitizeRailCode(po.railCode)
-        return cell
-    }
-    
-    private func sanitizeRailCode(_ railCode: String?) -> String? {
-        let sanitizedString = railCode?.replacingOccurrences(of: "_", with: " ")
-        return sanitizedString?.capitalized
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "ShowSavePaymentFieldsView", sender: self.paymentOptions[indexPath.row])
+    func paymentFinished(with result: Inai_PaymentResult) {
+        switch result.status {
+        case Inai_PaymentStatus.success:
+            let resultStr = convertDictToStr(result.data)
+            self.applePayCompletion?(PKPaymentAuthorizationResult(status: .success, errors: nil))
+            self.showAlert("Payment Success! \(resultStr)", title: "Result", completion: goToHomeScreen)
+            break
+            
+        case Inai_PaymentStatus.failed:
+            let strError = convertDictToStr(result.data)
+            let error = ApplePayStringError(strError);
+            self.applePayCompletion?(PKPaymentAuthorizationResult( status: .failure, errors: [error]))
+            self.showAlert("Payment Failed with data: \(strError)", title: "Result", completion: goToHomeScreen)
+            break
+            
+        case Inai_PaymentStatus.canceled:
+            let error = ApplePayStringError("Payment Canceled");
+            self.applePayCompletion?(PKPaymentAuthorizationResult( status: .failure, errors: [error]))
+            let message = result.data["message"] ?? "Payment Canceled!"
+            self.showAlert(message as! String, title: "Result", completion: goToHomeScreen)
+            break
+        @unknown default:
+            break;
+        }
     }
     
     func showAlert(_ message: String, title: String = "Alert", completion: ((UIAlertAction) -> Void)? = nil ) {

@@ -1,5 +1,5 @@
 //
-//  TextInputTableViewCell.swift
+//  ValidateFields_PaymentFieldsTableViewCell.swift
 //  inai-ios-sample-integration
 //
 //  Created by Parag Dulam on 5/1/22.
@@ -9,10 +9,10 @@ import Foundation
 import UIKit
 import inai_ios_sdk
 
-class PaymentFieldTableViewCell: UITableViewCell,
+class ValidateFields_PaymentFieldsTableViewCell: UITableViewCell,
                                  UITextFieldDelegate {
     
-    var formField: FormField!
+    var ValidateFields_FormField: ValidateFields_FormField!
     var viewController: UIViewController!
     var orderId: String!
     
@@ -35,22 +35,22 @@ class PaymentFieldTableViewCell: UITableViewCell,
                                               alpha: 1.0).cgColor
     }
     
-    func validateFormField() -> Bool {
+    func validateValidateFields_FormField() -> Bool {
         var validated = true
-        let req = formField.validations?.required as? Bool
-        let min = formField.validations?.min_length as? Int
-        let max = formField.validations?.max_length as? Int
-        let regex = formField.validations?.input_regex_mask as? String
-        if req != nil && req == true && formField.value == "" {
+        let req = ValidateFields_FormField.validations?.required as? Bool
+        let min = ValidateFields_FormField.validations?.min_length as? Int
+        let max = ValidateFields_FormField.validations?.max_length as? Int
+        let regex = ValidateFields_FormField.validations?.input_regex_mask as? String
+        if req != nil && req == true && ValidateFields_FormField.value == "" {
             validated = false
         }
-        if let min = min, formField.value.count < min {
+        if let min = min, ValidateFields_FormField.value.count < min {
             validated = false
         }
-        if let max = max, formField.value.count > max {
+        if let max = max, ValidateFields_FormField.value.count > max {
             validated = false
         }
-        if let regex = regex, formField.value.range(of: regex,
+        if let regex = regex, ValidateFields_FormField.value.range(of: regex,
                                                     options: .regularExpression,
                                                     range: nil,
                                                     locale: nil) == nil {
@@ -60,16 +60,16 @@ class PaymentFieldTableViewCell: UITableViewCell,
     }
     
     func updateTextFieldUI(textfield: UITextField) {
-        if formField.validated {
-            textfield.layer.borderColor = greenColor.cgColor
+        if ValidateFields_FormField.validated {
+            textfield.layer.borderColor = UIColor(red: 24.0/255.0, green: 172.0/255.0, blue: 174.0/255.0, alpha: 1.0).cgColor
         } else {
-            textfield.layer.borderColor = redColor.cgColor
+            textfield.layer.borderColor = UIColor(red: 244.0/255.0, green: 0, blue: 0, alpha: 1.0).cgColor
         }
     }
     
     @IBAction func textFieldDidChange(_ tf: UITextField) {
-        formField.value = tf.text!
-        formField.validated = validateFormField()
+        ValidateFields_FormField.value = tf.text!
+        ValidateFields_FormField.validated = validateValidateFields_FormField()
         updateTextFieldUI(textfield:tf)
     }
     
@@ -79,31 +79,31 @@ class PaymentFieldTableViewCell: UITableViewCell,
     }
     
     @IBAction func switchValueDidChange(_ swtch: UISwitch) {
-        formField.value = swtch.isOn ? "true" : "false"
+        ValidateFields_FormField.value = swtch.isOn ? "true" : "false"
     }
     
-    func updateUI(formField: FormField, viewController: UIViewController, orderId: String) {
-        self.formField = formField
+    func updateUI(formField: ValidateFields_FormField, viewController: UIViewController, orderId: String) {
+        self.ValidateFields_FormField = formField
         self.viewController = viewController
         self.orderId = orderId
         
-        label.text = formField.label
-        textField.placeholder = formField.placeHolder
+        label.text = ValidateFields_FormField.label
+        textField.placeholder = ValidateFields_FormField.placeHolder
         
         //  Show the appropriate input field as per field type
-        if formField.fieldType == "checkbox" {
+        if ValidateFields_FormField.fieldType == "checkbox" {
             self.textField.isHidden = true
-            self.formField.validated = true
+            self.ValidateFields_FormField.validated = true
         } else {
             self.switch_check.isHidden = true
         }
         
-        if ((formField.validations?.required) != nil && formField.validations?.required == true) {
+        if ((ValidateFields_FormField.validations?.required) != nil && ValidateFields_FormField.validations?.required == true) {
             label.text = label.text! + "*"
         }
         
         //  Init form field validation status
-        formField.validated = self.validateFormField()
+        ValidateFields_FormField.validated = self.validateValidateFields_FormField()
     }
     
     private func shouldChangeExpiryTextfield(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -199,7 +199,7 @@ class PaymentFieldTableViewCell: UITableViewCell,
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if (self.formField.name == "expiry") {
+        if (self.ValidateFields_FormField.name == "expiry") {
             //  Only validadate expiry text
             return self.shouldChangeExpiryTextfield(textField, shouldChangeCharactersIn: range, replacementString: string)
         }

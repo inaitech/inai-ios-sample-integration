@@ -2,130 +2,217 @@
 //  ValidateFieldsViewController.swift
 //  inai-ios-sample-integration
 //
-//  Created by Parag Dulam on 5/3/22.
+//  Created by Parag Dulam on 4/29/22.
 //
 
 import Foundation
 import UIKit
 import inai_ios_sdk
 
-class ValidateFieldsViewController: UIViewController, InaiValidateFieldsDelegate {
+class ValidateFieldsViewController: UIViewController {
     
-    @IBOutlet weak var tbl_inputs: UITableView!
+    @IBOutlet weak var tbl_payment_options: UITableView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
-    var savePaymentMethod: Bool = false
-    var selectedPaymentOption: PaymentMethodOption!
-    var orderId: String!
-    var keyboardHandler: KeyboardHandler!
-    var tbl_footerView: PaymentFieldsTableFooterView!
-
+    private var selectedPaymentOption: ValidateFields_PaymentMethodOption?
+    private var paymentOptions: [ValidateFields_PaymentMethodOption] = []
+    private var orderId = ""
+    
+    var base_url: String! {
+        return PlistConstants.shared.baseURL
+    }
+    
+    var inai_prepare_order_url: String! {
+        return "\(base_url!)/orders"
+    }
+    
+    var inai_get_payment_options_url: String! {
+        return "\(base_url!)/payment-method-options"
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.keyboardHandler = KeyboardHandler()
-        setup(keyboardHandler: self.keyboardHandler,
-              scrollView: self.tbl_inputs,
-              view: self.view)
-        tbl_inputs.separatorStyle = .none
-        setupTableFooterView()
+        self.prepareOrder()
     }
     
-    func setupTableFooterView() {
-        if let footerView = Bundle.main.loadNibNamed("PaymentFieldsTableFooterView",
-                                                  owner: nil,
-                                                     options: nil)?.first as? PaymentFieldsTableFooterView {
-            tbl_footerView = footerView
-            tbl_footerView.updateUI(isApplePay: false)
-            tbl_footerView.btn_checkout.addTarget(self, action: #selector(checkoutButtonTapped(_:)), for: .touchUpInside)
-            tbl_footerView.btn_checkout.setTitle("Validate Fields", for: .normal)
-        }
-    }
-    
-    @objc func checkoutButtonTapped(_ btn: UIButton) {
-        self.view.endEditing(true)
-        self.validateFields()
-    }
-    
-    private func generatePaymentDetails(selectedPaymentOption: PaymentMethodOption!) -> [String: Any] {
-        var paymentDetails = [String:Any]()
-        var fieldsArray: [[String: Any]] = []
-        for f in selectedPaymentOption.formFields {
-            fieldsArray.append(["name":f.name!, "value": f.value as Any])
-        }
-        paymentDetails["fields"] = fieldsArray
-        if let paymentMethodId = selectedPaymentOption.paymentMethodId {
-            paymentDetails["paymentMethodId"] = paymentMethodId
-        }
-        return paymentDetails
-    }
-    
-    private func validateFields() {
-        let config = InaiConfig(token: PlistConstants.shared.token,
-                                orderId : self.orderId,
-                                countryCode: PlistConstants.shared.country
-        )
-                
-        let paymentDetails = generatePaymentDetails(selectedPaymentOption: selectedPaymentOption)
-        if let inaiCheckout = InaiCheckout(config: config) {
-            self.activityIndicator.startAnimating()
-            inaiCheckout.validateFields(
-                paymentMethodOption: selectedPaymentOption.railCode!,
-                paymentDetails: paymentDetails,
-                viewController: self,
-                delegate: self )
+    private func prepareOrder() {
+        //  Initiate a new order
+        self.activityIndicator.startAnimating()
+        
+        //  Prep postdata
+        let Customer_ID_Key = "customerId-\(PlistConstants.shared.token)"
+        var savedCustomerId: String? = UserDefaults.standard.string(forKey: Customer_ID_Key) ?? nil
+        
+        var body: [String: AnyHashable] = [
+            "amount": PlistConstants.shared.amount,
+            "currency": PlistConstants.shared.currency,
+            "description": "Acme Shirt",
+            "metadata": ["test_order_id": "5735"]
+        ]
+        
+        if let savedCustomerId = savedCustomerId {
+            //  Lets reuse the existing customer
+            body["customer"] =  [ "id": savedCustomerId]
         } else {
-            showResult("Invalid Config")
+            //  Create a new customer
+            body["customer"] = ["email": "testdev@test.com",
+                                "first_name": "Dev",
+                                "last_name": "Smith",
+                                "contact_number": "01010101010"]
         }
-    }
-    
-    func fieldsValidationFinished(with result: Inai_ValidateFieldsResult) {
-        self.activityIndicator.stopAnimating()
-        switch result.status {
-        case Inai_ValidateFieldsStatus.success:
-            //  Fields validated proceed with payment..
-            self.showResult("\(convertDictToStr(result.data))")
-            break
+        
+        self.request(url: URL(string: self.inai_prepare_order_url)!,
+                     method: "POST",
+                     postData: body) { (data, error) in
             
-        case Inai_ValidateFieldsStatus.failed :
-            self.showResult("Fields Validation Failed!: \(convertDictToStr(result.data))")
-            break
-        @unknown default:
-            break
+            var orderId: String? = nil
+            
+            if let error = error {
+                print(error.localizedDescription)
+            }
+            else {
+                if let data = data {
+                    if let responseOrderId = data["id"] as? String {
+                        orderId = responseOrderId
+                    }
+                    
+                    if savedCustomerId == nil {
+                        if let customerId = data["customer_id"] as? String {
+                            //  Save customer id to defaults so we can reuse it
+                            savedCustomerId = customerId
+                            UserDefaults.standard.set(customerId, forKey: Customer_ID_Key)
+                        }
+                    }
+                }
+            }
+            
+            self.activityIndicator.stopAnimating()
+            if let orderId = orderId {
+                self.orderId = orderId
+                self.processPaymentOptions()
+            }
         }
     }
     
+    private func request(url: URL, method: String,
+                         postData: [String: Any]?,
+                         completion: @escaping ([String: Any]?, Error?) -> Void) {
+        
+        let authStr = "\(PlistConstants.shared.token):\(PlistConstants.shared.password)"
+        let encodedAuthStr = "BASIC \(Data(authStr.utf8).base64EncodedString())"
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = method
+        
+        //  Set headers
+        request.setValue(encodedAuthStr, forHTTPHeaderField: "Authorization")
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        //  Attach postdata if applicable
+        if let postData = postData {
+            request.httpBody = try? JSONSerialization.data(withJSONObject: postData, options: .fragmentsAllowed)
+        }
+        
+        let task = URLSession.shared.dataTask(with: request) { data, urlRequest, error in
+            var result: [String: Any]? = nil
+            if let data = data {
+                let json = try? JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
+                result = json as? [String : Any]
+            }
+            
+            DispatchQueue.main.async {
+                completion(result, error)
+            }
+        }
+        //  Fire away
+        task.resume()
+    }
     
-    func showResult(_ message: String) {
-        let alert = UIAlertController(title: "Result", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+    private func processPaymentOptions() {
+        self.activityIndicator.startAnimating()
+        
+        self.getPaymentOptions(
+            orderId: self.orderId,
+            saved_payment_method: false) { response, error in
+                self.activityIndicator.stopAnimating()
+                guard let respo = response else {
+                    self.showAlert(error?.localizedDescription ?? "")
+                    return
+                }
+                
+                //  Lets not render all options to save except  Apply Pay
+                let paymentOptions = ValidateFields_PaymentMethodOption.paymentOptionsFromJSON(respo)
+                    .filter { self.sanitizeRailCode($0.railCode) != "Apple Pay" }
+                
+                self.paymentOptions = paymentOptions
+                self.tbl_payment_options.reloadData()
+            }
+        
+    }
+    
+    func getPaymentOptions(orderId: String,
+                           saved_payment_method: Bool = false,
+                           completion: @escaping ([String: Any]?, Error?) -> Void) {
+        var params: [String: String] = [:]
+        params["order_id"] = orderId
+        params["country"] = PlistConstants.shared.country
+        if saved_payment_method {
+            params["saved_payment_method"] = "true"
+        }
+        
+        self.request(url: URL(string: inai_get_payment_options_url + buildQueryString(fromDictionary: params))!,
+                     method: "GET",
+                     postData: nil,
+                     completion: completion)
+    }
+    
+    func buildQueryString(fromDictionary parameters: [String:String]) -> String {
+        var urlVars:[String] = []
+        for (k, value) in parameters {
+            let value = value as NSString
+            if let encodedValue = value.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed) {
+                urlVars.append(k + "=" + encodedValue)
+            }
+        }
+        return urlVars.isEmpty ? "" : "?" + urlVars.joined(separator: "&")
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowValidateFieldsView" {
+            if let vc = segue.destination as? ValidateFields_PaymentFieldsViewController {
+                vc.orderId = self.orderId
+                vc.selectedPaymentOption = sender as? ValidateFields_PaymentMethodOption
+            }
+        }
+    }
+    
+    func showAlert(_ message: String, title: String = "Alert", completion: ((UIAlertAction) -> Void)? = nil ) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: completion))
         self.present(alert, animated: true, completion: nil)
     }
 }
 
-extension ValidateFieldsViewController: HandlesKeyboardEvent {}
 extension ValidateFieldsViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.selectedPaymentOption.formFields.count
+        return self.paymentOptions.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let formField = self.selectedPaymentOption.formFields[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: "TextInputTableViewCell", for: indexPath) as! PaymentFieldTableViewCell
-        cell.updateUI(formField: formField, viewController: self, orderId: self.orderId)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCell", for: indexPath)
+        let po = self.paymentOptions[indexPath.row]
+        cell.textLabel?.text = sanitizeRailCode(po.railCode)
         return cell
-        
     }
     
-    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
+    private func sanitizeRailCode(_ railCode: String?) -> String? {
+        let sanitizedString = railCode?.replacingOccurrences(of: "_", with: " ")
+        return sanitizedString?.capitalized
     }
     
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return tbl_footerView
-    }
-    
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 60
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "ShowValidateFieldsView", sender: self.paymentOptions[indexPath.row])
     }
 }

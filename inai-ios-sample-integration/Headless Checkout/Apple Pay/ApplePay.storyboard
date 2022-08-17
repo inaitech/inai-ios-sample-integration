@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="uuh-7h-x71">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Apple Pay-->
+        <scene sceneID="LbV-mN-LlG">
+            <objects>
+                <viewController id="uuh-7h-x71" customClass="ApplePayViewController" customModule="inai_ios_sample_integration" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ggq-kg-3EK">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Jqj-kD-17f">
+                                <rect key="frame" x="20" y="433" width="374" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="4gi-2j-uOa"/>
+                                </constraints>
+                            </stackView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="xzU-Fa-7SI">
+                                <rect key="frame" x="188.5" y="429.5" width="37" height="37"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="eng-0G-Tn5"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="eng-0G-Tn5" firstAttribute="trailing" secondItem="Jqj-kD-17f" secondAttribute="trailing" constant="20" id="Jmk-pi-TDv"/>
+                            <constraint firstItem="xzU-Fa-7SI" firstAttribute="centerY" secondItem="Ggq-kg-3EK" secondAttribute="centerY" id="QR4-3F-c7n"/>
+                            <constraint firstItem="xzU-Fa-7SI" firstAttribute="centerX" secondItem="Ggq-kg-3EK" secondAttribute="centerX" id="eXe-hL-vhR"/>
+                            <constraint firstItem="Jqj-kD-17f" firstAttribute="centerY" secondItem="eng-0G-Tn5" secondAttribute="centerY" id="i5x-Ez-0yL"/>
+                            <constraint firstItem="Jqj-kD-17f" firstAttribute="leading" secondItem="eng-0G-Tn5" secondAttribute="leading" constant="20" id="nZq-o1-9xh"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Apple Pay" id="H0a-h8-Xzx"/>
+                    <connections>
+                        <outlet property="activityIndicator" destination="xzU-Fa-7SI" id="Jgj-Km-qZG"/>
+                        <outlet property="button_container" destination="Jqj-kD-17f" id="KyM-nc-p8E"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="47Y-38-5cK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3844.9275362318845" y="34.821428571428569"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

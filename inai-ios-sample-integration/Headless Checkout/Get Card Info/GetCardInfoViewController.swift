@@ -34,27 +34,153 @@ class GetCardInfoViewController: UIViewController, UITextFieldDelegate,
     private var pendingCardNumber:String? = nil
     private var showCardInfoResult = false
     
-    var keyboardHandler: KeyboardHandler!
     var paymentFlow = Payment_Flow.checkout
     var orderId: String = ""
+    
+    var base_url: String! {
+        return PlistConstants.shared.baseURL
+    }
+    
+    var inai_prepare_order_url: String! {
+        return "\(base_url!)/orders"
+    }
     
     // MARK: - Internal Methods
     // MARK: -
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.keyboardHandler = KeyboardHandler()
-        setup(keyboardHandler: self.keyboardHandler,
-              scrollView: self.scrollView,
-              view: self.view)
+        setupKeyboardEvents( scrollView: self.scrollView, view: self.view)
         
         self.txt_card_number.delegate = self
         self.setupTextField()
         
-        APIMethods.shared.prepareOrder { orderId, customerId in
+        self.prepareOrder()
+    }
+    
+    private var scrollViewBottomConstraint: NSLayoutConstraint!
+    func setupKeyboardEvents(scrollView: UIScrollView,
+                             view: UIView) {
+        self.scrollViewBottomConstraint = scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0)
+        self.scrollViewBottomConstraint?.priority = .defaultHigh
+        self.scrollViewBottomConstraint?.isActive = true
+       
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(self.notifyKeyboardWillChange),
+                                               name: UIResponder.keyboardWillChangeFrameNotification,
+                                               object: .none)
+       
+       NotificationCenter.default.addObserver(self,
+                                              selector: #selector(self.notifyKeyboardWillHide),
+                                              name: UIResponder.keyboardWillHideNotification,
+                                              object: nil)
+   }
+   
+   @objc func notifyKeyboardWillChange(_ notification: NSNotification){
+       
+       let userInfo:NSDictionary = notification.userInfo! as NSDictionary
+       let keyboardFrame:NSValue = userInfo.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as! NSValue
+       let keyboardRectangle = keyboardFrame.cgRectValue
+       let keyboardHeight = keyboardRectangle.height
+       //  Offset scrollview accordingly..
+       self.scrollViewBottomConstraint?.constant = -keyboardHeight
+   }
+   
+   @objc func notifyKeyboardWillHide(_ notification: NSNotification){
+       self.scrollViewBottomConstraint?.constant = 0
+   }
+
+    
+    private func prepareOrder() {
+        //  Initiate a new order
+        self.activityIndicator.startAnimating()
+        
+        //  Prep postdata
+        let Customer_ID_Key = "customerId-\(PlistConstants.shared.token)"
+        var savedCustomerId: String? = UserDefaults.standard.string(forKey: Customer_ID_Key) ?? nil
+
+        var body: [String: AnyHashable] = [
+            "amount": PlistConstants.shared.amount,
+            "currency": PlistConstants.shared.currency,
+            "description": "Acme Shirt",
+            "metadata": ["test_order_id": "5735"]
+        ]
+        
+        if let savedCustomerId = savedCustomerId {
+            //  Lets reuse the existing customer
+            body["customer"] =  [ "id": savedCustomerId]
+        } else {
+            //  Create a new customer
+            body["customer"] = ["email": "testdev@test.com",
+                                 "first_name": "Dev",
+                                 "last_name": "Smith",
+                                 "contact_number": "01010101010"]
+        }
+
+        self.request(url: URL(string: self.inai_prepare_order_url)!,
+                     method: "POST",
+                     postData: body) { (data, error) in
+            
+            var orderId: String? = nil
+            
+            if let error = error {
+                print(error.localizedDescription)
+            }
+            else {
+                if let data = data {
+                    if let responseOrderId = data["id"] as? String {
+                        orderId = responseOrderId
+                    }
+                    
+                    if savedCustomerId == nil {
+                        if let customerId = data["customer_id"] as? String {
+                            //  Save customer id to defaults so we can reuse it
+                            savedCustomerId = customerId
+                            UserDefaults.standard.set(customerId, forKey: Customer_ID_Key)
+                        }
+                    }
+                }
+            }
+             
+            self.activityIndicator.stopAnimating()
             if let orderId = orderId {
                 self.orderId = orderId
             }
         }
+    }
+    
+    private func request(url: URL, method: String,
+                         postData: [String: Any]?,
+                         completion: @escaping ([String: Any]?, Error?) -> Void) {
+        
+        let authStr = "\(PlistConstants.shared.token):\(PlistConstants.shared.password)"
+        let encodedAuthStr = "BASIC \(Data(authStr.utf8).base64EncodedString())"
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = method
+        
+        //  Set headers
+        request.setValue(encodedAuthStr, forHTTPHeaderField: "Authorization")
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        //  Attach postdata if applicable
+        if let postData = postData {
+            request.httpBody = try? JSONSerialization.data(withJSONObject: postData, options: .fragmentsAllowed)
+        }
+        
+        let task = URLSession.shared.dataTask(with: request) { data, urlRequest, error in
+            var result: [String: Any]? = nil
+            if let data = data {
+                let json = try? JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
+                result = json as? [String : Any]
+            }
+            
+            DispatchQueue.main.async {
+                completion(result, error)
+            }
+        }
+        //  Fire away
+        task.resume()
     }
     
     func setupTextField() {
@@ -181,7 +307,32 @@ class GetCardInfoViewController: UIViewController, UITextFieldDelegate,
             self.txt_card_number.rightView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 30))
         }
     }
+    
+    func showAlert(_ message: String, title: String = "Alert", completion: ((UIAlertAction) -> Void)? = nil ) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: completion))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func convertDictToStr(_ dict: [String:Any]) -> String {
+        var jsonStr = "";
+        do {
+            let jsonData = try JSONSerialization.data(withJSONObject: dict, options: .fragmentsAllowed)
+            jsonStr = String(data: jsonData, encoding: String.Encoding.utf8) ?? ""
+        } catch {}
+        
+        return jsonStr
+    }
+    
+    func convertStrToDict(_ text: String) -> [String: Any]? {
+        if let data = text.data(using: .utf8) {
+            do {
+                return try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+        return nil
+    }
 }
-
-extension GetCardInfoViewController: HandlesKeyboardEvent {}
 

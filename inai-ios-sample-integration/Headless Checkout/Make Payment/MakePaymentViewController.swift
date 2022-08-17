@@ -1,5 +1,5 @@
 //
-//  SavePaymentOptionsViewController.swift
+//  MakePaymentViewController.swift
 //  inai-ios-sample-integration
 //
 //  Created by Parag Dulam on 4/29/22.
@@ -9,13 +9,12 @@ import Foundation
 import UIKit
 import inai_ios_sdk
 
-class SavePaymentOptionsViewController: UIViewController {
+class MakePaymentViewController: UIViewController {
     
     @IBOutlet weak var tbl_payment_options: UITableView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
         
-    private var selectedPaymentOption: SavePayment_PaymentMethodOption?
-    private var paymentOptions: [SavePayment_PaymentMethodOption] = []
+    private var paymentOptions: [MakePayment_PaymentMethodOption] = []
     private var orderId = ""
     
     var base_url: String! {
@@ -34,7 +33,7 @@ class SavePaymentOptionsViewController: UIViewController {
         super.viewDidLoad()
         self.prepareOrder()
     }
-    
+
     private func prepareOrder() {
         //  Initiate a new order
         self.activityIndicator.startAnimating()
@@ -60,8 +59,6 @@ class SavePaymentOptionsViewController: UIViewController {
                                  "last_name": "Smith",
                                  "contact_number": "01010101010"]
         }
-
-        body["capture_method"] = "MANUAL"
 
         self.request(url: URL(string: self.inai_prepare_order_url)!,
                      method: "POST",
@@ -142,13 +139,20 @@ class SavePaymentOptionsViewController: UIViewController {
                     return
                 }
                 
-                //  Lets render all options to save except Apply Pay
-                let paymentOptions = SavePayment_PaymentMethodOption.paymentOptionsFromJSON(respo)
+                //  Lets render all payment options except Apply Pay as its handled separately
+                self.paymentOptions = MakePayment_PaymentMethodOption.paymentOptionsFromJSON(respo)
                                     .filter { self.sanitizeRailCode($0.railCode) != "Apple Pay" }
-                
-                self.paymentOptions = paymentOptions
                 self.tbl_payment_options.reloadData()
             }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowMakePaymentPaymentFieldsView" {
+            if let vc = segue.destination as? MakePayment_PaymentFieldsViewController {
+                vc.orderId = self.orderId
+                vc.selectedPaymentOption = sender as? MakePayment_PaymentMethodOption
+            }
+        }
     }
     
     func getPaymentOptions(orderId: String,
@@ -174,17 +178,9 @@ class SavePaymentOptionsViewController: UIViewController {
         return urlVars.isEmpty ? "" : "?" + urlVars.joined(separator: "&")
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "ShowSavePaymentFieldsView" {
-            if let vc = segue.destination as? SavePayment_PaymentFieldsViewController {
-                vc.orderId = self.orderId
-                vc.selectedPaymentOption = sender as? SavePayment_PaymentMethodOption
-            }
-        }
-    }
 }
 
-extension SavePaymentOptionsViewController: UITableViewDataSource, UITableViewDelegate {
+extension MakePaymentViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.paymentOptions.count
@@ -203,7 +199,7 @@ extension SavePaymentOptionsViewController: UITableViewDataSource, UITableViewDe
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "ShowSavePaymentFieldsView", sender: self.paymentOptions[indexPath.row])
+        performSegue(withIdentifier: "ShowMakePaymentPaymentFieldsView", sender: self.paymentOptions[indexPath.row])
     }
     
     func showAlert(_ message: String, title: String = "Alert", completion: ((UIAlertAction) -> Void)? = nil ) {
