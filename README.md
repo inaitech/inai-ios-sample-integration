@@ -34,7 +34,7 @@ iOS 9, Swift 5.x
 To start the backend NodeJS server:
 1. Navigate to the ./server folder at the root level.
 2. Run command `npm install` to install the dependency packages.
-3. Add a new .env file the follwing variables:
+3. Add a new .env file the following variables:
     1. client_username
     2. client_password
 4. Run command `npm start` to start the nodejs backend server
