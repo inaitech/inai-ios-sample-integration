@@ -17,8 +17,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="awO-tB-UQG">
-                                <rect key="frame" x="20" y="98" width="374" height="40"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="awO-tB-UQG">
+                                <rect key="frame" x="20" y="98" width="374" height="100"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qm7-o9-SXd">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="40"/>
@@ -33,6 +33,21 @@
                                         </buttonConfiguration>
                                         <connections>
                                             <segue destination="o45-GN-P2H" kind="show" identifier="ShowHeadlessCheckoutView" id="bwQ-Jl-grk"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RBy-p2-zB4">
+                                        <rect key="frame" x="0.0" y="60" width="374" height="40"/>
+                                        <color key="backgroundColor" red="0.45886170859999997" green="0.45265638829999999" blue="0.83925354480000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="NhF-iB-FdS"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Drop In Checkout">
+                                            <fontDescription key="titleFontDescription" type="system" pointSize="18"/>
+                                            <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <segue destination="Mda-IL-Fhq" kind="show" id="zAd-46-LhJ"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -171,7 +186,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rc5-nN-raS" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1070" y="35"/>
+            <point key="canvasLocation" x="1175" y="24"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="aNm-ic-2Of">
@@ -300,7 +315,7 @@ This product is made with Primegreen, a series of high-performance recycled mate
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wx6-qb-cKF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3138" y="-16"/>
+            <point key="canvasLocation" x="3272" y="-32"/>
         </scene>
         <!--SavePaymentMethod-->
         <scene sceneID="gDV-bM-nYD">
@@ -340,7 +355,7 @@ This product is made with Primegreen, a series of high-performance recycled mate
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KHC-5t-PTw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3219" y="72"/>
+            <point key="canvasLocation" x="3330" y="35"/>
         </scene>
         <!--ApplePay-->
         <scene sceneID="Gsd-L8-eQ5">
@@ -350,7 +365,17 @@ This product is made with Primegreen, a series of high-performance recycled mate
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kgp-uC-emC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3172" y="149"/>
+            <point key="canvasLocation" x="3251" y="139"/>
+        </scene>
+        <!--DropInCheckout-->
+        <scene sceneID="WTa-2x-W50">
+            <objects>
+                <viewControllerPlaceholder storyboardName="DropInCheckout" id="Mda-IL-Fhq" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="39A-UW-2a1"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Wun-6y-iJ6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="725" y="90"/>
         </scene>
     </scenes>
     <resources>

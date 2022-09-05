@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="T62-Bb-EiA">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--DropIn Checkout-->
+        <scene sceneID="zmL-TF-xGu">
+            <objects>
+                <viewController id="T62-Bb-EiA" userLabel="DropIn Checkout" customClass="DropInCheckoutViewController" customModule="inai_ios_sample_integration" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" clipsSubviews="YES" contentMode="scaleToFill" id="eTX-Z7-CeW">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="inai-white" translatesAutoresizingMaskIntoConstraints="NO" id="y2k-C5-LRC">
+                                <rect key="frame" x="20" y="64" width="374" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="USu-9i-mtY"/>
+                                </constraints>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tshirt" translatesAutoresizingMaskIntoConstraints="NO" id="riu-Iz-st4">
+                                <rect key="frame" x="20" y="144" width="374" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="a2u-SO-fqe"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="nMd-ck-NqS">
+                                <rect key="frame" x="20" y="364" width="374" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="67P-RZ-iKq"/>
+                                </constraints>
+                                <string key="text">MANCHESTER UNITED 21/22 HOME JERSEY
+</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="tZk-4M-fDe">
+                                <rect key="frame" x="20" y="404" width="374" height="378"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <string key="text">A FAN JERSEY INSPIRED BY A LEGENDARY HOME KIT.
+Youth. Courage. Success. The thee pillars of Manchester United's motto have brought the club more than a century of triumphs. With its clean red design and white ribbed crewneck, this juniors' adidas football jersey takes inspiration from the iconic kit that carried them to some of their most memorable moments. Made for fans, its soft fabric and moisture-absorbing AEROREADY keep you comfortable. A devil signoff on the back shows your pride.
+
+This product is made with Primegreen, a series of high-performance recycled materials.
+
+</string>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="oSM-xi-cPX">
+                                <rect key="frame" x="20" y="802" width="374" height="40"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qS4-uU-cYT">
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="40"/>
+                                        <color key="backgroundColor" red="0.45886170859999997" green="0.45265638829999999" blue="0.83925354480000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="BuyNow"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="160" id="mTm-bK-5kj"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Buy Now">
+                                            <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="clickedBuyNow:" destination="T62-Bb-EiA" eventType="touchUpInside" id="xOP-fU-nfx"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="7Il-ks-5Wt"/>
+                                </constraints>
+                            </stackView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="CmO-Tu-g45">
+                                <rect key="frame" x="188.5" y="434.5" width="37" height="37"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="kui-3d-hVt"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="y2k-C5-LRC" firstAttribute="leading" secondItem="kui-3d-hVt" secondAttribute="leading" constant="20" id="1uf-Su-NgK"/>
+                            <constraint firstItem="riu-Iz-st4" firstAttribute="top" secondItem="y2k-C5-LRC" secondAttribute="bottom" constant="20" id="2H9-p8-8yt"/>
+                            <constraint firstItem="CmO-Tu-g45" firstAttribute="centerX" secondItem="kui-3d-hVt" secondAttribute="centerX" id="7bx-CB-EQO"/>
+                            <constraint firstItem="qS4-uU-cYT" firstAttribute="top" secondItem="tZk-4M-fDe" secondAttribute="bottom" constant="20" id="8si-0V-lLb"/>
+                            <constraint firstItem="kui-3d-hVt" firstAttribute="trailing" secondItem="tZk-4M-fDe" secondAttribute="trailing" constant="20" id="9S8-oN-a1k"/>
+                            <constraint firstItem="kui-3d-hVt" firstAttribute="trailing" secondItem="oSM-xi-cPX" secondAttribute="trailing" constant="20" id="CMF-BT-o8v"/>
+                            <constraint firstItem="tZk-4M-fDe" firstAttribute="top" secondItem="nMd-ck-NqS" secondAttribute="bottom" constant="20" id="D2k-Zs-VhY"/>
+                            <constraint firstItem="riu-Iz-st4" firstAttribute="leading" secondItem="kui-3d-hVt" secondAttribute="leading" constant="20" id="H4N-XT-Cho"/>
+                            <constraint firstItem="CmO-Tu-g45" firstAttribute="centerY" secondItem="kui-3d-hVt" secondAttribute="centerY" id="MS0-wb-MFT"/>
+                            <constraint firstItem="kui-3d-hVt" firstAttribute="bottom" secondItem="oSM-xi-cPX" secondAttribute="bottom" constant="20" id="Ryz-Y8-tCn"/>
+                            <constraint firstItem="kui-3d-hVt" firstAttribute="trailing" secondItem="y2k-C5-LRC" secondAttribute="trailing" constant="20" id="Whs-SI-aKP"/>
+                            <constraint firstItem="nMd-ck-NqS" firstAttribute="leading" secondItem="kui-3d-hVt" secondAttribute="leading" constant="20" id="YJq-qC-dIk"/>
+                            <constraint firstItem="kui-3d-hVt" firstAttribute="trailing" secondItem="nMd-ck-NqS" secondAttribute="trailing" constant="20" id="bFs-lL-gga"/>
+                            <constraint firstItem="kui-3d-hVt" firstAttribute="trailing" secondItem="riu-Iz-st4" secondAttribute="trailing" constant="20" id="brc-g3-pjl"/>
+                            <constraint firstItem="tZk-4M-fDe" firstAttribute="leading" secondItem="kui-3d-hVt" secondAttribute="leading" constant="20" id="cPz-ci-VaW"/>
+                            <constraint firstItem="nMd-ck-NqS" firstAttribute="top" secondItem="riu-Iz-st4" secondAttribute="bottom" constant="20" id="g2C-Mw-Uhe"/>
+                            <constraint firstItem="oSM-xi-cPX" firstAttribute="leading" secondItem="kui-3d-hVt" secondAttribute="leading" constant="20" id="nHa-Wt-Nby"/>
+                            <constraint firstItem="y2k-C5-LRC" firstAttribute="top" secondItem="kui-3d-hVt" secondAttribute="top" constant="20" id="tPR-nF-hsm"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Product" id="cLk-Mv-lCu"/>
+                    <connections>
+                        <outlet property="activityIndicator" destination="CmO-Tu-g45" id="6or-C7-K6q"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="l71-BZ-QA6" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="870" y="-7"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="inai-white" width="500" height="293"/>
+        <image name="tshirt" width="840" height="840"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
