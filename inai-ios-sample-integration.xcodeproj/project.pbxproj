@@ -35,6 +35,8 @@
 		28C5F4142899E0CC00F21C7E /* SavePaymentOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C5F4132899E0CC00F21C7E /* SavePaymentOptionsViewController.swift */; };
 		28C5F4182899E5D900F21C7E /* GetCardInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C5F4172899E5D900F21C7E /* GetCardInfoViewController.swift */; };
 		28C5F41E2899FD3000F21C7E /* ValidateFieldsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C5F41D2899FD3000F21C7E /* ValidateFieldsViewController.swift */; };
+		28C9139728C5E2F600C7BF0C /* DropInCheckout.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28C9139628C5E2F600C7BF0C /* DropInCheckout.storyboard */; };
+		28C9139928C5E30B00C7BF0C /* DropInCheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C9139828C5E30B00C7BF0C /* DropInCheckoutViewController.swift */; };
 		28ED2A782897F78700BB4782 /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28ED2A772897F78700BB4782 /* config.plist */; };
 		28F2D49E289301DB007EF5B3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F2D49D289301DB007EF5B3 /* AppDelegate.swift */; };
 		28F2D4A0289301DB007EF5B3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F2D49F289301DB007EF5B3 /* SceneDelegate.swift */; };
@@ -75,6 +77,8 @@
 		28C5F4132899E0CC00F21C7E /* SavePaymentOptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavePaymentOptionsViewController.swift; sourceTree = "<group>"; };
 		28C5F4172899E5D900F21C7E /* GetCardInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetCardInfoViewController.swift; sourceTree = "<group>"; };
 		28C5F41D2899FD3000F21C7E /* ValidateFieldsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidateFieldsViewController.swift; sourceTree = "<group>"; };
+		28C9139628C5E2F600C7BF0C /* DropInCheckout.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DropInCheckout.storyboard; sourceTree = "<group>"; };
+		28C9139828C5E30B00C7BF0C /* DropInCheckoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropInCheckoutViewController.swift; sourceTree = "<group>"; };
 		28ED2A772897F78700BB4782 /* config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = config.plist; sourceTree = "<group>"; };
 		28ED2A79289894D000BB4782 /* inai-ios-sample-integration.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "inai-ios-sample-integration.entitlements"; sourceTree = "<group>"; };
 		28F2D49A289301DB007EF5B3 /* inai-ios-sample-integration.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "inai-ios-sample-integration.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -215,6 +219,15 @@
 			path = "Validate Fields";
 			sourceTree = "<group>";
 		};
+		28C9139128C5E29C00C7BF0C /* DropIn Checkout */ = {
+			isa = PBXGroup;
+			children = (
+				28C9139628C5E2F600C7BF0C /* DropInCheckout.storyboard */,
+				28C9139828C5E30B00C7BF0C /* DropInCheckoutViewController.swift */,
+			);
+			path = "DropIn Checkout";
+			sourceTree = "<group>";
+		};
 		28F2D491289301DB007EF5B3 = {
 			isa = PBXGroup;
 			children = (
@@ -238,6 +251,7 @@
 			children = (
 				28ED2A79289894D000BB4782 /* inai-ios-sample-integration.entitlements */,
 				285605002893CDC00027E608 /* Headless Checkout */,
+				28C9139128C5E29C00C7BF0C /* DropIn Checkout */,
 				28F2D49D289301DB007EF5B3 /* AppDelegate.swift */,
 				28F2D49F289301DB007EF5B3 /* SceneDelegate.swift */,
 				28F2D4A1289301DB007EF5B3 /* HomeViewController.swift */,
@@ -328,6 +342,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28C9139728C5E2F600C7BF0C /* DropInCheckout.storyboard in Resources */,
 				28F2D4AA289301DD007EF5B3 /* LaunchScreen.storyboard in Resources */,
 				28F2D4A7289301DD007EF5B3 /* Assets.xcassets in Resources */,
 				28B42EDD28A7BDD800DB80F7 /* ValidateFields.storyboard in Resources */,
@@ -410,6 +425,7 @@
 				2849DE6628AAEBA300569AFB /* MakePaymentWithSavedMethod_PaymentFieldsViewController.swift in Sources */,
 				2849DE5428AA91C600569AFB /* ValidateFields_PaymentFieldsTableViewCell.swift in Sources */,
 				2849DE5F28AA961200569AFB /* SavePayment_FieldsTableViewCell.swift in Sources */,
+				28C9139928C5E30B00C7BF0C /* DropInCheckoutViewController.swift in Sources */,
 				2849DE6728AAEBA300569AFB /* MakePaymentWithSavedMethod_Models.swift in Sources */,
 				2849DE6A28AAEE6F00569AFB /* SavePayment_Models.swift in Sources */,
 				28C217AB2893D7C2005312F8 /* PlistConstants.swift in Sources */,
