@@ -18,6 +18,9 @@ This repository demonstrates how to integrate Inai’s iOS Framework into your p
 - Get Card Info
     - File : [GetCardInfoViewController.swift](https://github.com/inaitech/inai-ios-sample-integration/blob/main/inai-ios-sample-integration/Headless%20Checkout/Get%20Card%20Info/GetCardInfoViewController.swift)
 
+### Drop In Checkout
+- Make a payment using Inai's Checkout Interface
+    - File: [DropInCheckoutViewController.swift](https://github.com/inaitech/inai-ios-sample-integration/blob/f56e0caee501f1ca116c89932401a22b4e24164a/inai-ios-sample-integration/DropIn%20Checkout/DropInCheckoutViewController.swift)
 
 ## Prerequisites
 - To begin, you will require the client username and client password values. Instructions to get this can be found [here](https://docs.inai.io/docs/getting-started)
