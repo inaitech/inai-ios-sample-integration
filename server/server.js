@@ -4,7 +4,7 @@ const fetch = require('node-fetch');
 // urls
 const baseUrl = "https://api.inai.io/v1";
 const create_order_url = `${baseUrl}/orders`;
-const payment_method_options_url = `${baseUrl}/payment-method-options`;
+let payment_method_options_url = `${baseUrl}/payment-method-options`;
 
 // express app
 const app = express();

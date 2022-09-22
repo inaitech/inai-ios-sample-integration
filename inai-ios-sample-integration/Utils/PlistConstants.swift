@@ -11,11 +11,7 @@ import Foundation
 class PlistConstants {
   
     var token: String = ""
-    var password: String = ""
     var baseURL: String = ""
-    var country: String = ""
-    var currency: String = ""
-    var amount: String = ""
     
     // static property to create singleton
     static let shared = PlistConstants()
@@ -24,11 +20,7 @@ class PlistConstants {
     private init() {
         if let variables = getVariables() {
             self.token = variables["token"] as? String ?? ""
-            self.password = variables["password"] as? String ?? ""
             self.baseURL = variables["base_url"] as? String ?? ""
-            self.country = variables["country"] as? String ?? ""
-            self.currency = variables["currency"] as? String ?? ""
-            self.amount = variables["amount"] as? String ?? ""
         }
     }
     
@@ -46,3 +38,4 @@ class PlistConstants {
         return nil
     }
 }
+

@@ -2,17 +2,9 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>amount</key>
-	<string>100</string>
 	<key>token</key>
-	<string>__INAI_USERNAME__</string>
-	<key>password</key>
-	<string>__INAI_PASSWORD__</string>
+	<string>sbx_ci_7YUVXeduWpqdNd8kibg7f7dRjptfqcQXoLvahR1Mei2o</string>
 	<key>base_url</key>
-	<string>__BACKEND_URL__</string>
-	<key>country</key>
-	<string>USA</string>
-	<key>currency</key>
-	<string>USD</string>
+	<string>http://localhost:5009/v1</string>
 </dict>
 </plist>

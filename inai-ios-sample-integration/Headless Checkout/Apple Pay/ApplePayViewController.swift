@@ -61,8 +61,8 @@ class ApplePayViewController: UIViewController {
         var savedCustomerId: String? = UserDefaults.standard.string(forKey: Customer_ID_Key) ?? nil
 
         var body: [String: AnyHashable] = [
-            "amount": PlistConstants.shared.amount,
-            "currency": PlistConstants.shared.currency,
+            "amount": DemoConstants.amount,
+            "currency": DemoConstants.currency,
             "description": "Acme Shirt",
             "metadata": ["test_order_id": "5735"]
         ]
@@ -115,7 +115,7 @@ class ApplePayViewController: UIViewController {
                          postData: [String: Any]?,
                          completion: @escaping ([String: Any]?, Error?) -> Void) {
         
-        let authStr = "\(PlistConstants.shared.token):\(PlistConstants.shared.password)"
+        let authStr = "\(PlistConstants.shared.token)"
         let encodedAuthStr = "BASIC \(Data(authStr.utf8).base64EncodedString())"
         
         var request = URLRequest(url: url)
@@ -232,7 +232,7 @@ class ApplePayViewController: UIViewController {
                            completion: @escaping ([String: Any]?, Error?) -> Void) {
         var params: [String: String] = [:]
         params["order_id"] = orderId
-        params["country"] = PlistConstants.shared.country
+        params["country"] = DemoConstants.country
        
         self.request(url: URL(string: inai_get_payment_options_url + buildQueryString(fromDictionary: params))!,
                      method: "GET",
@@ -260,7 +260,7 @@ extension ApplePayViewController: PKPaymentAuthorizationControllerDelegate {
                                         handler completion: @escaping (PKPaymentAuthorizationResult) -> Void) {
         let config = InaiConfig(token: PlistConstants.shared.token,
                                 orderId : self.orderId,
-                                countryCode: PlistConstants.shared.country)
+                                countryCode: DemoConstants.country)
         
         if let inaiCheckout = InaiCheckout(config: config) {
             
