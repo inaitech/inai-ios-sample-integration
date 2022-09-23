@@ -78,7 +78,7 @@ class ValidateFields_PaymentFieldsViewController: UIViewController, InaiValidate
     private func validateFields() {
         let config = InaiConfig(token: PlistConstants.shared.token,
                                 orderId : self.orderId,
-                                countryCode: PlistConstants.shared.country
+                                countryCode: DemoConstants.country
         )
                 
         let paymentDetails = generatePaymentDetails(selectedPaymentOption: selectedPaymentOption)

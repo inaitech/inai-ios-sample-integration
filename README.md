@@ -37,23 +37,26 @@ iOS 9, Swift 5.x
 To start the backend NodeJS server:
 1. Navigate to the ./server folder at the root level.
 2. Run command `npm install` to install the dependency packages.
-3. Add a new .env file the following variables:
-    1. client_username
-    2. client_password
+3. Update the following environment variables in the `./server/.env` file. This can be accessed from inai's merchant dashboard under `Settings > Credentials`
+    - client_username
+    - client_password
+    
+| **variables** | **description**                                               |
+|---------------|---------------------------------------------------------------|
+| client_username | client username under **Settings > Credentials** in dashboard |
+| client_password | client password under **Settings > Credentials** in dashboard     
+
 4. Run command `npm start` to start the nodejs backend server
 
-To setup the inai sample app for IOS, follow the steps below:
+To setup the inai sample app for iOS, follow the steps below:
 1. `git clone https://github.com/inaitech/inai-ios-sample-integration`
 2. Navigate to  ./config.plist fileupdate the following values :
    - Client Username
-   - Client Password
-   - Country
-   - Amount      // for order creation
-   - Currency    // for order creation
-   - Base URL    // backend api server url eg: http://localhost:5009
+   - Base URL    // backend api server url eg: http://localhost:5009. If you are using a simulator, please replace localhost with the system IP address.
 3. Run command `pod install` at the root level of the project to install the CocoaPods dependencies.
 4. Open the workspace file `inai-ios-sample-integration.xcworkspace`, build and run the project.
- 
+5. In `DemoConstants.swift`, replace `amount`, `currency` & `country` as required.
+
 ## FAQs
 <TBA>
 

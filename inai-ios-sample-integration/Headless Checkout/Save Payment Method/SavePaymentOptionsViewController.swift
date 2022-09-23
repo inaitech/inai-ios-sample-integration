@@ -44,8 +44,8 @@ class SavePaymentOptionsViewController: UIViewController {
         var savedCustomerId: String? = UserDefaults.standard.string(forKey: Customer_ID_Key) ?? nil
 
         var body: [String: AnyHashable] = [
-            "amount": PlistConstants.shared.amount,
-            "currency": PlistConstants.shared.currency,
+            "amount": DemoConstants.amount,
+            "currency": DemoConstants.currency,
             "description": "Acme Shirt",
             "metadata": ["test_order_id": "5735"]
         ]
@@ -100,14 +100,10 @@ class SavePaymentOptionsViewController: UIViewController {
                          postData: [String: Any]?,
                          completion: @escaping ([String: Any]?, Error?) -> Void) {
         
-        let authStr = "\(PlistConstants.shared.token):\(PlistConstants.shared.password)"
-        let encodedAuthStr = "BASIC \(Data(authStr.utf8).base64EncodedString())"
-        
         var request = URLRequest(url: url)
         request.httpMethod = method
         
         //  Set headers
-        request.setValue(encodedAuthStr, forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Accept")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
@@ -155,7 +151,7 @@ class SavePaymentOptionsViewController: UIViewController {
                            completion: @escaping ([String: Any]?, Error?) -> Void) {
         var params: [String: String] = [:]
         params["order_id"] = orderId
-        params["country"] = PlistConstants.shared.country
+        params["country"] = DemoConstants.country
         
         self.request(url: URL(string: inai_get_payment_options_url + buildQueryString(fromDictionary: params))!,
                      method: "GET",

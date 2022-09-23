@@ -45,6 +45,7 @@
 		28F2D4A7289301DD007EF5B3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28F2D4A6289301DD007EF5B3 /* Assets.xcassets */; };
 		28F2D4AA289301DD007EF5B3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28F2D4A8289301DD007EF5B3 /* LaunchScreen.storyboard */; };
 		45ACC28367AAF145DA7198A6 /* Pods_inai_ios_sample_integration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC009725747D5E7A3279F62 /* Pods_inai_ios_sample_integration.framework */; };
+		902C50C328DC874E002BD466 /* DemoConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902C50C228DC874E002BD466 /* DemoConstants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -90,6 +91,7 @@
 		28F2D4A9289301DD007EF5B3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		28F2D4AB289301DD007EF5B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7EC009725747D5E7A3279F62 /* Pods_inai_ios_sample_integration.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_inai_ios_sample_integration.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		902C50C228DC874E002BD466 /* DemoConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoConstants.swift; sourceTree = "<group>"; };
 		DDF31F41779EA2B625BAEA01 /* Pods-inai-ios-sample-integration.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-inai-ios-sample-integration.release.xcconfig"; path = "Target Support Files/Pods-inai-ios-sample-integration/Pods-inai-ios-sample-integration.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -249,6 +251,7 @@
 		28F2D49C289301DB007EF5B3 /* inai-ios-sample-integration */ = {
 			isa = PBXGroup;
 			children = (
+				902C50C128DC873E002BD466 /* Utils */,
 				28ED2A79289894D000BB4782 /* inai-ios-sample-integration.entitlements */,
 				285605002893CDC00027E608 /* Headless Checkout */,
 				28C9139128C5E29C00C7BF0C /* DropIn Checkout */,
@@ -260,7 +263,6 @@
 				28F2D4A8289301DD007EF5B3 /* LaunchScreen.storyboard */,
 				28F2D4AB289301DD007EF5B3 /* Info.plist */,
 				28ED2A772897F78700BB4782 /* config.plist */,
-				28C217AA2893D7C2005312F8 /* PlistConstants.swift */,
 			);
 			path = "inai-ios-sample-integration";
 			sourceTree = "<group>";
@@ -280,6 +282,15 @@
 				7EC009725747D5E7A3279F62 /* Pods_inai_ios_sample_integration.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		902C50C128DC873E002BD466 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				28C217AA2893D7C2005312F8 /* PlistConstants.swift */,
+				902C50C228DC874E002BD466 /* DemoConstants.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -423,6 +434,7 @@
 				28B33AC128A53C2700AB6D25 /* MakePayment_PaymentFieldsViewController.swift in Sources */,
 				28F2D4A0289301DB007EF5B3 /* SceneDelegate.swift in Sources */,
 				2849DE6628AAEBA300569AFB /* MakePaymentWithSavedMethod_PaymentFieldsViewController.swift in Sources */,
+				902C50C328DC874E002BD466 /* DemoConstants.swift in Sources */,
 				2849DE5428AA91C600569AFB /* ValidateFields_PaymentFieldsTableViewCell.swift in Sources */,
 				2849DE5F28AA961200569AFB /* SavePayment_FieldsTableViewCell.swift in Sources */,
 				28C9139928C5E30B00C7BF0C /* DropInCheckoutViewController.swift in Sources */,

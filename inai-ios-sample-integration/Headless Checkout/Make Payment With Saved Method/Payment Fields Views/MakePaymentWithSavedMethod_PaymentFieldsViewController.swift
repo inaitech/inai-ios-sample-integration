@@ -89,7 +89,7 @@ class MakePaymentWithSavedMethod_PaymentFieldsViewController: UIViewController {
         let config = InaiConfig(token: PlistConstants.shared.token,
                                 orderId : self.orderId,
                                 styles: styles,
-                                countryCode: PlistConstants.shared.country
+                                countryCode: DemoConstants.country
         )
         
         if let inaiCheckout = InaiCheckout(config: config) {
@@ -118,7 +118,7 @@ class MakePaymentWithSavedMethod_PaymentFieldsViewController: UIViewController {
         self.pay(token: PlistConstants.shared.token,
                  paymentDetails: paymentDetails,
                  orderId: self.orderId,
-                 countryCode: PlistConstants.shared.country,
+                 countryCode: DemoConstants.country,
                  paymentMethodOption: selectedPaymentOption.railCode!,
                  viewController: self)
     }
