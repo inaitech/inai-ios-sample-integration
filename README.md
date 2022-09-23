@@ -49,7 +49,7 @@ To setup the inai sample app for iOS, follow the steps below:
    - Base URL    // backend api server url eg: http://localhost:5009. If you are using a simulator, please replace localhost with the system IP address.
 3. Run command `pod install` at the root level of the project to install the CocoaPods dependencies.
 4. Open the workspace file `inai-ios-sample-integration.xcworkspace`, build and run the project.
-5. In ```DemoConstants.swift```, replace ```amount```, ```currency``` & ```country``` as required.
+5. In `DemoConstants.swift`, replace `amount`, `currency` & `country` as required.
 
 ## FAQs
 <TBA>
