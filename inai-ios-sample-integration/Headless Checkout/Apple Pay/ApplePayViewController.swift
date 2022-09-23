@@ -115,14 +115,10 @@ class ApplePayViewController: UIViewController {
                          postData: [String: Any]?,
                          completion: @escaping ([String: Any]?, Error?) -> Void) {
         
-        let authStr = "\(PlistConstants.shared.token)"
-        let encodedAuthStr = "BASIC \(Data(authStr.utf8).base64EncodedString())"
-        
         var request = URLRequest(url: url)
         request.httpMethod = method
         
         //  Set headers
-        request.setValue(encodedAuthStr, forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Accept")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
