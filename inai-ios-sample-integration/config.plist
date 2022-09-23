@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>token</key>
-	<string>sbx_ci_7YUVXeduWpqdNd8kibg7f7dRjptfqcQXoLvahR1Mei2o</string>
+	<string>__INAI_USERNAME__</string>
 	<key>base_url</key>
 	<string>http://localhost:5009/v1</string>
 </dict>
