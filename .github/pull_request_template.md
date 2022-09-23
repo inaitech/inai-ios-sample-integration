@@ -1,19 +1,29 @@
-### Summary of the ticket 
+# Ticket: [PRD-](https://inai.atlassian.net/browse/PRD-XX)
 
+## Description of changes
 
-### Details 
+> Describe your changes here.  Think of this section as a guide for
+> code reviewers.  How should someone reviewing your PR see your
+> changes.  For example, in what order should they read the changed
+> files?
 
+## Testing done
 
-### JIRA Ticket
-   [PRD-XXXX](https://inai.atlassian.net/browse/PRD-XXXX)
-   
- 
-### Image / Video
- 
- ![Image Name](https://...)  
+> Describe how you tested your changes here.  
+> Add relevant screenshots / video grabs wherever applicable
+> Call out flows tested (empty state, positive flows, error flows)
+> No testing done, no PR approval.
 
-### Comparing Screenshots 
+- [ ] Unit tests passed
+- [ ] Integration tests passed
+- [ ] End to end tests passed
 
-Original                    |   Updated 
-:------------------------------:|:----------------------------:
-** original screenshot **       |  ** updated screenshot ** 
+## Does this introduce a breaking change?
+
+- [ ] Yes
+- [ ] No
+
+## Other information
+
+> Feel free to add any relevant information here.  Remove this section
+> if there's nothing to add.
