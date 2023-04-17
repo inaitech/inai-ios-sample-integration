@@ -160,15 +160,15 @@ extension GetInstallmentPlansViewController:InaiCheckoutDelegate{
                                 styles: styles,
                                 countryCode: DemoConstants.country
         )
-        if let paymentDetails = paymentDetails{
-            var paymentDetail = paymentDetails
+        if let _ = self.paymentDetails{
+            var installmentPaymentDetail = self.paymentDetails!
             let jsonEncoder =  JSONEncoder()
             if let jsonData = try? jsonEncoder.encode(data){
                 if let installmentPlanJson = try? JSONSerialization.jsonObject(with: jsonData,  options: []){
-                    paymentDetail["installment_plan"] = installmentPlanJson
+                    installmentPaymentDetail["installment_plan"] = installmentPlanJson
                     if let inaiCheckout = InaiCheckout(config: config) {
                         inaiCheckout.makePayment(paymentMethodOption: selectedPaymentMethodOption,
-                                                 paymentDetails: paymentDetail,
+                                                 paymentDetails: installmentPaymentDetail,
                                                  viewController: self,
                                                  delegate: self)
                     }
