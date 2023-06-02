@@ -9,8 +9,13 @@ import Foundation
 import UIKit
 import inai_ios_sdk
 
+enum PaymentCategory {
+    case upiIntent, upiCollect, card, netBanking, wallets
+}
 class MakePayment_PaymentFieldsViewController: UIViewController {
     var selectedPaymentOption: MakePayment_PaymentMethodOption!
+    var selectedPaymentMode:MakePayment_Mode!
+    var selectedPaymentFormField:MakePayment_FormField!
     var orderId: String!
     private var scrollViewBottomConstraint: NSLayoutConstraint!
     
@@ -18,8 +23,7 @@ class MakePayment_PaymentFieldsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupKeyboardEvents(scrollView: self.tbl_inputs, view: view)
-        tbl_inputs.separatorStyle = .none
+        self.initialization()
     }
     
     func setupKeyboardEvents(scrollView: UIScrollView,
@@ -55,11 +59,11 @@ class MakePayment_PaymentFieldsViewController: UIViewController {
 
     @objc func checkoutButtonTapped(_ btn: UIButton) {
         self.view.endEditing(true)
-        let requiredFieldsFilled = checkAllFieldsValidated()
-        if (!requiredFieldsFilled) {
-            showAlert("Please fill all required fields with valid Input")
-            return
-        }
+//        let requiredFieldsFilled = checkAllFieldsValidated()
+//        if (!requiredFieldsFilled) {
+//            showAlert("Please fill all required fields with valid Input")
+//            return
+//        }
         
         self.processCheckout()
     }
@@ -91,11 +95,22 @@ class MakePayment_PaymentFieldsViewController: UIViewController {
         )
         
         if let inaiCheckout = InaiCheckout(config: config) {
+            print(paymentDetails)
             inaiCheckout.makePayment(paymentMethodOption: paymentMethodOption,
                                      paymentDetails: paymentDetails,
                                      viewController: viewController,
                                      delegate: viewController)
         }
+    }
+    
+    
+    private func generatePaymentDetailsForPaymenMode(selectedMode:MakePayment_Mode, selectedPaymentFormField : MakePayment_FormField) -> [String:Any]{
+        var paymentDetails = [String:Any]()
+        var fieldsArray: [[String: Any]] = []
+        fieldsArray.append(["name":selectedPaymentFormField.name!,"value":selectedPaymentFormField.value])
+        paymentDetails["fields"] = fieldsArray
+        paymentDetails["mode"] = selectedMode.code
+        return paymentDetails
     }
     
     private func generatePaymentDetails(selectedPaymentOption: MakePayment_PaymentMethodOption!) -> [String: Any] {
@@ -112,7 +127,12 @@ class MakePayment_PaymentFieldsViewController: UIViewController {
     }
     
     private func processCheckout() {
-        let paymentDetails = generatePaymentDetails(selectedPaymentOption: selectedPaymentOption)
+        var paymentDetails = [String:Any]()
+        if let _ = self.selectedPaymentMode, let _ = self.selectedPaymentFormField{
+            paymentDetails = generatePaymentDetailsForPaymenMode(selectedMode:self.selectedPaymentMode!, selectedPaymentFormField : self.selectedPaymentFormField!)
+        }else{
+            paymentDetails = generatePaymentDetails(selectedPaymentOption: selectedPaymentOption)
+        }
         self.pay(token: PlistConstants.shared.token,
                  paymentDetails: paymentDetails,
                  orderId: self.orderId,
@@ -121,19 +141,45 @@ class MakePayment_PaymentFieldsViewController: UIViewController {
                  viewController: self)
     }
 }
-
+//MARK: - Initialization
+extension MakePayment_PaymentFieldsViewController{
+    func initialization(){
+        self.setupKeyboardEvents(scrollView: self.tbl_inputs, view: view)
+        self.tbl_inputs.separatorStyle = .none
+        self.setTableView()
+    }
+    func setTableView(){
+        self.tbl_inputs.register(UINib(nibName: "MakePayment_PaymentFieldOptionsTableViewCell", bundle: nil), forCellReuseIdentifier: "MakePayment_PaymentFieldOptionsTableViewCell")
+    }
+}
+//MARK: - TableViewDelegate, TableViewDataSource
 extension MakePayment_PaymentFieldsViewController: UITableViewDataSource, UITableViewDelegate {
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.selectedPaymentOption.formFields.count
+        if !self.selectedPaymentOption.modes.isEmpty {
+            return self.selectedPaymentOption.modes.count
+        }else{
+            return self.selectedPaymentOption.formFields.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let formField = self.selectedPaymentOption.formFields[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: "PaymentFieldCell", for: indexPath) as! MakePayment_PaymentFieldTableViewCell
-        cell.updateUI(formField: formField, viewController: self, orderId: self.orderId)
-        return cell
-        
+        if self.selectedPaymentOption.modes.isEmpty {
+            let formField = self.selectedPaymentOption.formFields[indexPath.row]
+
+            let cell = tableView.dequeueReusableCell(withIdentifier: "PaymentFieldCell", for: indexPath) as! MakePayment_PaymentFieldTableViewCell
+            cell.updateUI(formField: formField, viewController: self, orderId: self.orderId)
+            return cell
+        }else{
+            let formField = self.selectedPaymentOption.modes[indexPath.section].form_fields[indexPath.row]
+            let cell = tableView.dequeueReusableCell(withIdentifier: "PaymentFieldCell", for: indexPath) as! MakePayment_PaymentFieldTableViewCell
+            cell.updateUI(formField: formField, viewController: self, orderId: self.orderId)
+            cell.updateVPADelegate = { upiID in
+                self.selectedPaymentMode = self.selectedPaymentOption.modes[indexPath.section]
+                self.selectedPaymentOption.modes[indexPath.section].form_fields[indexPath.row].value = upiID
+                self.selectedPaymentFormField = self.selectedPaymentOption.modes[indexPath.section].form_fields[indexPath.row]
+            }
+            return cell
+        }
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {

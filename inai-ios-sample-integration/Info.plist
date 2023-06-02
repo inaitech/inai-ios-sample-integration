@@ -21,5 +21,15 @@
 			</array>
 		</dict>
 	</dict>
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+        <string>tez</string>
+        <string>phonepe</string>
+        <string>paytmmp</string>
+        <string>upi</string>
+        <string>bhim</string>
+    </array>
+    <key>CFBundleDisplayName</key>
+    <string>$(PRODUCT_NAME)</string>
 </dict>
 </plist>

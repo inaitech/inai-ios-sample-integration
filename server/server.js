@@ -2,7 +2,7 @@ const express = require('express');
 const fetch = require('node-fetch');
 
 // urls
-const baseUrl = "https://api.inai.io/v1";
+const baseUrl = "https://backend-dev.inai-dev.com/v1";
 const ordersUrl = `${baseUrl}/orders`;
 let paymentMethodOptionsUrl = `${baseUrl}/payment-method-options`;
 

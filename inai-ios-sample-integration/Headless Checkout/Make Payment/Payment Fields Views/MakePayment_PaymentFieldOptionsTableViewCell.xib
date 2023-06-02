@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="183" id="KGk-i7-Jjw" customClass="MakePayment_PaymentFieldOptionsTableViewCell" customModule="inai_ios_sample_integration" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="183"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="183"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Ol-cu-LaL">
+                        <rect key="frame" x="10" y="9.9999999999999982" width="300" height="20.333333333333329"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="uWC-Mv-LBa" customClass="AutoSizingTableView" customModule="inai_ios_sample_integration" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="183"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </tableView>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="uWC-Mv-LBa" secondAttribute="trailing" id="3Ht-jf-Da8"/>
+                    <constraint firstItem="uWC-Mv-LBa" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Ih9-89-xoJ"/>
+                    <constraint firstItem="uWC-Mv-LBa" firstAttribute="top" secondItem="5Ol-cu-LaL" secondAttribute="bottom" constant="10" id="Q6K-ED-ucm"/>
+                    <constraint firstItem="5Ol-cu-LaL" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="rrS-i1-qq3"/>
+                    <constraint firstAttribute="bottom" secondItem="uWC-Mv-LBa" secondAttribute="bottom" id="shT-w8-Vgc"/>
+                    <constraint firstAttribute="trailing" secondItem="5Ol-cu-LaL" secondAttribute="trailing" constant="10" id="uXf-CB-aNu"/>
+                    <constraint firstItem="5Ol-cu-LaL" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="wHT-tX-YrP"/>
+                    <constraint firstItem="uWC-Mv-LBa" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="yvz-9E-cID"/>
+                </constraints>
+                <variation key="default">
+                    <mask key="subviews">
+                        <exclude reference="5Ol-cu-LaL"/>
+                    </mask>
+                </variation>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="tableView" destination="uWC-Mv-LBa" id="I9w-9A-kid"/>
+                <outlet property="titleLbl" destination="5Ol-cu-LaL" id="5T9-EH-UcA"/>
+            </connections>
+            <point key="canvasLocation" x="138.93129770992365" y="66.549295774647888"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

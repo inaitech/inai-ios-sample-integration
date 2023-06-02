@@ -11,11 +11,13 @@ import inai_ios_sdk
 
 class MakePaymentViewController: UIViewController {
     
-    @IBOutlet weak var tbl_payment_options: UITableView!
+    @IBOutlet weak var tbl_payment_options: AutoSizingTableView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-        
-    private var paymentOptions: [MakePayment_PaymentMethodOption] = []
+    
+    private var paymentOptions: [MakePayment_PaymentMethodOptionIndia] = []
     private var orderId = ""
+    var selectedPaymentMode:MakePayment_Mode!
+    var selectedPaymentFormField:MakePayment_FormField!
     
     var base_url: String! {
         return PlistConstants.shared.baseURL
@@ -32,8 +34,9 @@ class MakePaymentViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.prepareOrder()
+        self.tbl_payment_options.register(UINib(nibName: "MakePayment_PaymentFieldOptionsTableViewCell", bundle: nil), forCellReuseIdentifier: "MakePayment_PaymentFieldOptionsTableViewCell")
     }
-
+    
     private func prepareOrder() {
         //  Initiate a new order
         self.activityIndicator.startAnimating()
@@ -41,7 +44,7 @@ class MakePaymentViewController: UIViewController {
         //  Prep postdata
         let Customer_ID_Key = "customerId-\(PlistConstants.shared.token)"
         var savedCustomerId: String? = UserDefaults.standard.string(forKey: Customer_ID_Key) ?? nil
-
+        
         var body: [String: AnyHashable] = [
             "amount": DemoConstants.amount,
             "currency": DemoConstants.currency,
@@ -55,11 +58,11 @@ class MakePaymentViewController: UIViewController {
         } else {
             //  Create a new customer
             body["customer"] = ["email": "testdev@test.com",
-                                 "first_name": "Dev",
-                                 "last_name": "Smith",
-                                 "contact_number": "01010101010"]
+                                "first_name": "Dev",
+                                "last_name": "Smith",
+                                "contact_number": "8884609010"]
         }
-
+        
         self.request(url: URL(string: self.inai_prepare_order_url)!,
                      method: "POST",
                      postData: body) { (data, error) in
@@ -101,6 +104,7 @@ class MakePaymentViewController: UIViewController {
         request.httpMethod = method
         
         //  Set headers
+        request.setValue("Basic Y2lfNGVjNUVLeUtyNmhLSG81RXJKTnAyN3pIY0FialBZdnpyRUJyaTlmUEJod2Q6Y3NfNTU3ampOd3NBNFNrU1BtUmV1VHFWWVZhTWVxVXFHR1FvYlZueXRLR1NidDk=", forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Accept")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
@@ -111,6 +115,8 @@ class MakePaymentViewController: UIViewController {
         
         let task = URLSession.shared.dataTask(with: request) { data, urlRequest, error in
             var result: [String: Any]? = nil
+            print(data!)
+            print(String(data: data!, encoding: .utf8))
             if let data = data {
                 let json = try? JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
                 result = json as? [String : Any]
@@ -136,19 +142,15 @@ class MakePaymentViewController: UIViewController {
                 }
                 
                 //  Lets render all payment options except Apply Pay as its handled separately
-                self.paymentOptions = MakePayment_PaymentMethodOption.paymentOptionsFromJSON(respo)
-                                    .filter { self.sanitizeRailCode($0.railCode) != "Apple Pay" }
+                self.paymentOptions = MakePayment_PaymentMethodOptionIndia.paymentOptionsFromJSON(respo)
+   
+                for (indx,paymentOption) in self.paymentOptions.enumerated(){
+                    self.paymentOptions[indx].paymentOptions = paymentOption.paymentOptions.filter({ $0.railCode != "Apple Pay" })
+                }
+                print(respo)
+                print(self.paymentOptions)
                 self.tbl_payment_options.reloadData()
             }
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "ShowMakePaymentPaymentFieldsView" {
-            if let vc = segue.destination as? MakePayment_PaymentFieldsViewController {
-                vc.orderId = self.orderId
-                vc.selectedPaymentOption = sender as? MakePayment_PaymentMethodOption
-            }
-        }
     }
     
     func getPaymentOptions(orderId: String,
@@ -177,16 +179,62 @@ class MakePaymentViewController: UIViewController {
 }
 
 extension MakePaymentViewController: UITableViewDataSource, UITableViewDelegate {
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return self.paymentOptions.count
     }
     
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if self.paymentOptions[section].category?.lowercased() == "wallet"{
+            return 1
+        }else{
+            return self.paymentOptions[section].paymentOptions.count
+        }
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCell", for: indexPath)
-        let po = self.paymentOptions[indexPath.row]
-        cell.textLabel?.text = sanitizeRailCode(po.railCode)
-        return cell
+        if self.paymentOptions[indexPath.section].category?.lowercased() == "upi"{
+            let selectedPaymentOption  = self.paymentOptions[indexPath.section].paymentOptions[indexPath.row]
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "MakePayment_PaymentFieldOptionsTableViewCell") as? MakePayment_PaymentFieldOptionsTableViewCell else {return UITableViewCell()}
+            cell.prePopulateCell(cellInfo:selectedPaymentOption, viewController: self,orderId: self.orderId )
+            cell.payDelegate = { _ in
+                self.processCheckout(railCode:selectedPaymentOption.railCode ?? "")
+            }
+            cell.updatedSelectedMode = { paymentMode,value in
+                if paymentMode.code == "upi_intent"{
+                    self.selectedPaymentMode = paymentMode
+                    self.selectedPaymentFormField = value
+                    self.tbl_payment_options.contentSize = self.tbl_payment_options.intrinsicContentSize
+                    self.tbl_payment_options.reloadData()
+                }else{
+                    guard let makePaymentFieldsVC = self.storyboard?.instantiateViewController(identifier: "MakePayment_PaymentFieldsViewController") as? MakePayment_PaymentFieldsViewController else {return }
+                    makePaymentFieldsVC.orderId = self.orderId
+                    var optionsPayment = self.paymentOptions[indexPath.section].paymentOptions[indexPath.row]
+                    optionsPayment.modes = optionsPayment.modes.filter({$0.code == "upi_collect"})
+                    makePaymentFieldsVC.selectedPaymentOption = optionsPayment
+                    self.navigationController?.pushViewController(makePaymentFieldsVC, animated: false)
+                }
+                
+            }
+            return cell
+        }else if self.paymentOptions[indexPath.section].category?.lowercased() == "wallet"{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCell", for: indexPath)
+            let po = self.paymentOptions[indexPath.section]
+            cell.contentView.layer.cornerRadius = 8
+            cell.contentView.dropShadow(color: .black, opacity: 0.1, offSet: CGSize(width: -1, height: 1), radius: 8, scale: true)
+            cell.backgroundColor = .white
+            cell.selectionStyle = .none
+            cell.textLabel?.text = sanitizeRailCode(po.category)
+            return cell
+        }else{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCell", for: indexPath)
+            let po = self.paymentOptions[indexPath.section].paymentOptions[indexPath.row]
+            cell.contentView.layer.cornerRadius = 8
+            cell.contentView.dropShadow(color: .black, opacity: 0.1, offSet: CGSize(width: -1, height: 1), radius: 8, scale: true)
+            cell.backgroundColor = .white
+            cell.selectionStyle = .none
+            cell.textLabel?.text = sanitizeRailCode(po.railCode)
+            return cell
+        }
     }
     
     private func sanitizeRailCode(_ railCode: String?) -> String? {
@@ -195,9 +243,60 @@ extension MakePaymentViewController: UITableViewDataSource, UITableViewDelegate 
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "ShowMakePaymentPaymentFieldsView", sender: self.paymentOptions[indexPath.row])
+        if self.paymentOptions[indexPath.section].category?.lowercased() == "upi" {
+            
+        }else if self.paymentOptions[indexPath.section].category?.lowercased() == "netbanking" {
+            let makePaymentNBVC = MakePayment_NBViewController()
+            makePaymentNBVC.orderId = self.orderId
+            makePaymentNBVC.paymentOptions = self.paymentOptions[indexPath.section].paymentOptions[indexPath.row]
+            self.navigationController?.pushViewController(makePaymentNBVC, animated: false)
+        }else if self.paymentOptions[indexPath.section].category?.lowercased() == "wallet" {
+            let makePaymentNBVC = MakePayment_WalletViewController()
+            makePaymentNBVC.orderId = self.orderId
+            makePaymentNBVC.paymentOptions = self.paymentOptions[indexPath.section].paymentOptions
+            self.navigationController?.pushViewController(makePaymentNBVC, animated: false)
+        }else{
+            guard let makePaymentFieldsVC = self.storyboard?.instantiateViewController(identifier: "MakePayment_PaymentFieldsViewController") as? MakePayment_PaymentFieldsViewController else {return }
+            makePaymentFieldsVC.orderId = self.orderId
+            makePaymentFieldsVC.selectedPaymentOption = self.paymentOptions[indexPath.section].paymentOptions[indexPath.row]
+            self.navigationController?.pushViewController(makePaymentFieldsVC, animated: false)
+        }
     }
     
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let sectionHolderView = UIView()
+        
+        let sectionTitleLbl = UILabel()
+        let po = self.paymentOptions[section]
+        sectionHolderView.addSubview(sectionTitleLbl)
+        
+        sectionTitleLbl.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            sectionTitleLbl.topAnchor.constraint(equalTo: sectionHolderView.topAnchor,constant: 12),
+            sectionTitleLbl.bottomAnchor.constraint(equalTo: sectionHolderView.bottomAnchor,constant: -12),
+            sectionTitleLbl.leftAnchor.constraint(equalTo: sectionHolderView.leftAnchor,constant: 12),
+            sectionTitleLbl.rightAnchor.constraint(equalTo: sectionHolderView.rightAnchor,constant: -12)
+        ])
+        
+        sectionTitleLbl.text = sanitizeRailCode(po.category)?.uppercased()
+        
+        sectionTitleLbl.textColor = .black
+        
+        sectionTitleLbl.font = UIFont.systemFont(ofSize: 14)
+        
+        return sectionHolderView
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 50
+    }
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 50
+    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
     func showAlert(_ message: String, title: String = "Alert", completion: ((UIAlertAction) -> Void)? = nil ) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: completion))
@@ -223,5 +322,106 @@ extension MakePaymentViewController: UITableViewDataSource, UITableViewDelegate 
             }
         }
         return nil
+    }
+    private func processCheckout(railCode:String) {
+        var paymentDetails = [String:Any]()
+        if let _ = self.selectedPaymentMode, let _ = self.selectedPaymentFormField{
+            paymentDetails = generatePaymentDetailsForPaymenMode(selectedMode:self.selectedPaymentMode!, selectedPaymentFormField : self.selectedPaymentFormField!)
+        }
+        print(paymentDetails)
+        self.pay(token: PlistConstants.shared.token,
+                 paymentDetails: paymentDetails,
+                 orderId: self.orderId,
+                 countryCode: DemoConstants.country,
+                 paymentMethodOption: railCode,
+                 viewController: self)
+    }
+    private func generatePaymentDetailsForPaymenMode(selectedMode:MakePayment_Mode, selectedPaymentFormField : MakePayment_FormField) -> [String:Any]{
+        var paymentDetails = [String:Any]()
+        var fieldsArray: [[String: Any]] = []
+        fieldsArray.append(["name":selectedPaymentFormField.name!,"value":selectedPaymentFormField.value])
+        paymentDetails["fields"] = fieldsArray
+        paymentDetails["mode"] = selectedMode.code
+        return paymentDetails
+    }
+    private func pay(token: String, paymentDetails: [String: Any],
+                     orderId: String, countryCode: String, paymentMethodOption: String,
+                     viewController: UIViewController & InaiCheckoutDelegate) {
+        let styles = InaiConfig_Styles(
+            container: InaiConfig_Styles_Container(backgroundColor: "#fff"),
+            cta: InaiConfig_Styles_Cta(backgroundColor: "#123456"),
+            errorText: InaiConfig_Styles_ErrorText(color: "#000000")
+        )
+        
+        let config = InaiConfig(token: PlistConstants.shared.token,
+                                orderId : self.orderId,
+                                styles: styles,
+                                countryCode: DemoConstants.country
+        )
+        
+        if let inaiCheckout = InaiCheckout(config: config) {
+            print(paymentDetails)
+            inaiCheckout.makePayment(paymentMethodOption: paymentMethodOption,
+                                     paymentDetails: paymentDetails,
+                                     viewController: viewController,
+                                     delegate: viewController)
+        }
+    }
+}
+
+
+extension MakePaymentViewController: InaiCheckoutDelegate {
+    
+    private func goToHomeScreen(action: UIAlertAction) -> Void {
+        self.navigationController?.popToRootViewController(animated: true)
+    }
+    
+    func paymentFinished(with result: Inai_PaymentResult) {
+        switch result.status {
+        case Inai_PaymentStatus.success:
+            let resultStr = convertDictToStr(result.data)
+            self.showAlert("Payment Success! \(resultStr)", title: "Result", completion: goToHomeScreen)
+            break
+            
+        case Inai_PaymentStatus.failed:
+            let strError = convertDictToStr(result.data)
+            self.showAlert("Payment Failed with data: \(strError)", title: "Result", completion: goToHomeScreen)
+            break
+            
+        case Inai_PaymentStatus.canceled:
+            let message = result.data["message"] ?? "Payment Canceled!"
+            self.showAlert(message as! String, title: "Result", completion: goToHomeScreen)
+            break
+        @unknown default:
+            break;
+        }
+    }
+}
+
+extension UIView {
+    
+    // OUTPUT 1
+    func dropShadow(scale: Bool = true) {
+        layer.masksToBounds = false
+        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowOpacity = 0.5
+        layer.shadowOffset = CGSize(width: -1, height: 1)
+        layer.shadowRadius = 1
+        
+        layer.shadowPath = UIBezierPath(rect: bounds).cgPath
+        layer.shouldRasterize = true
+        layer.rasterizationScale = scale ? UIScreen.main.scale : 1
+    }
+    
+    func dropShadow(color: UIColor, opacity: Float = 0.5, offSet: CGSize, radius: CGFloat = 1, scale: Bool = true) {
+        layer.masksToBounds = false
+        layer.shadowColor = color.cgColor
+        layer.shadowOpacity = opacity
+        layer.shadowOffset = offSet
+        layer.shadowRadius = radius
+        
+        layer.shadowPath = UIBezierPath(rect: self.bounds).cgPath
+        layer.shouldRasterize = true
+        layer.rasterizationScale = scale ? UIScreen.main.scale : 1
     }
 }

@@ -3,8 +3,8 @@
 <plist version="1.0">
 <dict>
 	<key>token</key>
-	<string>__INAI_USERNAME__</string>
+	<string>ci_4ec5EKyKr6hKHo5ErJNp27zHcAbjPYvzrEBri9fPBhwd</string>
 	<key>base_url</key>
-	<string>http://localhost:5009/v1</string>
+	<string>https://backend-dev.inai-dev.com/v1</string>
 </dict>
 </plist>

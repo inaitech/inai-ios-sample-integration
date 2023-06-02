@@ -16,6 +16,8 @@ class MakePayment_PaymentFieldTableViewCell: UITableViewCell,
     var viewController: UIViewController!
     var orderId: String!
     
+    var updateVPADelegate:((String)->())?
+    
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var switch_check: UISwitch!
@@ -71,10 +73,12 @@ class MakePayment_PaymentFieldTableViewCell: UITableViewCell,
         formField.value = tf.text!
         formField.validated = validateFormField()
         updateTextFieldUI(textfield:tf)
+        self.updateVPADelegate?(tf.text ?? "")
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
+        self.updateVPADelegate?(textField.text ?? "")
         return true
     }
     
@@ -91,7 +95,7 @@ class MakePayment_PaymentFieldTableViewCell: UITableViewCell,
         textField.placeholder = formField.placeHolder
         
         //  Show the appropriate input field as per field type
-        if formField.fieldType == "checkbox" {
+        if formField.fieldType == .checkbox {
             self.textField.isHidden = true
             self.formField.validated = true
         } else {

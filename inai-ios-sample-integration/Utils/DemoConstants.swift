@@ -10,7 +10,7 @@ import Foundation
 /// These fields are  hardcoded for demo purposes. Ideally they would be passed dynamically.
 
 struct DemoConstants {
-    static var amount: String = "50"
-    static var currency: String = "USD"
-    static var country: String = "USA"
+    static var amount: String = "1"
+    static var currency: String = "INR"
+    static var country: String = "IND"
 }

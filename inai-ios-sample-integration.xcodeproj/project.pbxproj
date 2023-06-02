@@ -46,7 +46,32 @@
 		28F2D4AA289301DD007EF5B3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28F2D4A8289301DD007EF5B3 /* LaunchScreen.storyboard */; };
 		45ACC28367AAF145DA7198A6 /* Pods_inai_ios_sample_integration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC009725747D5E7A3279F62 /* Pods_inai_ios_sample_integration.framework */; };
 		902C50C328DC874E002BD466 /* DemoConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902C50C228DC874E002BD466 /* DemoConstants.swift */; };
+		A41C9FC12A24D31700835AE5 /* MakePayment_PaymentFieldOptionsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41C9FBF2A24D31700835AE5 /* MakePayment_PaymentFieldOptionsTableViewCell.swift */; };
+		A41C9FC22A24D31700835AE5 /* MakePayment_PaymentFieldOptionsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A41C9FC02A24D31700835AE5 /* MakePayment_PaymentFieldOptionsTableViewCell.xib */; };
+		A41C9FC42A25F94A00835AE5 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41C9FC32A25F94A00835AE5 /* ImageLoader.swift */; };
+		A41C9FC72A26198400835AE5 /* MakePayment_DataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41C9FC52A26198400835AE5 /* MakePayment_DataTableViewCell.swift */; };
+		A41C9FC82A26198400835AE5 /* MakePayment_DataTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A41C9FC62A26198400835AE5 /* MakePayment_DataTableViewCell.xib */; };
+		A41C9FCB2A27108000835AE5 /* MakePayment_UPIIntentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41C9FC92A27108000835AE5 /* MakePayment_UPIIntentTableViewCell.swift */; };
+		A41C9FCC2A27108000835AE5 /* MakePayment_UPIIntentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A41C9FCA2A27108000835AE5 /* MakePayment_UPIIntentTableViewCell.xib */; };
+		A48EFD0B2A28810D00AC2485 /* MakePayment_WalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48EFD0A2A28810D00AC2485 /* MakePayment_WalletViewController.swift */; };
+		A48EFD0D2A289DE300AC2485 /* MakePayment_NBViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48EFD0C2A289DE300AC2485 /* MakePayment_NBViewController.swift */; };
+		A4BBF62B2A27ADD90056C2FB /* inai_ios_sdk.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4BBF6292A27ADC50056C2FB /* inai_ios_sdk.xcframework */; };
+		A4BBF62C2A27ADD90056C2FB /* inai_ios_sdk.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A4BBF6292A27ADC50056C2FB /* inai_ios_sdk.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		A4BBF62D2A27ADD90056C2FB /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				A4BBF62C2A27ADD90056C2FB /* inai_ios_sdk.xcframework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		22A70DB9860AE122672AD604 /* Pods-inai-ios-sample-integration.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-inai-ios-sample-integration.debug.xcconfig"; path = "Target Support Files/Pods-inai-ios-sample-integration/Pods-inai-ios-sample-integration.debug.xcconfig"; sourceTree = "<group>"; };
@@ -92,6 +117,16 @@
 		28F2D4AB289301DD007EF5B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7EC009725747D5E7A3279F62 /* Pods_inai_ios_sample_integration.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_inai_ios_sample_integration.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		902C50C228DC874E002BD466 /* DemoConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoConstants.swift; sourceTree = "<group>"; };
+		A41C9FBF2A24D31700835AE5 /* MakePayment_PaymentFieldOptionsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakePayment_PaymentFieldOptionsTableViewCell.swift; sourceTree = "<group>"; };
+		A41C9FC02A24D31700835AE5 /* MakePayment_PaymentFieldOptionsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MakePayment_PaymentFieldOptionsTableViewCell.xib; sourceTree = "<group>"; };
+		A41C9FC32A25F94A00835AE5 /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
+		A41C9FC52A26198400835AE5 /* MakePayment_DataTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakePayment_DataTableViewCell.swift; sourceTree = "<group>"; };
+		A41C9FC62A26198400835AE5 /* MakePayment_DataTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MakePayment_DataTableViewCell.xib; sourceTree = "<group>"; };
+		A41C9FC92A27108000835AE5 /* MakePayment_UPIIntentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakePayment_UPIIntentTableViewCell.swift; sourceTree = "<group>"; };
+		A41C9FCA2A27108000835AE5 /* MakePayment_UPIIntentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MakePayment_UPIIntentTableViewCell.xib; sourceTree = "<group>"; };
+		A48EFD0A2A28810D00AC2485 /* MakePayment_WalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakePayment_WalletViewController.swift; sourceTree = "<group>"; };
+		A48EFD0C2A289DE300AC2485 /* MakePayment_NBViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakePayment_NBViewController.swift; sourceTree = "<group>"; };
+		A4BBF6292A27ADC50056C2FB /* inai_ios_sdk.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = inai_ios_sdk.xcframework; path = ../../InaiSdk/inaiIosSdk/inai_ios_sdk.xcframework; sourceTree = "<group>"; };
 		DDF31F41779EA2B625BAEA01 /* Pods-inai-ios-sample-integration.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-inai-ios-sample-integration.release.xcconfig"; path = "Target Support Files/Pods-inai-ios-sample-integration/Pods-inai-ios-sample-integration.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -101,6 +136,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				45ACC28367AAF145DA7198A6 /* Pods_inai_ios_sample_integration.framework in Frameworks */,
+				A4BBF62B2A27ADD90056C2FB /* inai_ios_sdk.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -155,6 +191,7 @@
 				2849DE6E28AB1F9E00569AFB /* Apple Pay */,
 				28C5F4162899E51E00F21C7E /* Validate Fields */,
 				28C5F4152899E50000F21C7E /* Get Card Info */,
+				A41C9FC32A25F94A00835AE5 /* ImageLoader.swift */,
 			);
 			path = "Headless Checkout";
 			sourceTree = "<group>";
@@ -164,6 +201,12 @@
 			children = (
 				28B33ABD28A53C2700AB6D25 /* MakePayment_PaymentFieldsViewController.swift */,
 				28B33ABB28A53C2700AB6D25 /* MakePayment_PaymentFieldTableViewCell.swift */,
+				A41C9FBF2A24D31700835AE5 /* MakePayment_PaymentFieldOptionsTableViewCell.swift */,
+				A41C9FC02A24D31700835AE5 /* MakePayment_PaymentFieldOptionsTableViewCell.xib */,
+				A41C9FC52A26198400835AE5 /* MakePayment_DataTableViewCell.swift */,
+				A41C9FC62A26198400835AE5 /* MakePayment_DataTableViewCell.xib */,
+				A41C9FC92A27108000835AE5 /* MakePayment_UPIIntentTableViewCell.swift */,
+				A41C9FCA2A27108000835AE5 /* MakePayment_UPIIntentTableViewCell.xib */,
 			);
 			path = "Payment Fields Views";
 			sourceTree = "<group>";
@@ -174,6 +217,8 @@
 				28C217B82894968A005312F8 /* MakePaymentViewController.swift */,
 				284C164E28A5097400214A05 /* MakePayment.storyboard */,
 				28B929E928A591E1005FA064 /* MakePayment_Models.swift */,
+				A48EFD0A2A28810D00AC2485 /* MakePayment_WalletViewController.swift */,
+				A48EFD0C2A289DE300AC2485 /* MakePayment_NBViewController.swift */,
 				28B33AB928A53C1E00AB6D25 /* Payment Fields Views */,
 			);
 			path = "Make Payment";
@@ -279,6 +324,7 @@
 		7553D2D625537AD1211FDF20 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A4BBF6292A27ADC50056C2FB /* inai_ios_sdk.xcframework */,
 				7EC009725747D5E7A3279F62 /* Pods_inai_ios_sample_integration.framework */,
 			);
 			name = Frameworks;
@@ -304,7 +350,7 @@
 				28F2D496289301DB007EF5B3 /* Sources */,
 				28F2D497289301DB007EF5B3 /* Frameworks */,
 				28F2D498289301DB007EF5B3 /* Resources */,
-				4662D3422D32E38C9271E222 /* [CP] Embed Pods Frameworks */,
+				A4BBF62D2A27ADD90056C2FB /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -354,10 +400,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				28C9139728C5E2F600C7BF0C /* DropInCheckout.storyboard in Resources */,
+				A41C9FC82A26198400835AE5 /* MakePayment_DataTableViewCell.xib in Resources */,
 				28F2D4AA289301DD007EF5B3 /* LaunchScreen.storyboard in Resources */,
 				28F2D4A7289301DD007EF5B3 /* Assets.xcassets in Resources */,
 				28B42EDD28A7BDD800DB80F7 /* ValidateFields.storyboard in Resources */,
 				28B42EDB28A7BD8B00DB80F7 /* GetCardInfo.storyboard in Resources */,
+				A41C9FC22A24D31700835AE5 /* MakePayment_PaymentFieldOptionsTableViewCell.xib in Resources */,
+				A41C9FCC2A27108000835AE5 /* MakePayment_UPIIntentTableViewCell.xib in Resources */,
 				28B42ED928A7BC7A00DB80F7 /* SavePaymentMethod.storyboard in Resources */,
 				28B42EDF28A7BE4200DB80F7 /* MakePaymentWithSavedMethod.storyboard in Resources */,
 				284C164F28A5097400214A05 /* MakePayment.storyboard in Resources */,
@@ -370,23 +419,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		4662D3422D32E38C9271E222 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-inai-ios-sample-integration/Pods-inai-ios-sample-integration-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-inai-ios-sample-integration/Pods-inai-ios-sample-integration-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-inai-ios-sample-integration/Pods-inai-ios-sample-integration-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		8E96D769124FC76CB399E8CD /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -417,22 +449,28 @@
 			buildActionMask = 2147483647;
 			files = (
 				28C5F4182899E5D900F21C7E /* GetCardInfoViewController.swift in Sources */,
+				A41C9FCB2A27108000835AE5 /* MakePayment_UPIIntentTableViewCell.swift in Sources */,
 				28B929EA28A591E1005FA064 /* MakePayment_Models.swift in Sources */,
+				A41C9FC42A25F94A00835AE5 /* ImageLoader.swift in Sources */,
 				2849DE6C28AAEEB700569AFB /* ValidateFields_Models.swift in Sources */,
+				A41C9FC72A26198400835AE5 /* MakePayment_DataTableViewCell.swift in Sources */,
 				28C5F41E2899FD3000F21C7E /* ValidateFieldsViewController.swift in Sources */,
 				28F2D4A2289301DB007EF5B3 /* HomeViewController.swift in Sources */,
 				2849DE7228AB200300569AFB /* ApplePayViewController.swift in Sources */,
 				2849DE5528AA91C600569AFB /* ValidateFields_PaymentFieldsViewController.swift in Sources */,
 				28B33ABF28A53C2700AB6D25 /* MakePayment_PaymentFieldTableViewCell.swift in Sources */,
+				A48EFD0D2A289DE300AC2485 /* MakePayment_NBViewController.swift in Sources */,
 				28C5F4142899E0CC00F21C7E /* SavePaymentOptionsViewController.swift in Sources */,
 				285605022893CE260027E608 /* HeadlessCheckoutViewController.swift in Sources */,
 				28C217BD2894968A005312F8 /* MakePaymentViewController.swift in Sources */,
 				28F2D49E289301DB007EF5B3 /* AppDelegate.swift in Sources */,
+				A48EFD0B2A28810D00AC2485 /* MakePayment_WalletViewController.swift in Sources */,
 				285605042893CF190027E608 /* ProductViewController.swift in Sources */,
 				28C5F4112899DE4400F21C7E /* SavePayment_FieldsViewController.swift in Sources */,
 				2849DE7328AB200300569AFB /* ApplePay_Models.swift in Sources */,
 				28B33AC128A53C2700AB6D25 /* MakePayment_PaymentFieldsViewController.swift in Sources */,
 				28F2D4A0289301DB007EF5B3 /* SceneDelegate.swift in Sources */,
+				A41C9FC12A24D31700835AE5 /* MakePayment_PaymentFieldOptionsTableViewCell.swift in Sources */,
 				2849DE6628AAEBA300569AFB /* MakePaymentWithSavedMethod_PaymentFieldsViewController.swift in Sources */,
 				902C50C328DC874E002BD466 /* DemoConstants.swift in Sources */,
 				2849DE5428AA91C600569AFB /* ValidateFields_PaymentFieldsTableViewCell.swift in Sources */,
@@ -591,7 +629,7 @@
 				CODE_SIGN_ENTITLEMENTS = "inai-ios-sample-integration/inai-ios-sample-integration.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 73UU5N4925;
+				DEVELOPMENT_TEAM = 56P479WMRQ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "inai-ios-sample-integration/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -604,7 +642,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "io.inai.ios-sample-integration";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -622,7 +660,7 @@
 				CODE_SIGN_ENTITLEMENTS = "inai-ios-sample-integration/inai-ios-sample-integration.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 73UU5N4925;
+				DEVELOPMENT_TEAM = 56P479WMRQ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "inai-ios-sample-integration/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -635,7 +673,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "io.inai.ios-sample-integration";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
