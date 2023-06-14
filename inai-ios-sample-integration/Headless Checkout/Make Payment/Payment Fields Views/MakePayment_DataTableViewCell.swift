@@ -62,9 +62,9 @@ extension MakePayment_DataTableViewCell:UITableViewDelegate{
         self.selectedRow = indexPath
         if let intentInfo = self.cellInfo?.data?.values[indexPath.row]{
             self.updatedSelectedValue?(intentInfo)
-        }
-        self.tableView.reloadData()
+        }        
         self.tableView.contentSize = self.tableView.intrinsicContentSize
+        self.tableView.reloadData()
     }
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return 40

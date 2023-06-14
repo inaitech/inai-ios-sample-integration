@@ -6,12 +6,17 @@
 //
 
 import Foundation
+import UIKit
 enum MakePayment_FormFieldType:String{
     case textField = "textfield"
     case checkbox = "checkbox"
     case button = "button"
     case select = "select"
 }
+
+
+let suportedUPIIntents = ["google_pay": "tez://upi/pay","phonepe":"phonepe://pay","paytm": "paytmmp://pay", "default": "upi://pay"]
+
 class MakePayment_FormField {
     var fieldType: MakePayment_FormFieldType!
     var label: String!
@@ -140,7 +145,33 @@ struct MakePayment_Data{
             for valuesDict in valuesDictArray{
                 valueList.append(MakePayment_Value(valuesDict))
             }
-            self.values = valueList
+            let intentList = Bundle.main.object(forInfoDictionaryKey: "LSApplicationQueriesSchemes") as? Array<String> ?? []
+            var hasPermission = false
+            var installedApps:[MakePayment_Value] = []
+            for valueInfo in valueList{
+                if let intentUrlStr = suportedUPIIntents[valueInfo.value] as? String{
+                    if let intentUrl = URL(string: intentUrlStr){
+                        var appInstalled = false
+                        if UIApplication.shared.canOpenURL(intentUrl){
+                            for intentName in intentList {
+                                if intentUrlStr.hasPrefix(intentName){
+                                    appInstalled = true
+                                    hasPermission = true
+                                    break
+                                }
+                            }
+                        }
+                        if appInstalled{
+                            installedApps.append(valueInfo)
+                        }
+                    }
+                }
+            }
+            if hasPermission{
+                self.values = installedApps
+            }else{
+                self.values = valueList
+            }
         }
     }
 }

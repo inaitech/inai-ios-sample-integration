@@ -77,9 +77,18 @@ extension MakePayment_WalletViewController:UITableViewDataSource{
         cell.backgroundColor = .white
         cell.selectionStyle = .none
         cell.layer.cornerRadius = 8
-        cell.dropShadow(color: .black, opacity: 0.1, offSet: CGSize(width: -1, height: 1), radius: 8, scale: true)
+        if self.traitCollection.userInterfaceStyle == .dark {
+                    // User Interface is Dark
+            cell.contentView.dropShadow(color: .white, opacity: 0.1, offSet: CGSize(width: -1, height: 1), radius: 8, scale: true)
+            cell.backgroundColor = .black
+        } else {
+            // User Interface is Light
+            cell.contentView.dropShadow(color: .black, opacity: 0.1, offSet: CGSize(width: -1, height: 1), radius: 8, scale: true)
+            cell.backgroundColor = .white
+        }
         cell.accessoryType = .disclosureIndicator
         cell.textLabel?.text = sanitizeRailCode(po.railCode)
+        cell.textLabel?.textColor = .label
         return cell
     }
     private func sanitizeRailCode(_ railCode: String?) -> String? {

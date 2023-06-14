@@ -64,6 +64,7 @@ extension MakePayment_PaymentFieldOptionsTableViewCell:UITableViewDataSource{
                     if let mode = self.cellInfo?.modes[indexPath.section], let value = self.cellInfo?.modes[indexPath.section].form_fields[indexPath.row]{
                         self.updatedSelectedMode?(mode, value)
                     }
+                    self.tableView.reloadData()
                 }
             cell.payDelegate = { _ in
                 self.payDelegate?("")
@@ -74,9 +75,16 @@ extension MakePayment_PaymentFieldOptionsTableViewCell:UITableViewDataSource{
             let cell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCell", for: indexPath)
 //            let po = self.paymentOptions[indexPath.section]
             cell.contentView.layer.cornerRadius = 8
-            cell.dropShadow(color: .black, opacity: 0.1, offSet: CGSize(width: -1, height: 1), radius: 8, scale: true)
+            if self.traitCollection.userInterfaceStyle == .dark {
+                        // User Interface is Dark
+                cell.contentView.dropShadow(color: .white, opacity: 0.1, offSet: CGSize(width: -1, height: 1), radius: 8, scale: true)
+                cell.backgroundColor = .black
+            } else {
+                // User Interface is Light
+                cell.contentView.dropShadow(color: .black, opacity: 0.1, offSet: CGSize(width: -1, height: 1), radius: 8, scale: true)
+                cell.backgroundColor = .white
+            }
             cell.accessoryType = .disclosureIndicator
-            cell.backgroundColor = .white
             cell.selectionStyle = .none
             cell.textLabel?.text = sanitizeRailCode(self.cellInfo?.modes[indexPath.section].code)
             return cell

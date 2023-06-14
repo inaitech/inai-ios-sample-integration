@@ -220,19 +220,36 @@ extension MakePaymentViewController: UITableViewDataSource, UITableViewDelegate 
             let cell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCell", for: indexPath)
             let po = self.paymentOptions[indexPath.section]
             cell.contentView.layer.cornerRadius = 8
-            cell.contentView.dropShadow(color: .black, opacity: 0.1, offSet: CGSize(width: -1, height: 1), radius: 8, scale: true)
-            cell.backgroundColor = .white
+            if self.traitCollection.userInterfaceStyle == .dark {
+                        // User Interface is Dark
+                cell.contentView.dropShadow(color: .white, opacity: 0.1, offSet: CGSize(width: -1, height: 1), radius: 8, scale: true)
+                cell.backgroundColor = .black
+            } else {
+                // User Interface is Light
+                cell.contentView.dropShadow(color: .black, opacity: 0.1, offSet: CGSize(width: -1, height: 1), radius: 8, scale: true)
+                cell.backgroundColor = .white
+            }
             cell.selectionStyle = .none
             cell.textLabel?.text = sanitizeRailCode(po.category)
+            cell.textLabel?.textColor = .label
             return cell
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCell", for: indexPath)
             let po = self.paymentOptions[indexPath.section].paymentOptions[indexPath.row]
             cell.contentView.layer.cornerRadius = 8
-            cell.contentView.dropShadow(color: .black, opacity: 0.1, offSet: CGSize(width: -1, height: 1), radius: 8, scale: true)
-            cell.backgroundColor = .white
+            if self.traitCollection.userInterfaceStyle == .dark {
+                        // User Interface is Dark
+                cell.contentView.dropShadow(color: .white, opacity: 0.1, offSet: CGSize(width: -1, height: 1), radius: 8, scale: true)
+                cell.backgroundColor = .black
+            } else {
+                // User Interface is Light
+                cell.contentView.dropShadow(color: .black, opacity: 0.1, offSet: CGSize(width: -1, height: 1), radius: 8, scale: true)
+                cell.backgroundColor = .white
+            }
+            
             cell.selectionStyle = .none
             cell.textLabel?.text = sanitizeRailCode(po.railCode)
+            cell.textLabel?.textColor = .label
             return cell
         }
     }
@@ -281,7 +298,7 @@ extension MakePaymentViewController: UITableViewDataSource, UITableViewDelegate 
         
         sectionTitleLbl.text = sanitizeRailCode(po.category)?.uppercased()
         
-        sectionTitleLbl.textColor = .black
+        sectionTitleLbl.textColor = .label
         
         sectionTitleLbl.font = UIFont.systemFont(ofSize: 14)
         
