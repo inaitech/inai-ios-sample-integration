@@ -29,7 +29,9 @@ class ProductController: UIViewController {
             performSegue(withIdentifier: "ShowSavedPaymentOptionsView", sender: self)
         } else if (payment_method == "apple_pay") {
             performSegue(withIdentifier: "ShowApplePayView", sender: self)
-        } else {
+        } else if (payment_method == "installment_plans"){
+            performSegue(withIdentifier: "ShowInstallmentPlansView", sender: self)
+        }else {
             performSegue(withIdentifier: "ShowPaymentOptionsView", sender: self)
         }
     }
