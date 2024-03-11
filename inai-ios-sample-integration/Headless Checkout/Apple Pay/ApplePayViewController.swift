@@ -155,7 +155,8 @@ class ApplePayViewController: UIViewController {
                 }
                 
                 let payOptions = ApplePay_PaymentMethodOption.paymentOptionsFromJSON(respo)
-                    .filter { self.sanitizeRailCode($0.railCode) == "Apple Pay" }
+                    .filter {$0.railCode == "apple_pay" }
+                
                 
                 if (payOptions.count == 0 ) {
                     //  Apple Pay not available
@@ -166,11 +167,6 @@ class ApplePayViewController: UIViewController {
                 self.selectedPaymentOption = payOptions[0]
                 self.initApplePayUI()
             }
-    }
-    
-    private func sanitizeRailCode(_ railCode: String?) -> String? {
-        let sanitizedString = railCode?.replacingOccurrences(of: "_", with: " ")
-        return sanitizedString?.capitalized
     }
     
     private func initApplePayUI() {
