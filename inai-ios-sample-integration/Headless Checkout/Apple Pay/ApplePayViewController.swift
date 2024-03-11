@@ -30,10 +30,10 @@ class ApplePayViewController: UIViewController {
     var selectedPaymentOption: ApplePay_PaymentMethodOption!
 
     private var orderId = ""
+
+    private var applePayRequestData: [String:Any]?
     
-    private var paymentController: PKPaymentAuthorizationController!
-    private var applePayCompletion: ((PKPaymentAuthorizationResult) -> Void)?
-    private var applePayRequestData: InaiApplePayRequestData?
+    private var supportredPayments: [PKPaymentNetwork] = []
     
     var base_url: String! {
         return PlistConstants.shared.baseURL
@@ -175,29 +175,57 @@ class ApplePayViewController: UIViewController {
     
     private func initApplePayUI() {
         //  Get Apple Pay Order Information from the Inai SDK
-        if let applePaymentRequestData = InaiCheckout.getApplePayRequestData(paymentMethodOptionsData: self.selectedPaymentOption.dict) {
-            self.setupApplePayButton(applePaymentRequestData)
-            
-        } else {
-            // Invalid Apple Pay Request Data
-            self.showAlert("Invalid Apple Pay Request Data", title: "Error", completion: self.goToHomeScreen)
-        }
+        if let paymentMethodOptions = self.selectedPaymentOption.dict["payment_method_options"] as? [[String: Any]] {
+           for paymentMethodOption: [String: Any] in paymentMethodOptions {
+               if let _ = paymentMethodOption["rail_code"] {
+                   let railCode = paymentMethodOption["rail_code"] as! String
+                   if (railCode == "apple_pay") {
+                       self.setupApplePayButton(paymentMethodOption)
+                       break
+                   }
+               }
+           }
+       } else {
+           // Invalid Apple Pay Request Data
+           self.showAlert("Invalid Apple Pay Request Data", title: "Error", completion: self.goToHomeScreen)
+       }
     }
     
-    func setupApplePayButton (_ applePayRequestData: InaiApplePayRequestData) {
+    func setupApplePayButton (_ applePayRequestData: [String:Any]) {
         self.applePayRequestData = applePayRequestData
+        var canMakePayments:Bool = false
+        var canSetupCards:Bool = false
+        let configs = applePayRequestData["configs"] as? [String:Any] ?? [:]
+        let supportedNetworks = configs["supported_networks"] as? [[String:Any]] ?? []
+        if #available(iOS 10.0, *) {
+            canMakePayments = PKPaymentAuthorizationController.canMakePayments()
+            //selected supported cards
+            canSetupCards = PKPaymentAuthorizationController.canMakePayments(usingNetworks: getSupportredPayments(supportedNetworks))
+        } else {
+            // Fallback on earlier versions
+            canMakePayments = PKPaymentAuthorizationViewController.canMakePayments()
+            //selected supported cards
+            canSetupCards = PKPaymentAuthorizationViewController.canMakePayments(usingNetworks: getSupportredPayments(supportedNetworks))
+        }
+        
         var button: UIButton?
-        if applePayRequestData.canMakePayments {
+        if canMakePayments{
             button = PKPaymentButton(paymentButtonType: .buy, paymentButtonStyle: .black)
             button?.addTarget(self, action: #selector(self.payPressed), for: .touchUpInside)
-        } else if applePayRequestData.canSetupCards {
+        } else if canSetupCards{
             button = PKPaymentButton(paymentButtonType: .setUp, paymentButtonStyle: .black)
             button?.addTarget(self, action: #selector(self.setupPressed), for: .touchUpInside)
         }
         
         if let applePayButton = button {
+            applePayButton.layer.cornerRadius = 20
+            applePayButton.clipsToBounds = true
             applePayButton.translatesAutoresizingMaskIntoConstraints = false
             button_container.addSubview(applePayButton)
+            applePayButton.topAnchor.constraint(equalTo: button_container.topAnchor).isActive = true
+            applePayButton.leftAnchor.constraint(equalTo: button_container.leftAnchor).isActive = true
+            applePayButton.rightAnchor.constraint(equalTo: button_container.rightAnchor).isActive = true
+            applePayButton.bottomAnchor.constraint(equalTo: button_container.bottomAnchor).isActive = true
         }
     }
 
@@ -207,16 +235,20 @@ class ApplePayViewController: UIViewController {
     }
     
     @objc func payPressed(sender: Any) {
-        let request = InaiCheckout.getApplePaymentRequest(paymentRequestData: self.applePayRequestData!)
-        paymentController = PKPaymentAuthorizationController(paymentRequest: request)
-        paymentController?.delegate = self
-        paymentController?.present(completion: { (presented: Bool) in
-            if presented {
-                debugPrint("Presented payment controller")
-            } else {
-                debugPrint("Failed to present payment controller")
-            }
-        })
+        var request = self.applePayRequestData!
+
+
+        let config = InaiConfig(token: PlistConstants.shared.token,
+                                orderId : self.orderId,
+                                countryCode: DemoConstants.country)
+
+        if let inaiCheckout = InaiCheckout(config: config) {
+
+            inaiCheckout.makePayment( paymentMethodOption: "apple_pay",
+                                      paymentDetails: request,
+                                      viewController: self,
+                                      delegate: self)
+        }
     }
     
     private func goToHomeScreen(action: UIAlertAction) -> Void {
@@ -249,53 +281,67 @@ class ApplePayViewController: UIViewController {
     
 }
 
-extension ApplePayViewController: PKPaymentAuthorizationControllerDelegate {
-    
-    func paymentAuthorizationController(_ controller: PKPaymentAuthorizationController,
-                                        didAuthorizePayment payment: PKPayment,
-                                        handler completion: @escaping (PKPaymentAuthorizationResult) -> Void) {
-        let config = InaiConfig(token: PlistConstants.shared.token,
-                                orderId : self.orderId,
-                                countryCode: DemoConstants.country)
-        
-        if let inaiCheckout = InaiCheckout(config: config) {
-            
-            let paymentDetails = InaiCheckout.convertPaymentTokenToDict(payment: payment)
-            self.applePayCompletion = completion
-            
-            inaiCheckout.makePayment( paymentMethodOption: "apple_pay",
-                                      paymentDetails: paymentDetails,
-                                      viewController: self,
-                                      delegate: self)
-        }
-    }
-  
-    func paymentAuthorizationControllerDidFinish(_ controller: PKPaymentAuthorizationController) {
-        controller.dismiss {}
-    }
-}
-
 
 extension ApplePayViewController: InaiCheckoutDelegate {
+    func getSupportredPayments(_ cardOptions:[[String:Any]]) ->  [PKPaymentNetwork] {
+        var supportedPayments = [PKPaymentNetwork]()
+        for cardOption in cardOptions {
+            if (cardOption["name"] as? String)?.lowercased() == "amex"{
+                supportedPayments.append(.amex)
+            }else if (cardOption["name"] as? String)?.lowercased() == "cartesbancaires"{
+                supportedPayments.append(.cartesBancaires)
+            }else if (cardOption["name"] as? String)?.lowercased() == "chinaunionpay"{
+                supportedPayments.append(.chinaUnionPay)
+            }else if (cardOption["name"] as? String)?.lowercased() == "discover"{
+                supportedPayments.append(.discover)
+            }else if (cardOption["name"] as? String)?.lowercased() == "eftpos"{
+                supportedPayments.append(.eftpos)
+            }else if (cardOption["name"] as? String)?.lowercased() == "electron"{
+                supportedPayments.append(.electron)
+            }else if (cardOption["name"] as? String)?.lowercased() == "elo"{
+                supportedPayments.append(.elo)
+            }else if (cardOption["name"] as? String)?.lowercased() == "girocard"{
+                if #available(iOS 14.0, *) {
+                    supportedPayments.append(.girocard)
+                }
+            }else if (cardOption["name"] as? String)?.lowercased() == "interac"{
+                supportedPayments.append(.interac)
+            }else if (cardOption["name"] as? String)?.lowercased() == "mada"{
+                supportedPayments.append(.mada)
+            }else if (cardOption["name"] as? String)?.lowercased() == "maestro"{
+                supportedPayments.append(.maestro)
+            }else if (cardOption["name"] as? String)?.lowercased() == "mastercard"{
+                supportedPayments.append(.masterCard)
+            }else if (cardOption["name"] as? String)?.lowercased() == "mir"{
+                if #available(iOS 14.5, *) {
+                    supportedPayments.append(.mir)
+                }
+            }else if (cardOption["name"] as? String)?.lowercased() == "privatelabel"{
+                supportedPayments.append(.privateLabel)
+            }else if (cardOption["name"] as? String)?.lowercased() == "visa"{
+                supportedPayments.append(.visa)
+            }else if (cardOption["name"] as? String)?.lowercased() == "vpay"{
+                supportedPayments.append(.vPay)
+            }
+        }
+        return supportedPayments
+    }
     
     func paymentFinished(with result: Inai_PaymentResult) {
         switch result.status {
         case Inai_PaymentStatus.success:
             let resultStr = convertDictToStr(result.data)
-            self.applePayCompletion?(PKPaymentAuthorizationResult(status: .success, errors: nil))
             self.showAlert("Payment Success! \(resultStr)", title: "Result", completion: goToHomeScreen)
             break
             
         case Inai_PaymentStatus.failed:
             let strError = convertDictToStr(result.data)
             let error = ApplePayStringError(strError);
-            self.applePayCompletion?(PKPaymentAuthorizationResult( status: .failure, errors: [error]))
             self.showAlert("Payment Failed with data: \(strError)", title: "Result", completion: goToHomeScreen)
             break
             
         case Inai_PaymentStatus.canceled:
             let error = ApplePayStringError("Payment Canceled");
-            self.applePayCompletion?(PKPaymentAuthorizationResult( status: .failure, errors: [error]))
             let message = result.data["message"] ?? "Payment Canceled!"
             self.showAlert(message as! String, title: "Result", completion: goToHomeScreen)
             break
