@@ -38,5 +38,9 @@ class HeadlessCheckoutViewController: UIViewController {
     @IBAction func showProductViewWithApplePay(_ sender: Any) {
         performSegue(withIdentifier: "ShowProductView", sender: ["payment_method": "apple_pay"])
     }
+    @IBAction func showProductViewWithInstallmentPlans(_ sender: Any) {
+        performSegue(withIdentifier: "ShowProductView", sender: ["payment_method": "installment_plans"])
+    }
+    
 }
 

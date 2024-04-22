@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="VTA-fy-hod">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="VTA-fy-hod">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="awO-tB-UQG">
-                                <rect key="frame" x="20" y="98" width="374" height="100"/>
+                                <rect key="frame" x="20" y="102" width="374" height="100"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qm7-o9-SXd">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="40"/>
@@ -76,7 +76,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Mjg-ll-A7i">
-                                <rect key="frame" x="20" y="98" width="374" height="340"/>
+                                <rect key="frame" x="20" y="102" width="374" height="400"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U3c-qY-mdg">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="40"/>
@@ -168,6 +168,21 @@
                                             <segue destination="i0N-V7-VZ3" kind="show" identifier="" id="kS4-LZ-c34"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XOj-B4-nTZ">
+                                        <rect key="frame" x="0.0" y="360" width="374" height="40"/>
+                                        <color key="backgroundColor" red="0.45886170859999997" green="0.45265638829999999" blue="0.83925354480000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="jxU-b0-LI5"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Installment Plans">
+                                            <fontDescription key="titleFontDescription" type="system" pointSize="18"/>
+                                            <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="showProductViewWithInstallmentPlans:" destination="o45-GN-P2H" eventType="touchUpInside" id="WXb-Qk-QFp"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                             </stackView>
                         </subviews>
@@ -194,7 +209,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="VTA-fy-hod" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="OiL-rR-g7z">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="48" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -215,19 +230,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="inai-white" translatesAutoresizingMaskIntoConstraints="NO" id="GCz-NM-IIp">
-                                <rect key="frame" x="20" y="108" width="374" height="60"/>
+                                <rect key="frame" x="20" y="112" width="374" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="yA8-0t-0P4"/>
                                 </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tshirt" translatesAutoresizingMaskIntoConstraints="NO" id="uxM-eG-lkI">
-                                <rect key="frame" x="20" y="188" width="374" height="200"/>
+                                <rect key="frame" x="20" y="192" width="374" height="200"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="200" id="514-9E-qy7"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="2tI-eK-yR8">
-                                <rect key="frame" x="20" y="408" width="374" height="20"/>
+                                <rect key="frame" x="20" y="412" width="374" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="NDa-1E-6sh"/>
                                 </constraints>
@@ -238,7 +253,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="zBB-bl-Ki1">
-                                <rect key="frame" x="20" y="448" width="374" height="334"/>
+                                <rect key="frame" x="20" y="452" width="374" height="330"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <string key="text">A FAN JERSEY INSPIRED BY A LEGENDARY HOME KIT.
 Youth. Courage. Success. The thee pillars of Manchester United's motto have brought the club more than a century of triumphs. With its clean red design and white ribbed crewneck, this juniors' adidas football jersey takes inspiration from the iconic kit that carried them to some of their most memorable moments. Made for fans, its soft fabric and moisture-absorbing AEROREADY keep you comfortable. A devil signoff on the back shows your pride.
@@ -301,6 +316,7 @@ This product is made with Primegreen, a series of high-performance recycled mate
                         <segue destination="wv3-nF-KBc" kind="show" identifier="ShowPaymentOptionsView" id="TdC-ZQ-DK1"/>
                         <segue destination="uhw-4n-RRx" kind="show" identifier="ShowSavedPaymentOptionsView" id="HRH-Ra-WxH"/>
                         <segue destination="e1d-HV-atn" kind="show" identifier="ShowApplePayView" id="smI-cl-jDM"/>
+                        <segue destination="w2p-aQ-PW4" kind="show" identifier="ShowInstallmentPlansView" id="gGG-14-H5q"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YbM-WU-YIC" sceneMemberID="firstResponder"/>
@@ -367,6 +383,16 @@ This product is made with Primegreen, a series of high-performance recycled mate
             </objects>
             <point key="canvasLocation" x="3251" y="139"/>
         </scene>
+        <!--InstallmentPlans-->
+        <scene sceneID="vFd-sb-DPJ">
+            <objects>
+                <viewControllerPlaceholder storyboardName="InstallmentPlans" id="w2p-aQ-PW4" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="9hD-TO-pjl"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qu6-bP-IGz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3211" y="201"/>
+        </scene>
         <!--DropInCheckout-->
         <scene sceneID="WTa-2x-W50">
             <objects>
@@ -382,7 +408,7 @@ This product is made with Primegreen, a series of high-performance recycled mate
         <image name="inai-white" width="500" height="293"/>
         <image name="tshirt" width="840" height="840"/>
         <systemColor name="labelColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

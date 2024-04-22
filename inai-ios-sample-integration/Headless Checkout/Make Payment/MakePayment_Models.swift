@@ -49,6 +49,7 @@ struct MakePayment_Validation {
 
 struct MakePayment_PaymentMethodOption {
     var railCode: String?
+    var installmentPlans:String?
     var paymentMethodId: String?
     var formFields: [MakePayment_FormField]
     var dict: [String: Any]
@@ -64,9 +65,16 @@ struct MakePayment_PaymentMethodOption {
                         let formField = MakePayment_FormField(f)
                         formFields.append(formField)
                     }
-                    let paymentOption = MakePayment_PaymentMethodOption(railCode: rCode,
+                    
+                    var paymentOption = MakePayment_PaymentMethodOption(railCode: rCode,
                                                                         formFields: formFields,
                                                                         dict: json)
+                    if let installmentPlans = opt["installment_plans"] as? String{
+                        paymentOption = MakePayment_PaymentMethodOption(railCode: rCode,
+                                                                            installmentPlans: installmentPlans,
+                                                                            formFields: formFields,
+                                                                            dict: json)
+                    }
                     retVal.append(paymentOption)
                 }
             }
